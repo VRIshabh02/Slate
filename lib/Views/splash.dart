@@ -3,8 +3,8 @@ import 'package:flutter_animator/flutter_animator.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:untitled_slate/home.dart';
-import 'package:untitled_slate/login.dart';
+import 'package:untitled_slate/Views/home.dart';
+import 'package:untitled_slate/Views/login.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -73,14 +73,15 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
   _navigatetohome()async{
-
+    int i = 0;
     await Future.delayed(Duration(milliseconds: 5000));
 
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userData = prefs.getString('userData');
     if (userData != null) {
-      Get.offAll(const HomePage());}
+      Get.off( HomePage(), arguments: [i]);
+    }
     else{
       Get.offAll(LoginScreen());
     }
