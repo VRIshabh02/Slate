@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled_slate/Models/companyIDModel.dart';
 import 'package:untitled_slate/Models/dashboardCardsModel.dart';
@@ -18,6 +20,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     int company = Get.arguments[0];
     print('$company');
+    final oCcy = NumberFormat.currency(
+      name: "INR",
+      locale: 'en_IN',
+       // change it to get decimal places
+      symbol: '₹',
+    );
+    String date;
+
     return Stack(children: [
       FutureBuilder(
           future: organizationListApi(),
@@ -72,19 +82,26 @@ class HomePage extends StatelessWidget {
                             actions: [
                               Padding(
                                   padding: const EdgeInsets.all(12.0),
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(60),
-                                          color: Colors.white),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Icon(
-                                          Icons.calendar_today_outlined,
-                                          color: Colors.black,
-                                          size: 20,
-                                        ),
-                                      ))),
+                                  child: GestureDetector(
+                                    onTap: (){
+                                      // Get.dialog(
+                                      //
+                                      // );
+                                    },
+                                    child: Container(
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(60),
+                                            color: Colors.white),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Icon(
+                                            Icons.calendar_today_outlined,
+                                            color: Colors.black,
+                                            size: 20,
+                                          ),
+                                        )),
+                                  )),
                             ],
                             toolbarHeight: 60,
                             backgroundColor: Color(0xFF272D4D),
@@ -193,6 +210,18 @@ class HomePage extends StatelessWidget {
                                                       children: [
                                                         Row(
                                                           children: [
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(right: 4.0),
+                                                              child: Container(
+                                                                height: 15,
+                                                                width: 15,
+                                                                decoration: BoxDecoration(
+                                                                  color: Colors.orangeAccent,
+                                                                  borderRadius: BorderRadius.circular(50)
+                                                                ),
+                                                                child: Icon(Icons.shopping_bag_outlined, size: 10,color: Colors.white,),
+                                                              ),
+                                                            ),
                                                             Text('Sales'),
                                                             Icon(
                                                               Icons.info,
@@ -204,8 +233,9 @@ class HomePage extends StatelessWidget {
                                                         ),
                                                         Text(
                                                             dashboardCardsData.ret!.data!.sales!.length != 0 ?
-                                                            "${dashboardCardsData.ret!.data!.sales![0].amount}"
-                                                                : " "
+                                                            // "${dashboardCardsData.ret!.data!.sales![0].amount}"
+                                                            '${oCcy.format(dashboardCardsData.ret!.data!.sales![0].amount?.abs())}'
+                                                                : " ", style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
 
                                                         )
                                                       ],
@@ -238,6 +268,21 @@ class HomePage extends StatelessWidget {
                                                       children: [
                                                         Row(
                                                           children: [
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(right: 4.0),
+                                                              child: Container(
+                                                                height: 15,
+                                                                width: 15,
+                                                                decoration: BoxDecoration(
+                                                                    color: Colors.orangeAccent,
+                                                                    borderRadius: BorderRadius.circular(50)
+                                                                ),
+                                                                child: Padding(
+                                                                  padding: const EdgeInsets.all(2.0),
+                                                                  child: Image.asset('assets/images/receivablesLogo.png', color: Colors.white,),
+                                                                )
+                                                              ),
+                                                            ),
                                                             Text('Receivables'),
                                                             Icon(
                                                               Icons.info,
@@ -249,8 +294,9 @@ class HomePage extends StatelessWidget {
                                                         ),
                                                         Text(
                                                             dashboardCardsData.ret!.data!.recievable!.length != 0 ?
-                                                            "${dashboardCardsData.ret!.data!.recievable![0].balance}"
-                                                        : ""
+                                                            // "${dashboardCardsData.ret!.data!.recievable![0].balance}"
+                                                            '${oCcy.format(double.parse(dashboardCardsData.ret!.data!.recievable![0].balance.toString()).abs())}'
+                                                        : "", style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
                                                         )
                                                       ],
                                                     ),
@@ -282,6 +328,21 @@ class HomePage extends StatelessWidget {
                                                       children: [
                                                         Row(
                                                           children: [
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(right: 4.0),
+                                                              child: Container(
+                                                                height: 15,
+                                                                width: 15,
+                                                                decoration: BoxDecoration(
+                                                                    color: Colors.orangeAccent,
+                                                                    borderRadius: BorderRadius.circular(50)
+                                                                ),
+                                                                child: Padding(
+                                                                  padding: const EdgeInsets.all(2.0),
+                                                                  child: Image.asset('assets/images/payableLogo.png', color: Colors.white,),
+                                                                )
+                                                              ),
+                                                            ),
                                                             Text('Payable'),
                                                             Icon(
                                                               Icons.info,
@@ -293,8 +354,9 @@ class HomePage extends StatelessWidget {
                                                         ),
                                                         Text(
                                                             dashboardCardsData.ret!.data!.payable!.length != 0 ?
-                                                            "${dashboardCardsData.ret!.data!.payable![0].balance}"
-                                                        : ""
+                                                            // "${dashboardCardsData.ret!.data!.payable![0].balance}"
+                                                            '${oCcy.format(double.parse(dashboardCardsData.ret!.data!.payable![0].balance.toString()).abs())}'
+                                                        : "", style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
                                                         )
                                                       ],
                                                     ),
@@ -326,6 +388,21 @@ class HomePage extends StatelessWidget {
                                                       children: [
                                                         Row(
                                                           children: [
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(right: 4.0),
+                                                              child: Container(
+                                                                height: 15,
+                                                                width: 15,
+                                                                decoration: BoxDecoration(
+                                                                    color: Colors.tealAccent,
+                                                                    borderRadius: BorderRadius.circular(50)
+                                                                ),
+                                                                child: Padding(
+                                                                  padding: const EdgeInsets.all(2.0),
+                                                                  child: Image.asset('assets/images/liquidityLogo.png',color: Colors.white),
+                                                                )
+                                                              ),
+                                                            ),
                                                             Text('Liquidity'),
                                                             Icon(
                                                               Icons.info,
@@ -337,8 +414,9 @@ class HomePage extends StatelessWidget {
                                                         ),
                                                         Text(
                                                             dashboardCardsData.ret!.data!.liquidity!.length != 0 ?
-                                                            "${dashboardCardsData.ret!.data!.liquidity![0].balance}"
-                                                        : ""
+                                                            // "${dashboardCardsData.ret!.data!.liquidity![0].balance}"
+                                                            '${oCcy.format(double.parse(dashboardCardsData.ret!.data!.liquidity![0].balance.toString()).abs())}'
+                                                        : "", style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
                                                         )
                                                       ],
                                                     ),
@@ -380,7 +458,6 @@ class HomePage extends StatelessWidget {
                                   crossAxisCount: 2,
                                   padding: EdgeInsets.zero,
                                   children: [
-                                    for (int i = 0; i < 4; i++)
                                       Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Container(
@@ -412,11 +489,7 @@ class HomePage extends StatelessWidget {
                                                         padding:
                                                             const EdgeInsets
                                                                 .all(4.0),
-                                                        child: Icon(
-                                                          Icons
-                                                              .calendar_today_outlined,
-                                                          size: 30,
-                                                        ),
+                                                        child: Image.asset('assets/images/invoiceLogo.png', height: 35,color: Colors.white,)
                                                       )),
                                                 ),
                                                 Text(
@@ -432,9 +505,154 @@ class HomePage extends StatelessWidget {
                                             ),
                                           ),
                                         ),
-                                      )
+                                      ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        height: 80,
+                                        width: 200,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xFFBCC2E5),
+                                            borderRadius:
+                                            BorderRadius.circular(12)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.all(
+                                                    12.0),
+                                                child: Container(
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(50),
+                                                        color: Color(
+                                                            0xFF292D50)),
+                                                    child: Padding(
+                                                        padding:
+                                                        const EdgeInsets
+                                                            .all(4.0),
+                                                        child: Image.asset('assets/images/customerLogo.png', height: 35,color: Colors.white,)
+                                                    )),
+                                              ),
+                                              Text(
+                                                'Create\n Customer',
+                                                textAlign: TextAlign.center,
+                                                style: GoogleFonts.poppins(
+                                                    fontSize: 15,
+                                                    color: Color(0xff272d4d),
+                                                    fontWeight:
+                                                    FontWeight.bold),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        height: 80,
+                                        width: 200,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xFFBCC2E5),
+                                            borderRadius:
+                                            BorderRadius.circular(12)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.all(
+                                                    12.0),
+                                                child: Container(
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(50),
+                                                        color: Color(
+                                                            0xFF292D50)),
+                                                    child: Padding(
+                                                        padding:
+                                                        const EdgeInsets
+                                                            .all(8.0),
+                                                        child: Image.asset('assets/images/managementLogo.png', height: 25,color: Colors.white,)
+                                                    )),
+                                              ),
+                                              Text(
+                                                'Document\n Management',
+                                                textAlign: TextAlign.center,
+                                                style: GoogleFonts.poppins(
+                                                    fontSize: 15,
+                                                    color: Color(0xff272d4d),
+                                                    fontWeight:
+                                                    FontWeight.bold),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Container(
+                                        height: 80,
+                                        width: 200,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xFFBCC2E5),
+                                            borderRadius:
+                                            BorderRadius.circular(12)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.all(
+                                                    12.0),
+                                                child: Container(
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                        BorderRadius
+                                                            .circular(50),
+                                                        color: Color(
+                                                            0xFF292D50)),
+                                                    child: Padding(
+                                                        padding:
+                                                        const EdgeInsets
+                                                            .all(4.0),
+                                                        child: Image.asset('assets/images/inventoryLogo.png', height: 35,color: Colors.white,)
+                                                    )),
+                                              ),
+                                              Text(
+                                                'View\n Inventory',
+                                                textAlign: TextAlign.center,
+                                                style: GoogleFonts.poppins(
+                                                    fontSize: 15,
+                                                    color: Color(0xff272d4d),
+                                                    fontWeight:
+                                                    FontWeight.bold),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
+
                                 Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Container(
@@ -468,6 +686,7 @@ class HomePage extends StatelessWidget {
                                                       ),
                                                     )),
                                               ),
+
                                               Padding(
                                                 padding:
                                                     const EdgeInsets.all(8.0),
@@ -857,6 +1076,7 @@ Future<CompanyIdModel> companyIdApi(int orgId) async {
   final userData = json.decode(data1!);
   var requestURL = Uri.parse(
       'https://uat.finance.slate.ac/slate-api/routes.php?action=GetCompanyDetails');
+
   var map = Map<String, dynamic>();
   map['org_id'] = '$orgId';
   // map['from_date'] = '2021-05-01';

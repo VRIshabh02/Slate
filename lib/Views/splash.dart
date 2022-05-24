@@ -5,6 +5,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled_slate/Views/home.dart';
 import 'package:untitled_slate/Views/login.dart';
+import 'package:untitled_slate/Views/otpVerification.dart';
+import 'package:untitled_slate/Views/signUp.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -79,14 +81,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? userData = prefs.getString('userData');
-    if (userData != null) {
-      Get.off( HomePage(), arguments: [i]);
-    }
-    else{
-      Get.offAll(LoginScreen());
-    }
+    // if (userData != null) {
+    //   Get.off( HomePage(), arguments: [i]);
+    // }
+    // else{
+    //   Get.offAll(LoginScreen());
+    // }
 
-    // Get.offAll(LoginScreen());
+    Get.offAll(LoginScreen());
 
 
   }
