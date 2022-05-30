@@ -1,37 +1,36 @@
-/// ret : {"data":{"liquidity":[{"current":"current","voucher_month":"Oct-21","balance":1627565.9799999997},{"current":"previous","voucher_month":"Sep-21","balance":-5674313.390000001}],"investment":[{"current":"current","voucher_month":"Oct-21","balance":-25499033.79},{"current":"previous","voucher_month":"Sep-21","balance":-27499033.79}],"recievable":[{"current":"current","voucher_month":"Oct-21","balance":-747068.36},{"current":"previous","voucher_month":"Sep-21","balance":-679456.6599999999}],"payable":[{"current":"current","voucher_month":"Oct-21","balance":2130516.2199999997},{"current":"previous","voucher_month":"Sep-21","balance":3815724.48}],"sales":[{"current":"current","amount":2105985},{"current":"previous","amount":1146816}]},"status":1,"msg":"retrived successfully"}
+/// ret : {"data":{"liquidity":[{"current":"current","voucher_month":"May-22","balance":-534213.0200000006},{"current":"previous","voucher_month":"Apr-22","balance":-534213.0200000006}],"investment":[{"current":"current","voucher_month":"May-22","balance":-20499033.79},{"current":"previous","voucher_month":"Apr-22","balance":-20499033.79}],"recievable":[{"current":"current","voucher_month":"May-22","balance":-732570.36},{"current":"previous","voucher_month":"Apr-22","balance":-732570.36}],"payable":[{"current":"current","voucher_month":"May-22","balance":2139750},{"current":"previous","voucher_month":"Apr-22","balance":2139750}],"sales":[{"current":"previous","amount":350958}]},"status":1,"msg":"retrived successfully"}
 /// err : {"data":"","status":0}
 
-class DashboardCardsModel {
-  DashboardCardsModel({
+class DashboardCardsModel1 {
+  DashboardCardsModel1({
       Ret? ret, 
-      // Err? err,
-  }){
+      Err? err,}){
     _ret = ret;
-    // _err = err;
+    _err = err;
 }
 
-  DashboardCardsModel.fromJson(dynamic json) {
+  DashboardCardsModel1.fromJson(dynamic json) {
     _ret = json['ret'] != null ? Ret.fromJson(json['ret']) : null;
-    // _err = json['err'] != null ? Err.fromJson(json['err']) : null;
+    _err = json['err'] != null ? Err.fromJson(json['err']) : null;
   }
   Ret? _ret;
-  // Err? _err;
-DashboardCardsModel copyWith({  Ret? ret,
-  // Err? err,
-}) => DashboardCardsModel(  ret: ret ?? _ret,
-  // err: err ?? _err,
+  Err? _err;
+DashboardCardsModel1 copyWith({  Ret? ret,
+  Err? err,
+}) => DashboardCardsModel1(  ret: ret ?? _ret,
+  err: err ?? _err,
 );
   Ret? get ret => _ret;
-  // Err? get err => _err;
+  Err? get err => _err;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     if (_ret != null) {
       map['ret'] = _ret?.toJson();
     }
-    // if (_err != null) {
-    //   map['err'] = _err?.toJson();
-    // }
+    if (_err != null) {
+      map['err'] = _err?.toJson();
+    }
     return map;
   }
 
@@ -40,38 +39,38 @@ DashboardCardsModel copyWith({  Ret? ret,
 /// data : ""
 /// status : 0
 
-// class Err {
-//   Err({
-//       String? data,
-//       int? status,}){
-//     _data = data;
-//     _status = status;
-// }
-//
-//   Err.fromJson(dynamic json) {
-//     _data = json['data'];
-//     _status = json['status'];
-//   }
-//   String? _data;
-//   int? _status;
-// Err copyWith({  String? data,
-//   int? status,
-// }) => Err(  data: data ?? _data,
-//   status: status ?? _status,
-// );
-//   String? get data => _data;
-//   int? get status => _status;
-//
-//   Map<String, dynamic> toJson() {
-//     final map = <String, dynamic>{};
-//     map['data'] = _data;
-//     map['status'] = _status;
-//     return map;
-//   }
-//
-// }
+class Err {
+  Err({
+      String? data, 
+      int? status,}){
+    _data = data;
+    _status = status;
+}
 
-/// data : {"liquidity":[{"current":"current","voucher_month":"Oct-21","balance":1627565.9799999997},{"current":"previous","voucher_month":"Sep-21","balance":-5674313.390000001}],"investment":[{"current":"current","voucher_month":"Oct-21","balance":-25499033.79},{"current":"previous","voucher_month":"Sep-21","balance":-27499033.79}],"recievable":[{"current":"current","voucher_month":"Oct-21","balance":-747068.36},{"current":"previous","voucher_month":"Sep-21","balance":-679456.6599999999}],"payable":[{"current":"current","voucher_month":"Oct-21","balance":2130516.2199999997},{"current":"previous","voucher_month":"Sep-21","balance":3815724.48}],"sales":[{"current":"current","amount":2105985},{"current":"previous","amount":1146816}]}
+  Err.fromJson(dynamic json) {
+    _data = json['data'];
+    _status = json['status'];
+  }
+  String? _data;
+  int? _status;
+Err copyWith({  String? data,
+  int? status,
+}) => Err(  data: data ?? _data,
+  status: status ?? _status,
+);
+  String? get data => _data;
+  int? get status => _status;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['data'] = _data;
+    map['status'] = _status;
+    return map;
+  }
+
+}
+
+/// data : {"liquidity":[{"current":"current","voucher_month":"May-22","balance":-534213.0200000006},{"current":"previous","voucher_month":"Apr-22","balance":-534213.0200000006}],"investment":[{"current":"current","voucher_month":"May-22","balance":-20499033.79},{"current":"previous","voucher_month":"Apr-22","balance":-20499033.79}],"recievable":[{"current":"current","voucher_month":"May-22","balance":-732570.36},{"current":"previous","voucher_month":"Apr-22","balance":-732570.36}],"payable":[{"current":"current","voucher_month":"May-22","balance":2139750},{"current":"previous","voucher_month":"Apr-22","balance":2139750}],"sales":[{"current":"previous","amount":350958}]}
 /// status : 1
 /// msg : "retrived successfully"
 
@@ -116,11 +115,11 @@ Ret copyWith({  Data? data,
 
 }
 
-/// liquidity : [{"current":"current","voucher_month":"Oct-21","balance":1627565.9799999997},{"current":"previous","voucher_month":"Sep-21","balance":-5674313.390000001}]
-/// investment : [{"current":"current","voucher_month":"Oct-21","balance":-25499033.79},{"current":"previous","voucher_month":"Sep-21","balance":-27499033.79}]
-/// recievable : [{"current":"current","voucher_month":"Oct-21","balance":-747068.36},{"current":"previous","voucher_month":"Sep-21","balance":-679456.6599999999}]
-/// payable : [{"current":"current","voucher_month":"Oct-21","balance":2130516.2199999997},{"current":"previous","voucher_month":"Sep-21","balance":3815724.48}]
-/// sales : [{"current":"current","amount":2105985},{"current":"previous","amount":1146816}]
+/// liquidity : [{"current":"current","voucher_month":"May-22","balance":-534213.0200000006},{"current":"previous","voucher_month":"Apr-22","balance":-534213.0200000006}]
+/// investment : [{"current":"current","voucher_month":"May-22","balance":-20499033.79},{"current":"previous","voucher_month":"Apr-22","balance":-20499033.79}]
+/// recievable : [{"current":"current","voucher_month":"May-22","balance":-732570.36},{"current":"previous","voucher_month":"Apr-22","balance":-732570.36}]
+/// payable : [{"current":"current","voucher_month":"May-22","balance":2139750},{"current":"previous","voucher_month":"Apr-22","balance":2139750}]
+/// sales : [{"current":"previous","amount":350958}]
 
 class Data {
   Data({
@@ -212,8 +211,8 @@ Data copyWith({  List<Liquidity>? liquidity,
 
 }
 
-/// current : "current"
-/// amount : 2105985
+/// current : "previous"
+/// amount : 350958
 
 class Sales {
   Sales({
@@ -247,14 +246,14 @@ Sales copyWith({  String? current,
 }
 
 /// current : "current"
-/// voucher_month : "Oct-21"
-/// balance : 2130516.2199999997
+/// voucher_month : "May-22"
+/// balance : 2139750
 
 class Payable {
   Payable({
       String? current, 
       String? voucherMonth, 
-      double? balance,}){
+      int? balance,}){
     _current = current;
     _voucherMonth = voucherMonth;
     _balance = balance;
@@ -267,17 +266,17 @@ class Payable {
   }
   String? _current;
   String? _voucherMonth;
-  double? _balance;
+  int? _balance;
 Payable copyWith({  String? current,
   String? voucherMonth,
-  double? balance,
+  int? balance,
 }) => Payable(  current: current ?? _current,
   voucherMonth: voucherMonth ?? _voucherMonth,
   balance: balance ?? _balance,
 );
   String? get current => _current;
   String? get voucherMonth => _voucherMonth;
-  double? get balance => _balance;
+  int? get balance => _balance;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -290,8 +289,8 @@ Payable copyWith({  String? current,
 }
 
 /// current : "current"
-/// voucher_month : "Oct-21"
-/// balance : -747068.36
+/// voucher_month : "May-22"
+/// balance : -732570.36
 
 class Recievable {
   Recievable({
@@ -333,8 +332,8 @@ Recievable copyWith({  String? current,
 }
 
 /// current : "current"
-/// voucher_month : "Oct-21"
-/// balance : -25499033.79
+/// voucher_month : "May-22"
+/// balance : -20499033.79
 
 class Investment {
   Investment({
@@ -376,8 +375,8 @@ Investment copyWith({  String? current,
 }
 
 /// current : "current"
-/// voucher_month : "Oct-21"
-/// balance : 1627565.9799999997
+/// voucher_month : "May-22"
+/// balance : -534213.0200000006
 
 class Liquidity {
   Liquidity({

@@ -4,9 +4,12 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled_slate/Views/home.dart';
+import 'package:untitled_slate/Views/invoicesListDead.dart';
 import 'package:untitled_slate/Views/login.dart';
 import 'package:untitled_slate/Views/otpVerification.dart';
 import 'package:untitled_slate/Views/signUp.dart';
+
+import 'invoiceList.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -79,16 +82,16 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(Duration(milliseconds: 5000));
 
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? userData = prefs.getString('userData');
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // String? userData = prefs.getString('userData');
     // if (userData != null) {
-    //   Get.off( HomePage(), arguments: [i]);
+    //   Get.off( HomePage2(), arguments: [i]);
     // }
     // else{
     //   Get.offAll(LoginScreen());
     // }
 
-    Get.offAll(LoginScreen());
+    Get.offAll(HomePage2(), arguments: [0]);
 
 
   }

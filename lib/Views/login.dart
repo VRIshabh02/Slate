@@ -11,7 +11,7 @@ import 'package:untitled_slate/Views/selectCompany.dart';
 import 'package:untitled_slate/Views/signUp.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -21,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  bool _secureText = true;
   bool isChecked = false;
   bool isCheckedError = false;
   bool login = false;
@@ -190,9 +191,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               padding: const EdgeInsets.only(
                                   left: 20.0, bottom: 20, right: 20),
                               child: Container(
+                                height: 45,
                                   padding: EdgeInsets.symmetric(
                                     horizontal: 20,
-                                    vertical: 10,
+                                    vertical: 0,
                                   ),
                                   decoration: BoxDecoration(
                                       color: Colors.transparent,
@@ -205,12 +207,23 @@ class _LoginScreenState extends State<LoginScreen> {
                                     style: TextStyle(
                                       color: Colors.black,
                                     ),
-                                    decoration: InputDecoration.collapsed(
+                                    decoration: InputDecoration(
+                                      suffixIcon: IconButton(onPressed: (){
+                                        setState(() {
+                                          _secureText = !_secureText;
+                                        });
+
+                                      }, icon:  Icon( _secureText ? Icons.visibility_off : Icons.remove_red_eye,
+                                          color: Colors.grey)
+                                      ),
                                       hintStyle: TextStyle(
                                         color: Colors.black,
                                       ),
                                       hintText: '',
+
                                     ),
+                                    obscureText: _secureText,
+
                                   )),
                             )
                           : Container(),
@@ -278,6 +291,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   const EdgeInsets.only(top: 20.0, bottom: 8),
                               child: GestureDetector(
                                 onTap: () async {
+                                  bool emailValid = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(emailController.text);
+                                    emailValid == true ?
                                   emailVerification(emailController.text)
                                       .then((value) {
                                     if (value.err?.msg == 'username exist') {
@@ -294,7 +309,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                               builder: (context) => SignUpPage(
                                                   emailController.text)));
                                     }
-                                  });
+                                  }):
+                                        Get.snackbar('Error', 'Please enter a valid email address.');
                                 },
                                 child: Container(
                                   height: 60,
@@ -380,7 +396,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     onTap: (){
                                       setState(() {
                                         login = true;
-                                        print('$login');
+                                        // print('$login');
                                       });
                                     },
                                     child: Text(
