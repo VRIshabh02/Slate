@@ -1486,8 +1486,6 @@ class _HomePage2State extends State<HomePage2> {
           }),
     ),
     Scaffold(body: Text("Hello4")),
-
-
   ];
 
 
@@ -1684,12 +1682,11 @@ class _HomePage2State extends State<HomePage2> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Colors.greenAccent,
-        unselectedItemColor: Colors.black,
+        selectedItemColor: Color(0xff346243),
+        unselectedItemColor: Colors.grey,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home_outlined),
-
             label: 'Home',
             // backgroundColor: Colors.red,
           ),

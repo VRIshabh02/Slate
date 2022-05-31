@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled_slate/Models/organizationsListByUserId.dart';
 import 'package:untitled_slate/Views/home.dart';
 
+import 'invoicesListDead.dart';
+
 class SelectCompany extends StatefulWidget {
   const SelectCompany({Key? key}) : super(key: key);
 
@@ -56,7 +58,7 @@ class _SelectCompanyState extends State<SelectCompany> {
                     // setState(() {
                     //   clicked = !clicked;
                     // });
-                    Get.off(()=> HomePage(), arguments: [i]);
+                    Get.off(()=> HomePage2(), arguments: [i]);
                   },
                   child: Container(
                     child: Row(

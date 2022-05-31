@@ -1307,7 +1307,6 @@ class _HomePageState extends State<HomePage> {
               ),
             );
           }),
-/*
       Align(
         alignment: Alignment.bottomCenter,
         child: Container(
@@ -1362,25 +1361,30 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Container(
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.document_scanner,
-                        size: 30,
-                        color: Colors.blue,
-                      ),
-                      Text(
-                        'Invoices',
-                        style: GoogleFonts.poppins(
-                            fontSize: 10,
-                            color: Colors.blue,
-                            decoration: TextDecoration.none,
-                            fontWeight: FontWeight.w500),
-                      )
-                    ],
+              GestureDetector(
+                onTap: (){
+                  Get.to(() => InvoiceList());
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.document_scanner,
+                          size: 30,
+                          color: Colors.blue,
+                        ),
+                        Text(
+                          'Invoices',
+                          style: GoogleFonts.poppins(
+                              fontSize: 10,
+                              color: Colors.blue,
+                              decoration: TextDecoration.none,
+                              fontWeight: FontWeight.w500),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -1412,7 +1416,6 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       )
-*/
     ]);
   }
 }
