@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:untitled_slate/Controllers/globalVariables.dart';
 import 'package:untitled_slate/Models/emailVerification.dart';
 import 'package:untitled_slate/Models/loginModel.dart';
 import 'package:untitled_slate/Views/selectCompany.dart';
@@ -508,6 +509,9 @@ Future<LoginModel> loginFunc(String email, String pass) async {
       return LoginModel();
     } else {
       sharedPref(data);
+      userDataGlobal = jsonDecode(response.body.toString());
+      // print("Global $userDataGlobal");
+      // print('${userDataGlobal['ret']['data']['token']}');
       return LoginModel.fromJson(data);
     }
     // print('${data['ret']['data']}');
@@ -520,5 +524,6 @@ Future sharedPref(dynamic data) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setString('userData', jsonEncode(data));
   String? userData = prefs.getString('userData');
+
   // print('Vrishabh ${userData}');
 }

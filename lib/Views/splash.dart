@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:untitled_slate/Controllers/globalVariables.dart';
 import 'package:untitled_slate/Views/home.dart';
 import 'package:untitled_slate/Views/invoicesListDead.dart';
 import 'package:untitled_slate/Views/login.dart';
@@ -82,16 +85,18 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(Duration(milliseconds: 5000));
 
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? userData = prefs.getString('userData');
-    if (userData != null) {
-      Get.off( HomePage2(), arguments: [i]);
-    }
-    else{
-      Get.offAll(LoginScreen());
-    }
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // String? userData = prefs.getString('userData');
+    // if (userData != null) {
+    //   userDataGlobal = json.decode(userData);
+    //   print("Yeh raha token ${userDataGlobal['ret']['data']['token']}");
+    //   Get.off( HomePage2(), arguments: [i]);
+    // }
+    // else{
+    //   Get.offAll(LoginScreen());
+    // }
 
-    // Get.offAll(LoginScreen(), arguments: [0]);
+    Get.offAll(HomePage3(), arguments: [0]);
 
 
   }

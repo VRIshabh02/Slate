@@ -6,6 +6,7 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:untitled_slate/Views/home.dart';
+import 'package:untitled_slate/Views/invoicesListDead.dart';
 
 class OtpVerification extends StatefulWidget {
    OtpVerification({Key? key}) : super(key: key);
@@ -196,7 +197,7 @@ Future verifyOTPFunc(String otp, String number) async {
       Get.snackbar('Error', '${data['err']['data']}');
     }else{
       Get.snackbar('OTP Verified','');
-      Get.offAll(()=> HomePage(), arguments: [0]);
+      Get.offAll(()=> HomePage2(), arguments: [0]);
     }
   } else {
     Get.snackbar('Error', '${data['err']['data']}');

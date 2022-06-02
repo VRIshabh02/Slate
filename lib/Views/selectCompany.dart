@@ -44,81 +44,83 @@ class _SelectCompanyState extends State<SelectCompany> {
       OrganizationsListByUserId organizationsData = snapshot
           .data as OrganizationsListByUserId;
       return
-        Column(
-          children: [
-            for(int i = 0; i < organizationsData.ret!.data!.length; i++)
-            Container(
-              child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 40,),
-                GestureDetector(
-                  onTap: () {
-                    // setState(() {
-                    //   clicked = !clicked;
-                    // });
-                    Get.off(()=> HomePage2(), arguments: [i]);
-                  },
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                                color:
-                                clicked == true ?
-                                Colors.teal : Colors.white,
-                                border: Border.all(color: Colors.teal),
-                                borderRadius: BorderRadius.circular(50)
-                            ),
-                            child: Icon(Icons.done, color: Colors.white,),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('${organizationsData.ret!.data![i].orgName}',
-                                style: GoogleFonts.poppins(
-                                    fontSize: 20,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
+        SingleChildScrollView(
+          child: Column(
+            children: [
+              for(int i = 0; i < organizationsData.ret.data.length; i++)
+              Container(
+                child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 40,),
+                  GestureDetector(
+                    onTap: () {
+                      // setState(() {
+                      //   clicked = !clicked;
+                      // });
+                      Get.off(()=> HomePage2(), arguments: [i]);
+                    },
+                    child: Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                  color:
+                                  clicked == true ?
+                                  Colors.teal : Colors.white,
+                                  border: Border.all(color: Colors.teal),
+                                  borderRadius: BorderRadius.circular(50)
                               ),
-                              Row(
-                                children: [
-                                  Text('primary contact: ',
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 15,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                  SizedBox(width: 5,),
-                                  Text('Name',
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 15,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              )
-                            ],
+                              child: Icon(Icons.done, color: Colors.white,),
+                            ),
                           ),
-                        ),
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('${organizationsData.ret.data[i].orgName}',
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 20,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Row(
+                                  children: [
+                                    Text('primary contact: ',
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 15,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    SizedBox(width: 5,),
+                                    Text('${organizationsData.ret.data[i].primaryContact}',
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 15,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
-      ),
+                ],
+              ),
             ),
           ],
-        );
+        ),
+      );
     }
           return const Center(
               child: CircularProgressIndicator(
@@ -147,6 +149,7 @@ Future<OrganizationsListByUserId> organizationListApi() async {
       // body: json.encode(map)
   );
   var data = jsonDecode(response.body.toString());
+  // print(data);
   if (response.statusCode == 200) {
       return OrganizationsListByUserId.fromJson(data);
   } else {

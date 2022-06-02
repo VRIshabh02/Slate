@@ -1,12 +1,16 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:date_range_form_field/date_range_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:untitled_slate/Controllers/globalVariables.dart';
 import 'package:untitled_slate/Models/InvoiceListModel.dart';
 import 'package:untitled_slate/Views/home.dart';
 import 'package:untitled_slate/Views/selectCompany.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 import '../Models/DateFormatModel.dart';
 import '../Models/companyIDModel.dart';
 import '../Models/dashboardCardsModel.dart';
@@ -24,8 +28,8 @@ class HomePage2 extends StatefulWidget {
 
 class _HomePage2State extends State<HomePage2> {
   int _selectedIndex = 0;
-  static int company = 2;
-
+  int company = Get.arguments[0];
+  static bool clicked1 = false;
   static bool searching = false;
   static TextEditingController searchController = TextEditingController();
   static List<DataInvoiceList> _list = [];
@@ -47,8 +51,21 @@ class _HomePage2State extends State<HomePage2> {
 
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  final List<Widget> _widgetOptions = <Widget>[
-    StatefulBuilder(builder: (context, setState12) {
+  static var reqUrl = Uri.parse('dev.finance.slate.ac/mobile-app/');
+
+  List<Widget> _widgetOptions = [];
+
+  void initState() {
+    setIt();
+  }
+
+  setIt(){
+    _widgetOptions = [tab1(), tab2(), tab3(), tab4()];
+
+  }
+
+  Widget tab1() {
+    return StatefulBuilder(builder: (context, setState12) {
       return Stack(children: [
         FutureBuilder(
             future: organizationListApi(),
@@ -57,9 +74,8 @@ class _HomePage2State extends State<HomePage2> {
                 OrganizationsListByUserId organizationsData =
                     snapshot.data as OrganizationsListByUserId;
                 return FutureBuilder(
-                    future: companyIdApi(int.parse(organizationsData
-                        .ret!.data![company].orgId
-                        .toString())),
+                    future: companyIdApi(int.parse(
+                        organizationsData.ret.data[company].orgId.toString())),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.done) {
                         CompanyIdModel companyIdData =
@@ -74,228 +90,413 @@ class _HomePage2State extends State<HomePage2> {
                                 DateFormatModel dateFormatData =
                                     snapshot.data as DateFormatModel;
                                 return Scaffold(
-                                  appBar: AppBar(
-                                      title: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            width: 220,
-                                            child: Text(
-                                              '${organizationsData.ret!.data![company].orgName}',
-                                              overflow: TextOverflow.ellipsis,
-                                              maxLines: 1,
-                                            ),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                'Refreshed on ',
-                                                style: GoogleFonts.poppins(
-                                                    fontSize: 13,
-                                                    color: Colors.grey,
-                                                    fontWeight:
-                                                        FontWeight.w400),
-                                              ),
-                                              Container(
-                                                width: 100,
-                                                child: Text(
-                                                  '${organizationsData.ret!.data![company].updatedOn}',
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: GoogleFonts.poppins(
-                                                      fontSize: 13,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      actions: [
-                                        Padding(
-                                            padding: const EdgeInsets.all(12.0),
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                Get.dialog(
-                                                  Material(
-                                                    child: Form(
-                                                      key: myFormKey,
-                                                      child: Center(
-                                                        child: Column(
-                                                          children: [
-                                                            SafeArea(
-                                                              child:
-                                                                  DateRangeField(
-                                                                      enabled:
-                                                                          true,
-                                                                      firstDate: DateTime(
-                                                                          int.parse((dateFormatData.ret!.data![0].dYear! - 1)
-                                                                              .toString()),
-                                                                          int.parse((dateFormatData.ret!.data![0].dMonth! + 1)
-                                                                              .toString())),
-                                                                      lastDate: DateTime(
-                                                                          int.parse(dateFormatData.ret!.data![0].dYear
-                                                                              .toString()),
-                                                                          int.parse(dateFormatData.ret!.data![0].dMonth
-                                                                              .toString())),
-                                                                      initialValue: DateTimeRange(
-                                                                          start: DateTime(
-                                                                              int.parse((dateFormatData.ret!.data![0].dYear! - 1).toString()),
-                                                                              int.parse((dateFormatData.ret!.data![0].dMonth! + 1).toString())),
-                                                                          end: DateTime(int.parse((dateFormatData.ret!.data![0].dYear! - 1).toString()), int.parse((dateFormatData.ret!.data![0].dMonth! + 1).toString())).add(Duration(days: 5))),
-                                                                      decoration: InputDecoration(
-                                                                        labelText:
-                                                                            'Date Range',
-                                                                        prefixIcon:
-                                                                            Icon(Icons.date_range),
-                                                                        hintText:
-                                                                            'Please select a start and end date',
-                                                                        border:
-                                                                            OutlineInputBorder(),
-                                                                      ),
-                                                                      validator: (value) {
-                                                                        if (value!
-                                                                            .start
-                                                                            .isBefore(DateTime.now())) {
-                                                                          return 'Please enter a later start date';
-                                                                        }
-                                                                        return null;
-                                                                      },
-                                                                      onSaved: (value) {
-                                                                        setState12(
-                                                                            () {
-                                                                          myDateRange =
-                                                                              value!;
-                                                                          DateRange1 =
-                                                                              myDateRange.toString();
-                                                                          splitted =
-                                                                              DateRange1.split(' ');
-                                                                          print(
-                                                                              '${splitted}');
-                                                                          print(
-                                                                              '${splitted[0]} to ${splitted[3]}');
-                                                                        });
-                                                                      }),
-                                                            ),
-                                                            GestureDetector(
-                                                              onTap: () async {
-                                                                _submitForm();
-                                                                Get.back();
-                                                                setState12(
-                                                                    () {});
-                                                              },
-                                                              child: Container(
-                                                                height: 30,
-                                                                width: 200,
-                                                                decoration: BoxDecoration(
-                                                                    color: Colors
-                                                                        .deepPurple,
-                                                                    borderRadius:
-                                                                        BorderRadius.circular(
-                                                                            12)),
-                                                                child: Center(
-                                                                    child: Text(
-                                                                  "Done",
-                                                                  style: GoogleFonts.roboto(
-                                                                      fontSize:
-                                                                          20,
-                                                                      color: Colors
-                                                                          .white),
-                                                                )),
-                                                              ),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                );
-                                              },
-                                              child: Container(
-                                                  decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              60),
-                                                      color: Colors.white),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Icon(
-                                                      Icons
-                                                          .calendar_today_outlined,
-                                                      color: Colors.black,
-                                                      size: 20,
-                                                    ),
-                                                  )),
-                                            )),
-                                      ],
-                                      toolbarHeight: 60,
-                                      backgroundColor: Color(0xFF272D4D),
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.only(
-                                              bottomRight: Radius.circular(20),
-                                              bottomLeft:
-                                                  Radius.circular(20)))),
-                                  drawer: SafeArea(
-                                    child: Drawer(
-                                      child: Column(
-                                        children: [
-                                          Text("Hello"),
-                                          TextButton(
-                                              onPressed: () =>
-                                                  showDialog<String>(
-                                                    context: context,
-                                                    builder: (BuildContext
-                                                            context) =>
-                                                        AlertDialog(
-                                                      title: Text('Alert'),
-                                                      content: Text(
-                                                          "Are you sure you want to sign out?"),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            Get.back();
-                                                          },
-                                                          child: Text("No"),
-                                                        ),
-                                                        TextButton(
-                                                            onPressed:
-                                                                () async {
-                                                              SharedPreferences
-                                                                  prefs =
-                                                                  await SharedPreferences
-                                                                      .getInstance();
-                                                              prefs.remove(
-                                                                  'userData');
-                                                              Get.offAll(
-                                                                  LoginScreen());
-                                                            },
-                                                            child: Text(
-                                                              "Yes",
-                                                              style: TextStyle(
-                                                                  color: Colors
-                                                                      .deepPurple),
-                                                            ))
-                                                      ],
-                                                      actionsAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                    ),
-                                                  ),
-                                              child: Text('Sign Out',
-                                                  style: GoogleFonts.poppins(
-                                                    color: Colors.black,
-                                                    fontSize: 15,
-                                                  ))),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  backgroundColor: Color(0xE1FFFFFF),
+                                  // appBar: AppBar(
+                                  //     title: Column(
+                                  //       crossAxisAlignment:
+                                  //       CrossAxisAlignment.start,
+                                  //       children: [
+                                  //         GestureDetector(
+                                  //           onTap: () {
+                                  //             Get.dialog(Container(
+                                  //                 width: MediaQuery.of(context)
+                                  //                     .size
+                                  //                     .width *
+                                  //                     4 /
+                                  //                     5,
+                                  //                 child: Column(
+                                  //                   children: [
+                                  //                     Material(
+                                  //                       child: Container(
+                                  //                         height: 40,
+                                  //                         width: MediaQuery.of(
+                                  //                             context)
+                                  //                             .size
+                                  //                             .width *
+                                  //                             4 /
+                                  //                             5,
+                                  //                         color: Colors.teal,
+                                  //                         child: Padding(
+                                  //                           padding:
+                                  //                           const EdgeInsets
+                                  //                               .all(8.0),
+                                  //                           child: Text(
+                                  //                             'Select Company',
+                                  //                             style: GoogleFonts.poppins(
+                                  //                                 fontSize: 13,
+                                  //                                 color: Colors
+                                  //                                     .white,
+                                  //                                 fontWeight:
+                                  //                                 FontWeight
+                                  //                                     .w400),
+                                  //                           ),
+                                  //                         ),
+                                  //                       ),
+                                  //                     ),
+                                  //                     Material(
+                                  //                       child: Container(
+                                  //                         width: MediaQuery.of(
+                                  //                             context)
+                                  //                             .size
+                                  //                             .width *
+                                  //                             4 /
+                                  //                             5,
+                                  //                         height: MediaQuery.of(
+                                  //                             context)
+                                  //                             .size
+                                  //                             .height *
+                                  //                             4 /
+                                  //                             5,
+                                  //                         color: Colors.white,
+                                  //                         child: FutureBuilder(
+                                  //                             future:
+                                  //                             organizationListApi(),
+                                  //                             builder: (context,
+                                  //                                 snapshot) {
+                                  //                               if (snapshot
+                                  //                                   .connectionState ==
+                                  //                                   ConnectionState
+                                  //                                       .done) {
+                                  //                                 OrganizationsListByUserId
+                                  //                                 organizationsData =
+                                  //                                 snapshot.data
+                                  //                                 as OrganizationsListByUserId;
+                                  //                                 return SingleChildScrollView(
+                                  //                                   child:
+                                  //                                   Column(
+                                  //                                     children: [
+                                  //                                       SizedBox(
+                                  //                                         height:
+                                  //                                         10,
+                                  //                                       ),
+                                  //                                       for (int i =
+                                  //                                       0;
+                                  //                                       i < organizationsData.ret.data.length;
+                                  //                                       i++)
+                                  //                                         Container(
+                                  //                                           child:
+                                  //                                           Column(
+                                  //                                             mainAxisAlignment: MainAxisAlignment.start,
+                                  //                                             crossAxisAlignment: CrossAxisAlignment.start,
+                                  //                                             children: [
+                                  //                                               SizedBox(
+                                  //                                                 height: 0,
+                                  //                                               ),
+                                  //                                               GestureDetector(
+                                  //                                                 onTap: () {
+                                  //                                                   // setState(() {
+                                  //                                                   //   clicked = !clicked;
+                                  //                                                   // });
+                                  //                                                   // Get.off(()=> HomePage2(), arguments: [i]);
+                                  //                                                   // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomePage2()));
+                                  //                                                   // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                  //                                                   //     HomePage2()), (Route<dynamic> route) => false);
+                                  //                                                   setState12(() {
+                                  //                                                     company = i;
+                                  //                                                   });
+                                  //                                                   Get.back();
+                                  //                                                 },
+                                  //                                                 child: Container(
+                                  //                                                   child: Row(
+                                  //                                                     mainAxisAlignment: MainAxisAlignment.start,
+                                  //                                                     children: [
+                                  //                                                       Padding(
+                                  //                                                         padding: const EdgeInsets.all(8.0),
+                                  //                                                         child: Container(
+                                  //                                                           height: 25,
+                                  //                                                           width: 25,
+                                  //                                                           decoration: BoxDecoration(color: clicked1 == true ? Colors.teal : Colors.white, border: Border.all(color: Colors.teal), borderRadius: BorderRadius.circular(50)),
+                                  //                                                           child: Icon(
+                                  //                                                             Icons.done,
+                                  //                                                             color: Colors.white,
+                                  //                                                           ),
+                                  //                                                         ),
+                                  //                                                       ),
+                                  //                                                       Padding(
+                                  //                                                         padding: const EdgeInsets.all(8.0),
+                                  //                                                         child: Column(
+                                  //                                                           crossAxisAlignment: CrossAxisAlignment.start,
+                                  //                                                           children: [
+                                  //                                                             Text(
+                                  //                                                               '${organizationsData.ret.data[i].orgName}',
+                                  //                                                               style: GoogleFonts.poppins(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
+                                  //                                                             ),
+                                  //                                                             Row(
+                                  //                                                               children: [
+                                  //                                                                 Text(
+                                  //                                                                   'primary contact: ',
+                                  //                                                                   style: GoogleFonts.poppins(fontSize: 10, color: Colors.black, fontWeight: FontWeight.w600),
+                                  //                                                                 ),
+                                  //                                                                 SizedBox(
+                                  //                                                                   width: 5,
+                                  //                                                                 ),
+                                  //                                                                 Text(
+                                  //                                                                   '${organizationsData.ret.data[i].primaryContact}',
+                                  //                                                                   style: GoogleFonts.poppins(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
+                                  //                                                                 ),
+                                  //                                                               ],
+                                  //                                                             )
+                                  //                                                           ],
+                                  //                                                         ),
+                                  //                                                       ),
+                                  //                                                     ],
+                                  //                                                   ),
+                                  //                                                 ),
+                                  //                                               ),
+                                  //                                               SizedBox(
+                                  //                                                 height: 20,
+                                  //                                               ),
+                                  //                                             ],
+                                  //                                           ),
+                                  //                                         ),
+                                  //                                     ],
+                                  //                                   ),
+                                  //                                 );
+                                  //                               }
+                                  //                               return const Center(
+                                  //                                   child:
+                                  //                                   CircularProgressIndicator(
+                                  //                                     color: Colors
+                                  //                                         .white,
+                                  //                                     // ));
+                                  //                                   ));
+                                  //                             }),
+                                  //                       ),
+                                  //                     )
+                                  //                   ],
+                                  //                 )));
+                                  //           },
+                                  //           child: Row(
+                                  //             // mainAxisAlignment: MainAxisAlignment.start,
+                                  //             children: [
+                                  //               Expanded(
+                                  //                 child: Text(
+                                  //                   '${organizationsData.ret.data[company].orgName}',
+                                  //                   style: GoogleFonts.roboto(
+                                  //                       fontSize: 16,
+                                  //                       fontWeight:
+                                  //                       FontWeight.bold),
+                                  //                   overflow:
+                                  //                   TextOverflow.ellipsis,
+                                  //                   maxLines: 2,
+                                  //                 ),
+                                  //               ),
+                                  //               Icon(
+                                  //                 Icons.arrow_drop_down,
+                                  //                 color: Colors.white,
+                                  //                 size: 30,
+                                  //               ),
+                                  //             ],
+                                  //           ),
+                                  //         ),
+                                  //         Row(
+                                  //           children: [
+                                  //             Text(
+                                  //               'Refreshed on ',
+                                  //               style: GoogleFonts.poppins(
+                                  //                   fontSize: 13,
+                                  //                   color: Colors.grey,
+                                  //                   fontWeight:
+                                  //                   FontWeight.w400),
+                                  //             ),
+                                  //             Container(
+                                  //               width: 100,
+                                  //               child: Text(
+                                  //                 '${organizationsData.ret.data[company].updatedOn}',
+                                  //                 overflow:
+                                  //                 TextOverflow.ellipsis,
+                                  //                 style: GoogleFonts.poppins(
+                                  //                     fontSize: 13,
+                                  //                     color: Colors.white,
+                                  //                     fontWeight:
+                                  //                     FontWeight.w600),
+                                  //               ),
+                                  //             ),
+                                  //           ],
+                                  //         ),
+                                  //       ],
+                                  //     ),
+                                  //     actions: [
+                                  //       Padding(
+                                  //           padding: const EdgeInsets.all(12.0),
+                                  //           child: GestureDetector(
+                                  //             onTap: () {
+                                  //               Get.dialog(
+                                  //                 Material(
+                                  //                   child: Form(
+                                  //                     key: myFormKey,
+                                  //                     child: Center(
+                                  //                       child: Column(
+                                  //                         children: [
+                                  //                           SafeArea(
+                                  //                             child:
+                                  //                             DateRangeField(
+                                  //                                 enabled:
+                                  //                                 true,
+                                  //                                 firstDate: DateTime(
+                                  //                                     int.parse((dateFormatData.ret!.data![0].dYear! - 1)
+                                  //                                         .toString()),
+                                  //                                     int.parse((dateFormatData.ret!.data![0].dMonth! + 1)
+                                  //                                         .toString())),
+                                  //                                 lastDate: DateTime(
+                                  //                                     int.parse(dateFormatData.ret!.data![0].dYear
+                                  //                                         .toString()),
+                                  //                                     int.parse(dateFormatData.ret!.data![0].dMonth
+                                  //                                         .toString())),
+                                  //                                 initialValue: DateTimeRange(
+                                  //                                     start: DateTime(
+                                  //                                         int.parse((dateFormatData.ret!.data![0].dYear! - 1).toString()),
+                                  //                                         int.parse((dateFormatData.ret!.data![0].dMonth! + 1).toString())),
+                                  //                                     end: DateTime(int.parse((dateFormatData.ret!.data![0].dYear! - 1).toString()), int.parse((dateFormatData.ret!.data![0].dMonth! + 1).toString())).add(Duration(days: 5))),
+                                  //                                 decoration: InputDecoration(
+                                  //                                   labelText:
+                                  //                                   'Date Range',
+                                  //                                   prefixIcon:
+                                  //                                   Icon(Icons.date_range),
+                                  //                                   hintText:
+                                  //                                   'Please select a start and end date',
+                                  //                                   border:
+                                  //                                   OutlineInputBorder(),
+                                  //                                 ),
+                                  //                                 validator: (value) {
+                                  //                                   if (value!
+                                  //                                       .start
+                                  //                                       .isBefore(DateTime.now())) {
+                                  //                                     return 'Please enter a later start date';
+                                  //                                   }
+                                  //                                   return null;
+                                  //                                 },
+                                  //                                 onSaved: (value) {
+                                  //                                   setState12(
+                                  //                                           () {
+                                  //                                         myDateRange =
+                                  //                                         value!;
+                                  //                                         DateRange1 =
+                                  //                                             myDateRange.toString();
+                                  //                                         splitted =
+                                  //                                             DateRange1.split(' ');
+                                  //                                         // print(
+                                  //                                         //     '${splitted}');
+                                  //                                         // print(
+                                  //                                         //     '${splitted[0]} to ${splitted[3]}');
+                                  //                                       });
+                                  //                                 }),
+                                  //                           ),
+                                  //                           GestureDetector(
+                                  //                             onTap: () async {
+                                  //                               _submitForm();
+                                  //                               Get.back();
+                                  //                               setState12(
+                                  //                                       () {});
+                                  //                             },
+                                  //                             child: Container(
+                                  //                               height: 30,
+                                  //                               width: 200,
+                                  //                               decoration: BoxDecoration(
+                                  //                                   color: Colors
+                                  //                                       .deepPurple,
+                                  //                                   borderRadius:
+                                  //                                   BorderRadius.circular(
+                                  //                                       12)),
+                                  //                               child: Center(
+                                  //                                   child: Text(
+                                  //                                     "Done",
+                                  //                                     style: GoogleFonts.roboto(
+                                  //                                         fontSize:
+                                  //                                         20,
+                                  //                                         color: Colors
+                                  //                                             .white),
+                                  //                                   )),
+                                  //                             ),
+                                  //                           )
+                                  //                         ],
+                                  //                       ),
+                                  //                     ),
+                                  //                   ),
+                                  //                 ),
+                                  //               );
+                                  //             },
+                                  //             child: Container(
+                                  //                 decoration: BoxDecoration(
+                                  //                     borderRadius:
+                                  //                     BorderRadius.circular(
+                                  //                         60),
+                                  //                     color: Colors.white),
+                                  //                 child: Padding(
+                                  //                   padding:
+                                  //                   const EdgeInsets.all(
+                                  //                       8.0),
+                                  //                   child: Icon(
+                                  //                     Icons
+                                  //                         .calendar_today_outlined,
+                                  //                     color: Colors.black,
+                                  //                     size: 20,
+                                  //                   ),
+                                  //                 )),
+                                  //           )),
+                                  //     ],
+                                  //     toolbarHeight: 60,
+                                  //     backgroundColor: Color(0xFF272D4D),
+                                  //     shape: RoundedRectangleBorder(
+                                  //         borderRadius: BorderRadius.only(
+                                  //             bottomRight: Radius.circular(20),
+                                  //             bottomLeft:
+                                  //             Radius.circular(20)))),
+                                  // drawer: SafeArea(
+                                  //   child: Drawer(
+                                  //     child: Column(
+                                  //       children: [
+                                  //         Text("Hello"),
+                                  //         TextButton(
+                                  //             onPressed: () =>
+                                  //                 showDialog<String>(
+                                  //                   context: context,
+                                  //                   builder: (BuildContext
+                                  //                   context) =>
+                                  //                       AlertDialog(
+                                  //                         title: Text('Alert'),
+                                  //                         content: Text(
+                                  //                             "Are you sure you want to sign out?"),
+                                  //                         actions: [
+                                  //                           TextButton(
+                                  //                             onPressed: () {
+                                  //                               Get.back();
+                                  //                             },
+                                  //                             child: Text("No"),
+                                  //                           ),
+                                  //                           TextButton(
+                                  //                               onPressed:
+                                  //                                   () async {
+                                  //                                 SharedPreferences
+                                  //                                 prefs =
+                                  //                                 await SharedPreferences
+                                  //                                     .getInstance();
+                                  //                                 prefs.remove(
+                                  //                                     'userData');
+                                  //                                 Get.offAll(
+                                  //                                     LoginScreen());
+                                  //                               },
+                                  //                               child: Text(
+                                  //                                 "Yes",
+                                  //                                 style: TextStyle(
+                                  //                                     color: Colors
+                                  //                                         .deepPurple),
+                                  //                               ))
+                                  //                         ],
+                                  //                         actionsAlignment:
+                                  //                         MainAxisAlignment
+                                  //                             .spaceBetween,
+                                  //                       ),
+                                  //                 ),
+                                  //             child: Text('Sign Out',
+                                  //                 style: GoogleFonts.poppins(
+                                  //                   color: Colors.black,
+                                  //                   fontSize: 15,
+                                  //                 ))),
+                                  //       ],
+                                  //     ),
+                                  //   ),
+                                  // ),
+                                  backgroundColor: Color(0xE1EAEAEA),
                                   body: Center(
                                     child: SingleChildScrollView(
                                       child: Column(
@@ -317,8 +518,8 @@ class _HomePage2State extends State<HomePage2> {
                                                         ? '2021-10-30'
                                                         : splitted[3]),
                                                 builder: (context, snapshot) {
-                                                  print(
-                                                      "yaha dekho ${splitted}");
+                                                  // print(
+                                                  //     "yaha dekho ${splitted}");
 
                                                   if (snapshot
                                                           .connectionState ==
@@ -329,8 +530,8 @@ class _HomePage2State extends State<HomePage2> {
                                                             as DashboardCardsModel;
                                                     // print(
                                                     //     "sales ka value ${dashboardCardsData.ret!.data!.sales![0].amount}");
-                                                    print(
-                                                        "snapshot data : ${snapshot.data}");
+                                                    // print(
+                                                    //     "snapshot data : ${snapshot.data}");
                                                     return Container(
                                                       child: GridView.count(
                                                         childAspectRatio: 7 / 3,
@@ -675,8 +876,8 @@ class _HomePage2State extends State<HomePage2> {
                                                     const EdgeInsets.all(8.0),
                                                 child: GestureDetector(
                                                   onTap: () {
-                                                    Get.to(() => InvoiceList());
-
+                                                    // Get.to(() => InvoiceList());
+                                                    _onItemTapped(2);
                                                   },
                                                   child: Container(
                                                     height: 80,
@@ -984,7 +1185,7 @@ class _HomePage2State extends State<HomePage2> {
                                                         Padding(
                                                           padding:
                                                               const EdgeInsets
-                                                                  .all(8.0),
+                                                                  .all(4.0),
                                                           child: Text(
                                                             'Add User',
                                                             style: GoogleFonts.poppins(
@@ -1268,71 +1469,110 @@ class _HomePage2State extends State<HomePage2> {
               );
             }),
       ]);
-    }),
-    Scaffold(body: Text("Hello2")),
-    Scaffold(
-      appBar: AppBar(
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: 220,
-                child: Text(
-                  'Invoices',
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
+    });
+  }
+
+  Widget tab2() {
+    return FutureBuilder(
+        future: organizationListApi(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            OrganizationsListByUserId organizationsData =
+                snapshot.data as OrganizationsListByUserId;
+            var finalUrl =
+                "https://${reqUrl}dashboard/${organizationsData.ret.data[company].orgId}/${userDataGlobal['ret']['data']['token']}";
+            print(finalUrl);
+            return WebView(
+              initialUrl: Uri.encodeFull(finalUrl),
+              javascriptMode: JavascriptMode.unrestricted,
+            );
+          }
+          return Material(
+            child: Center(
+              child: Container(
+                height: 100,
+                width: 100,
+                child: Center(
+                  child: Column(
+                    children: const [
+                      Center(
+                          child: CircularProgressIndicator(
+                        color: Colors.black,
+                      )),
+                      Text("Please wait!")
+                    ],
+                  ),
                 ),
               ),
-            ],
-          ),
-          toolbarHeight: 60,
-          backgroundColor: Color(0xFF272D4D),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(20),
-                  bottomLeft: Radius.circular(20)))),
-      drawer: SafeArea(
-        child: Drawer(
-          child: Column(
-            children: [
-              Text("Hello"),
-//   TextButton(
-//   onPressed: () => showDialog<String>(
-//   context: context,
-//   builder: (BuildContext context) => AlertDialog(
-//   title: Text('Alert'),
-//   content: Text("Are you sure you want to sign out?"),
-//   actions: [
-//   TextButton(
-//   onPressed: () {
-//   Get.back();
-//   },
-//   child: Text("No"),
-//   ),
-//   TextButton(
-//   onPressed: () async {
-//   SharedPreferences prefs =
-//       await SharedPreferences.getInstance();
-//   prefs.remove('userData');
-//   Get.offAll(LoginScreen());
-// },
-// child: Text(
-// "Yes",
-// style: TextStyle(color: Colors.deepPurple),
-// ))
-// ],
-// actionsAlignment: MainAxisAlignment.spaceBetween,
-// ),
-// ),
-// child: Text('Sign Out',
-// style: GoogleFonts.poppins(
-// color: Colors.black,
-// fontSize: 15,
-// ))),
-            ],
-          ),
-        ),
-      ),
+            ),
+          );
+        });
+  }
+
+  Widget tab3() {
+    return Scaffold(
+//       appBar: AppBar(
+//           title: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             children: [
+//               Container(
+//                 width: 220,
+//                 child: Text(
+//                   'Invoices',
+//                   overflow: TextOverflow.ellipsis,
+//                   maxLines: 1,
+//                 ),
+//               ),
+//             ],
+//           ),
+//           toolbarHeight: 60,
+//           backgroundColor: Color(0xFF272D4D),
+//           shape: RoundedRectangleBorder(
+//               borderRadius: BorderRadius.only(
+//                   bottomRight: Radius.circular(20),
+//                   bottomLeft: Radius.circular(20)))),
+//       drawer: SafeArea(
+//         child: Drawer(
+//           child: Column(
+//             children: [
+//               Text("Hello"),
+// //   TextButton(
+// //   onPressed: () => showDialog<String>(
+// //   context: context,
+// //   builder: (BuildContext context) => AlertDialog(
+// //   title: Text('Alert'),
+// //   content: Text("Are you sure you want to sign out?"),
+// //   actions: [
+// //   TextButton(
+// //   onPressed: () {
+// //   Get.back();
+// //   },
+// //   child: Text("No"),
+// //   ),
+// //   TextButton(
+// //   onPressed: () async {
+// //   SharedPreferences prefs =
+// //       await SharedPreferences.getInstance();
+// //   prefs.remove('userData');
+// //   Get.offAll(LoginScreen());
+// // },
+// // child: Text(
+// // "Yes",
+// // style: TextStyle(color: Colors.deepPurple),
+// // ))
+// // ],
+// // actionsAlignment: MainAxisAlignment.spaceBetween,
+// // ),
+// // ),
+// // child: Text('Sign Out',
+// // style: GoogleFonts.poppins(
+// // color: Colors.black,
+// // fontSize: 15,
+// // ))),
+//             ],
+//           ),
+//         ),
+//       ),
       backgroundColor: Color(0xE1FFFFFF),
       body: FutureBuilder(
           future: getInvoiceList(),
@@ -1484,11 +1724,14 @@ class _HomePage2State extends State<HomePage2> {
               ),
             );
           }),
-    ),
-    Scaffold(body: Text("Hello4")),
-  ];
+    );
+  }
 
-
+  Widget tab4() {
+    return Scaffold(
+      body: Text("Hello"),
+    );
+  }
 
   static onSearchTextChanged(Function setWidgetState) async {
     _filteredList.clear();
@@ -1503,8 +1746,8 @@ class _HomePage2State extends State<HomePage2> {
         _filteredList.add(userDetail);
     });
     searching = _filteredList.length < _list.length ? true : false;
-    print(searching);
-    print(" Length Length cjbdcvbjbv c           ${_filteredList.length}");
+    // print(searching);
+    // print(" Length Length cjbdcvbjbv c           ${_filteredList.length}");
     setWidgetState(() {});
   }
 
@@ -1668,7 +1911,6 @@ class _HomePage2State extends State<HomePage2> {
   }
 
   void _onItemTapped(int index) {
-    // index == 2 ? Get.to(() => InvoiceList()) :
     setState(() {
       _selectedIndex = index;
     });
@@ -1676,40 +1918,588 @@ class _HomePage2State extends State<HomePage2> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xE1C2C0C0),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Color(0xff346243),
-        unselectedItemColor: Colors.grey,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: 'Home',
-            // backgroundColor: Colors.red,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard_outlined),
-            label: 'Dashboard',
-            // backgroundColor: Colors.green,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.document_scanner),
-            label: 'Invoices',
-            // backgroundColor: Colors.purple,
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_none),
-            label: 'Notifications',
-            // backgroundColor: Colors.pink,
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        // selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
-      ),
-    );
+    return FutureBuilder(
+        future: organizationListApi(),
+        builder: (context, snapshot) {
+          // if (snapshot.connectionState == ConnectionState.done) {
+          OrganizationsListByUserId organizationsData =
+              snapshot.data as OrganizationsListByUserId;
+          return FutureBuilder(
+              future: companyIdApi(int.parse(
+                  organizationsData.ret.data[company].orgId.toString())),
+              builder: (context, snapshot) {
+                // if (snapshot.connectionState == ConnectionState.done) {
+                CompanyIdModel companyIdData = snapshot.data as CompanyIdModel;
+                return FutureBuilder(
+                    future: dateFormat(
+                        companyIdData.ret!.data![0].companyId.toString()),
+                    builder: (context, snapshot) {
+                      // if (snapshot.connectionState ==
+                      //     ConnectionState.done) {
+                      DateFormatModel dateFormatData =
+                          snapshot.data as DateFormatModel;
+                      return Scaffold(
+                        appBar: _selectedIndex == 0
+                            ?
+                        AppBar(
+                                title: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () {
+                                        Get.dialog(Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                4 /
+                                                5,
+                                            child: Column(
+                                              children: [
+                                                Material(
+                                                  child: Container(
+                                                    height: 40,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            4 /
+                                                            5,
+                                                    color: Colors.teal,
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Text(
+                                                        'Select Company',
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                fontSize: 13,
+                                                                color: Colors
+                                                                    .white,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Material(
+                                                  child: Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            4 /
+                                                            5,
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            4 /
+                                                            5,
+                                                    color: Colors.white,
+                                                    child: FutureBuilder(
+                                                        future:
+                                                            organizationListApi(),
+                                                        builder: (context,
+                                                            snapshot) {
+                                                          if (snapshot
+                                                                  .connectionState ==
+                                                              ConnectionState
+                                                                  .done) {
+                                                            OrganizationsListByUserId
+                                                                organizationsData =
+                                                                snapshot.data
+                                                                    as OrganizationsListByUserId;
+                                                            return SingleChildScrollView(
+                                                              child: Column(
+                                                                children: [
+                                                                  SizedBox(
+                                                                    height: 10,
+                                                                  ),
+                                                                  for (int i =
+                                                                          0;
+                                                                      i <
+                                                                          organizationsData
+                                                                              .ret
+                                                                              .data
+                                                                              .length;
+                                                                      i++)
+                                                                    Container(
+                                                                      child:
+                                                                          Column(
+                                                                        mainAxisAlignment:
+                                                                            MainAxisAlignment.start,
+                                                                        crossAxisAlignment:
+                                                                            CrossAxisAlignment.start,
+                                                                        children: [
+                                                                          SizedBox(
+                                                                            height:
+                                                                                0,
+                                                                          ),
+                                                                          GestureDetector(
+                                                                            onTap:
+                                                                                () {
+                                                                              // setState(() {
+                                                                              //   clicked = !clicked;
+                                                                              // });
+                                                                              // Get.off(()=> HomePage2(), arguments: [i]);
+                                                                              // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomePage2()));
+                                                                              // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                                                              //     HomePage2()), (Route<dynamic> route) => false);
+                                                                                  setState(() {
+                                                                                company = i;
+                                                                                setIt();
+                                                                              });
+                                                                              Get.back();
+                                                                            },
+                                                                            child:
+                                                                                Container(
+                                                                              child: Row(
+                                                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                                                children: [
+                                                                                  Padding(
+                                                                                    padding: const EdgeInsets.all(8.0),
+                                                                                    child: Container(
+                                                                                      height: 25,
+                                                                                      width: 25,
+                                                                                      decoration: BoxDecoration(color: clicked1 == true ? Colors.teal : Colors.white, border: Border.all(color: Colors.teal), borderRadius: BorderRadius.circular(50)),
+                                                                                      child: Icon(
+                                                                                        Icons.done,
+                                                                                        color: Colors.white,
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                  Padding(
+                                                                                    padding: const EdgeInsets.all(8.0),
+                                                                                    child: Column(
+                                                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                      children: [
+                                                                                        Text(
+                                                                                          '${organizationsData.ret.data[i].orgName}',
+                                                                                          style: GoogleFonts.poppins(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
+                                                                                        ),
+                                                                                        Row(
+                                                                                          children: [
+                                                                                            Text(
+                                                                                              'primary contact: ',
+                                                                                              style: GoogleFonts.poppins(fontSize: 10, color: Colors.black, fontWeight: FontWeight.w600),
+                                                                                            ),
+                                                                                            SizedBox(
+                                                                                              width: 5,
+                                                                                            ),
+                                                                                            Text(
+                                                                                              '${organizationsData.ret.data[i].primaryContact}',
+                                                                                              style: GoogleFonts.poppins(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
+                                                                                            ),
+                                                                                          ],
+                                                                                        )
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                          SizedBox(
+                                                                            height:
+                                                                                20,
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    ),
+                                                                ],
+                                                              ),
+                                                            );
+                                                          }
+                                                          return const Center(
+                                                              child:
+                                                                  CircularProgressIndicator(
+                                                            color: Colors.white,
+                                                            // ));
+                                                          ));
+                                                        }),
+                                                  ),
+                                                )
+                                              ],
+                                            )));
+                                      },
+                                      child: Row(
+                                        // mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          Expanded(
+                                            child: Text(
+                                              '${organizationsData.ret.data[company].orgName}',
+                                              style: GoogleFonts.roboto(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.bold),
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 2,
+                                            ),
+                                          ),
+                                          Icon(
+                                            Icons.arrow_drop_down,
+                                            color: Colors.white,
+                                            size: 30,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          'Refreshed on ',
+                                          style: GoogleFonts.poppins(
+                                              fontSize: 13,
+                                              color: Colors.grey,
+                                              fontWeight: FontWeight.w400),
+                                        ),
+                                        Container(
+                                          width: 100,
+                                          child: Text(
+                                            '${organizationsData.ret.data[company].updatedOn}',
+                                            overflow: TextOverflow.ellipsis,
+                                            style: GoogleFonts.poppins(
+                                                fontSize: 13,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                actions: [
+                                  Padding(
+                                      padding: const EdgeInsets.all(12.0),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Get.dialog(
+                                            Material(
+                                              child: Form(
+                                                key: myFormKey,
+                                                child: Center(
+                                                  child: Column(
+                                                    children: [
+                                                      SafeArea(
+                                                        child: DateRangeField(
+                                                            enabled: true,
+                                                            firstDate: DateTime(
+                                                                int.parse((dateFormatData.ret!.data![0].dYear! - 1)
+                                                                    .toString()),
+                                                                int.parse(
+                                                                    (dateFormatData.ret!.data![0].dMonth! + 1)
+                                                                        .toString())),
+                                                            lastDate: DateTime(
+                                                                int.parse(dateFormatData
+                                                                    .ret!
+                                                                    .data![0]
+                                                                    .dYear
+                                                                    .toString()),
+                                                                int.parse(dateFormatData
+                                                                    .ret!
+                                                                    .data![0]
+                                                                    .dMonth
+                                                                    .toString())),
+                                                            initialValue: DateTimeRange(
+                                                                start:
+                                                                    DateTime(int.parse((dateFormatData.ret!.data![0].dYear! - 1).toString()), int.parse((dateFormatData.ret!.data![0].dMonth! + 1).toString())),
+                                                                end: DateTime(int.parse((dateFormatData.ret!.data![0].dYear! - 1).toString()), int.parse((dateFormatData.ret!.data![0].dMonth! + 1).toString())).add(Duration(days: 5))),
+                                                            decoration: InputDecoration(
+                                                              labelText:
+                                                                  'Date Range',
+                                                              prefixIcon: Icon(
+                                                                  Icons
+                                                                      .date_range),
+                                                              hintText:
+                                                                  'Please select a start and end date',
+                                                              border:
+                                                                  OutlineInputBorder(),
+                                                            ),
+                                                            validator: (value) {
+                                                              if (value!.start
+                                                                  .isBefore(DateTime
+                                                                      .now())) {
+                                                                return 'Please enter a later start date';
+                                                              }
+                                                              return null;
+                                                            },
+                                                            onSaved: (value) {
+                                                              setState(() {
+                                                                myDateRange =
+                                                                    value!;
+                                                                DateRange1 =
+                                                                    myDateRange
+                                                                        .toString();
+                                                                splitted =
+                                                                    DateRange1
+                                                                        .split(
+                                                                            ' ');
+                                                                // print(
+                                                                //     '${splitted}');
+                                                                // print(
+                                                                //     '${splitted[0]} to ${splitted[3]}');
+                                                              });
+                                                            }),
+                                                      ),
+                                                      GestureDetector(
+                                                        onTap: () async {
+                                                          _submitForm();
+                                                          Get.back();
+                                                          setState(() {});
+                                                        },
+                                                        child: Container(
+                                                          height: 30,
+                                                          width: 200,
+                                                          decoration: BoxDecoration(
+                                                              color: Colors
+                                                                  .deepPurple,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12)),
+                                                          child: Center(
+                                                              child: Text(
+                                                            "Done",
+                                                            style: GoogleFonts
+                                                                .roboto(
+                                                                    fontSize:
+                                                                        20,
+                                                                    color: Colors
+                                                                        .white),
+                                                          )),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(60),
+                                                color: Colors.white),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Icon(
+                                                Icons.calendar_today_outlined,
+                                                color: Colors.black,
+                                                size: 20,
+                                              ),
+                                            )),
+                                      )),
+                                ],
+                                toolbarHeight: 60,
+                                backgroundColor: Color(0xFF272D4D),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                        bottomRight: Radius.circular(20),
+                                        bottomLeft: Radius.circular(20))))
+                            : AppBar(
+                                title: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      width: 220,
+                                      child: Text(
+                                        _selectedIndex == 1 ?
+                                            'Dashboard' :
+                                         _selectedIndex == 2 ?
+                                        'Invoices'  :
+                                         _selectedIndex == 3 ?
+                                         'Notifications':
+                                        '',
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                toolbarHeight: 60,
+                                backgroundColor: Color(0xFF272D4D),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                        bottomRight: Radius.circular(20),
+                                        bottomLeft: Radius.circular(20)))),
+                        drawer: SafeArea(
+                          child: Drawer(
+                            child: Column(
+                              children: [
+                                Text("Hello"),
+                                TextButton(
+                                    onPressed: () => showDialog<String>(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              AlertDialog(
+                                            title: Text('Alert'),
+                                            content: Text(
+                                                "Are you sure you want to sign out?"),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                },
+                                                child: Text("No"),
+                                              ),
+                                              TextButton(
+                                                  onPressed: () async {
+                                                    SharedPreferences prefs =
+                                                        await SharedPreferences
+                                                            .getInstance();
+                                                    prefs.remove('userData');
+                                                    Get.offAll(LoginScreen());
+                                                  },
+                                                  child: Text(
+                                                    "Yes",
+                                                    style: TextStyle(
+                                                        color:
+                                                            Colors.deepPurple),
+                                                  ))
+                                            ],
+                                            actionsAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                          ),
+                                        ),
+                                    child: Text('Sign Out',
+                                        style: GoogleFonts.poppins(
+                                          color: Colors.black,
+                                          fontSize: 15,
+                                        ))),
+                              ],
+                            ),
+                          ),
+                        ),
+                        backgroundColor: Color(0xE1FFFFFF),
+                        body: Center(
+                          child: _widgetOptions.elementAt(_selectedIndex),
+                        ),
+                        bottomNavigationBar: BottomNavigationBar(
+                          selectedItemColor: Color(0xff346243),
+                          unselectedItemColor: Colors.grey,
+                          items: const <BottomNavigationBarItem>[
+                            BottomNavigationBarItem(
+                              icon: Icon(Icons.home_outlined),
+                              label: 'Home',
+                              // backgroundColor: Colors.red,
+                            ),
+                            BottomNavigationBarItem(
+                              icon: Icon(Icons.dashboard_outlined),
+                              label: 'Dashboard',
+                              // backgroundColor: Colors.green,
+                            ),
+                            BottomNavigationBarItem(
+                              icon: Icon(Icons.document_scanner),
+                              label: 'Invoices',
+                              // backgroundColor: Colors.purple,
+                            ),
+                            BottomNavigationBarItem(
+                              icon: Icon(Icons.notifications_none),
+                              label: 'Notifications',
+                              // backgroundColor: Colors.pink,
+                            ),
+                          ],
+                          currentIndex: _selectedIndex,
+                          // selectedItemColor: Colors.amber[800],
+                          onTap: _onItemTapped,
+                        ),
+                      );
+                      // }return Material(
+                      //   child: Center(
+                      //     child: Container(
+                      //       height: 100,
+                      //       width: 100,
+                      //       child: Center(
+                      //         child: Column(
+                      //           children: const [
+                      //             Center(
+                      //                 child: CircularProgressIndicator(
+                      //                   color: Colors.black,
+                      //                 )),
+                      //             Text("Please wait!")
+                      //           ],
+                      //         ),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // );
+                    });
+                // }return Material(
+                //   child: Center(
+                //     child: Container(
+                //       height: 100,
+                //       width: 100,
+                //       child: Center(
+                //         child: Column(
+                //           children: const [
+                //             Center(
+                //                 child: CircularProgressIndicator(
+                //                   color: Colors.black,
+                //                 )),
+                //             Text("Please wait!")
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // );
+              });
+          // }
+          // return Material(
+          //   child: Center(
+          //     child: Container(
+          //       height: 100,
+          //       width: 100,
+          //       child: Center(
+          //         child: Column(
+          //           children: const [
+          //             Center(
+          //                 child: CircularProgressIndicator(
+          //                   color: Colors.black,
+          //                 )),
+          //             Text("Please wait!")
+          //           ],
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // );
+        });
   }
 }
+
+Future<InvoiceListModel> getInvoiceList() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? data1 = prefs.getString('userData');
+  final userData = json.decode(data1!);
+
+  var requestURL = Uri.parse(
+      'https://uat.finance.slate.ac/slate-api/routes.php?');
+
+  final uri = Uri.parse('$requestURL').replace(queryParameters: {
+    'action': 'getInvoice',
+    'arg': '81',
+  });
+  // print('final url is: $uri');
+  // var map = Map<String, dynamic>();
+  // map['company_id'] = '$comId';
+  // map['from_date'] = '2021-05-01';
+  // map['to_date'] = '2021-10-30';
+  final response = await http.get(uri,
+    headers: {"Authorization": "Bearer${userDataGlobal['ret']['data']['token']}"},
+    // body: json.encode(map)
+  );
+  var data = jsonDecode(response.body.toString());
+  // print('${data.toString()}');
+  // print('Status code: ${response.statusCode}');
+  if (response.statusCode == 200) {
+    return InvoiceListModel.fromJson(data);
+  } else {
+    return InvoiceListModel.fromJson(data);
+  }
+}
+
+

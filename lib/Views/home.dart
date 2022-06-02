@@ -1,3 +1,4 @@
+/*
 import 'dart:convert';
 import 'package:date_range_form_field/date_range_form_field.dart';
 import 'package:flutter/cupertino.dart';
@@ -58,7 +59,7 @@ class _HomePageState extends State<HomePage> {
                   snapshot.data as OrganizationsListByUserId;
               return FutureBuilder(
                   future: companyIdApi(int.parse(
-                      organizationsData.ret!.data![company].orgId.toString())),
+                      organizationsData.ret.data[company].orgId.toString())),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.done) {
                       CompanyIdModel companyIdData =
@@ -80,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                                         Container(
                                           width: 220,
                                           child: Text(
-                                            '${organizationsData.ret!.data![company].orgName}',
+                                            '${organizationsData.ret.data[company].orgName}',
                                             overflow: TextOverflow.ellipsis,
                                             maxLines: 1,
                                           ),
@@ -97,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                                             Container(
                                               width: 100,
                                               child: Text(
-                                                '${organizationsData.ret!.data![company].updatedOn}',
+                                                '${organizationsData.ret.data[company].updatedOn}',
                                                 overflow: TextOverflow.ellipsis,
                                                 style: GoogleFonts.poppins(
                                                     fontSize: 13,
@@ -1420,12 +1421,22 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
+
+*/
+
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:untitled_slate/Models/companyIDModel.dart';
+import 'package:untitled_slate/Models/dashboardCardsModel.dart';
+import '../Models/DateFormatModel.dart';
+
 Future<DashboardCardsModel> dashboardCardsApi(
     var companyId, String sDate, String eDate) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? data1 = prefs.getString('userData');
   final userData = json.decode(data1!);
-  print('jckhjbdhs hjcbdsvbc $sDate r4');
+  // print('jckhjbdhs hjcbdsvbc $sDate r4');
   var requestURL = Uri.parse(
       'https://uat.finance.slate.ac/slate-api/routes.php?action=dashboardCards');
   var map = Map<String, dynamic>();
@@ -1439,14 +1450,14 @@ Future<DashboardCardsModel> dashboardCardsApi(
 
   final response = await http.post(requestURL,
       headers: {
-    "Authorization": "Bearer${userData['ret']['data']['token']}"
+        "Authorization": "Bearer${userData['ret']['data']['token']}"
       },
       body: json.encode(map));
-  var data = jsonDecode(response.body.toString());
-  print(' yeh hai hamara data ${data.toString()}');
-  print('status code ${response.statusCode}');
+  var data = json.decode(response.body.toString());
+  // print(' yeh hai hamara data ${data.toString()}');
+  // print('status code ${response.statusCode}');
   var finalData = DashboardCardsModel.fromJson(data);
-  print("Final Data $finalData");
+  // print("Final Data $finalData");
   return DashboardCardsModel.fromJson(data);
   // if (response.statusCode == 200) {
   //   var finalData = DashboardCardsModel.fromJson(data);

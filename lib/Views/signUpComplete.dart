@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:untitled_slate/Views/home.dart';
+import 'package:untitled_slate/Views/invoicesListDead.dart';
 
 class SignUpComplete extends StatelessWidget {
   const SignUpComplete({Key? key}) : super(key: key);
@@ -60,7 +61,7 @@ class SignUpComplete extends StatelessWidget {
               padding: const EdgeInsets.only(top: 40.0),
               child: GestureDetector(
                 onTap: (){
-                  Get.offAll(()=> HomePage(), arguments: [0]);
+                  Get.offAll(()=> HomePage2(), arguments: [0]);
                 },
                 child: Container(
                   height: 50,
