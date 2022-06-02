@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled_slate/Controllers/globalVariables.dart';
 import 'package:untitled_slate/Models/InvoiceListModel.dart';
+import 'package:untitled_slate/Views/detailsPage.dart';
 import 'package:untitled_slate/Views/home.dart';
 import 'package:untitled_slate/Views/selectCompany.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -548,74 +549,79 @@ class _HomePage2State extends State<HomePage2> {
                                                             padding:
                                                                 const EdgeInsets
                                                                     .all(8.0),
-                                                            child: Container(
-                                                              height: 80,
-                                                              width: 200,
-                                                              decoration: BoxDecoration(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12)),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .all(
-                                                                        8.0),
-                                                                child: Column(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceEvenly,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Row(
-                                                                      children: [
-                                                                        Padding(
-                                                                          padding:
-                                                                              const EdgeInsets.only(right: 4.0),
-                                                                          child:
-                                                                              Container(
-                                                                            height:
-                                                                                15,
-                                                                            width:
-                                                                                15,
-                                                                            decoration:
-                                                                                BoxDecoration(color: Colors.orangeAccent, borderRadius: BorderRadius.circular(50)),
+                                                            child: GestureDetector(
+                                                              onTap: (){
+                                                                Get.to(()=> DetailsPage(), arguments: ['reports/sales', company]);
+                                                              },
+                                                              child: Container(
+                                                                height: 80,
+                                                                width: 200,
+                                                                decoration: BoxDecoration(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(
+                                                                                12)),
+                                                                child: Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          8.0),
+                                                                  child: Column(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceEvenly,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Row(
+                                                                        children: [
+                                                                          Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.only(right: 4.0),
                                                                             child:
-                                                                                Icon(
-                                                                              Icons.shopping_bag_outlined,
-                                                                              size: 10,
-                                                                              color: Colors.white,
+                                                                                Container(
+                                                                              height:
+                                                                                  15,
+                                                                              width:
+                                                                                  15,
+                                                                              decoration:
+                                                                                  BoxDecoration(color: Colors.orangeAccent, borderRadius: BorderRadius.circular(50)),
+                                                                              child:
+                                                                                  Icon(
+                                                                                Icons.shopping_bag_outlined,
+                                                                                size: 10,
+                                                                                color: Colors.white,
+                                                                              ),
                                                                             ),
                                                                           ),
-                                                                        ),
-                                                                        Text(
-                                                                            'Sales'),
-                                                                        Icon(
-                                                                          Icons
-                                                                              .info,
-                                                                          size:
-                                                                              15,
-                                                                          color:
-                                                                              Colors.grey,
-                                                                        )
-                                                                      ],
-                                                                    ),
-                                                                    Text(
-                                                                      dashboardCardsData.ret!.data!.sales!.length ==
-                                                                              0
-                                                                          ?
-                                                                          // "${dashboardCardsData.ret!.data!.sales![0].amount}"
-                                                                          ' '
-                                                                          : "${oCcy.format(dashboardCardsData.ret!.data!.sales![0].amount?.abs())} ",
-                                                                      style: GoogleFonts.poppins(
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
-                                                                    )
-                                                                  ],
+                                                                          Text(
+                                                                              'Sales'),
+                                                                          Icon(
+                                                                            Icons
+                                                                                .info,
+                                                                            size:
+                                                                                15,
+                                                                            color:
+                                                                                Colors.grey,
+                                                                          )
+                                                                        ],
+                                                                      ),
+                                                                      Text(
+                                                                        dashboardCardsData.ret!.data!.sales!.length ==
+                                                                                0
+                                                                            ?
+                                                                            // "${dashboardCardsData.ret!.data!.sales![0].amount}"
+                                                                            ' '
+                                                                            : "${oCcy.format(dashboardCardsData.ret!.data!.sales![0].amount?.abs())} ",
+                                                                        style: GoogleFonts.poppins(
+                                                                            fontWeight:
+                                                                                FontWeight.bold),
+                                                                      )
+                                                                    ],
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),
@@ -624,70 +630,75 @@ class _HomePage2State extends State<HomePage2> {
                                                             padding:
                                                                 const EdgeInsets
                                                                     .all(8.0),
-                                                            child: Container(
-                                                              height: 80,
-                                                              width: 200,
-                                                              decoration: BoxDecoration(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12)),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .all(
-                                                                        8.0),
-                                                                child: Column(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceEvenly,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Row(
-                                                                      children: [
-                                                                        Padding(
-                                                                          padding:
-                                                                              const EdgeInsets.only(right: 4.0),
-                                                                          child: Container(
-                                                                              height: 15,
-                                                                              width: 15,
-                                                                              decoration: BoxDecoration(color: Colors.orangeAccent, borderRadius: BorderRadius.circular(50)),
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsets.all(2.0),
-                                                                                child: Image.asset(
-                                                                                  'assets/images/receivablesLogo.png',
-                                                                                  color: Colors.white,
-                                                                                ),
-                                                                              )),
-                                                                        ),
-                                                                        Text(
-                                                                            'Receivables'),
-                                                                        Icon(
-                                                                          Icons
-                                                                              .info,
-                                                                          size:
-                                                                              15,
-                                                                          color:
-                                                                              Colors.grey,
-                                                                        )
-                                                                      ],
-                                                                    ),
-                                                                    Text(
-                                                                      dashboardCardsData.ret!.data!.recievable!.length !=
-                                                                              0
-                                                                          ?
-                                                                          // "${dashboardCardsData.ret!.data!.recievable![0].balance}"
-                                                                          '${oCcy.format(double.parse(dashboardCardsData.ret!.data!.recievable![0].balance.toString()).abs())}'
-                                                                          : "",
-                                                                      style: GoogleFonts.poppins(
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
-                                                                    )
-                                                                  ],
+                                                            child: GestureDetector(
+                                                              onTap: (){
+                                                                Get.to(()=> DetailsPage(), arguments: ['reports/receivable', company]);
+                                                              },
+                                                              child: Container(
+                                                                height: 80,
+                                                                width: 200,
+                                                                decoration: BoxDecoration(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(
+                                                                                12)),
+                                                                child: Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          8.0),
+                                                                  child: Column(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceEvenly,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Row(
+                                                                        children: [
+                                                                          Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.only(right: 4.0),
+                                                                            child: Container(
+                                                                                height: 15,
+                                                                                width: 15,
+                                                                                decoration: BoxDecoration(color: Colors.orangeAccent, borderRadius: BorderRadius.circular(50)),
+                                                                                child: Padding(
+                                                                                  padding: const EdgeInsets.all(2.0),
+                                                                                  child: Image.asset(
+                                                                                    'assets/images/receivablesLogo.png',
+                                                                                    color: Colors.white,
+                                                                                  ),
+                                                                                )),
+                                                                          ),
+                                                                          Text(
+                                                                              'Receivables'),
+                                                                          Icon(
+                                                                            Icons
+                                                                                .info,
+                                                                            size:
+                                                                                15,
+                                                                            color:
+                                                                                Colors.grey,
+                                                                          )
+                                                                        ],
+                                                                      ),
+                                                                      Text(
+                                                                        dashboardCardsData.ret!.data!.recievable!.length !=
+                                                                                0
+                                                                            ?
+                                                                            // "${dashboardCardsData.ret!.data!.recievable![0].balance}"
+                                                                            '${oCcy.format(double.parse(dashboardCardsData.ret!.data!.recievable![0].balance.toString()).abs())}'
+                                                                            : "",
+                                                                        style: GoogleFonts.poppins(
+                                                                            fontWeight:
+                                                                                FontWeight.bold),
+                                                                      )
+                                                                    ],
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),
@@ -696,70 +707,75 @@ class _HomePage2State extends State<HomePage2> {
                                                             padding:
                                                                 const EdgeInsets
                                                                     .all(8.0),
-                                                            child: Container(
-                                                              height: 80,
-                                                              width: 200,
-                                                              decoration: BoxDecoration(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12)),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .all(
-                                                                        8.0),
-                                                                child: Column(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceEvenly,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Row(
-                                                                      children: [
-                                                                        Padding(
-                                                                          padding:
-                                                                              const EdgeInsets.only(right: 4.0),
-                                                                          child: Container(
-                                                                              height: 15,
-                                                                              width: 15,
-                                                                              decoration: BoxDecoration(color: Colors.orangeAccent, borderRadius: BorderRadius.circular(50)),
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsets.all(2.0),
-                                                                                child: Image.asset(
-                                                                                  'assets/images/payableLogo.png',
-                                                                                  color: Colors.white,
-                                                                                ),
-                                                                              )),
-                                                                        ),
-                                                                        Text(
-                                                                            'Payable'),
-                                                                        Icon(
-                                                                          Icons
-                                                                              .info,
-                                                                          size:
-                                                                              15,
-                                                                          color:
-                                                                              Colors.grey,
-                                                                        )
-                                                                      ],
-                                                                    ),
-                                                                    Text(
-                                                                      dashboardCardsData.ret!.data!.payable!.length !=
-                                                                              0
-                                                                          ?
-                                                                          // "${dashboardCardsData.ret!.data!.payable![0].balance}"
-                                                                          '${oCcy.format(double.parse(dashboardCardsData.ret!.data!.payable![0].balance.toString()).abs())}'
-                                                                          : "",
-                                                                      style: GoogleFonts.poppins(
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
-                                                                    )
-                                                                  ],
+                                                            child: GestureDetector(
+                                                              onTap: (){
+                                                                Get.to(()=> DetailsPage(), arguments: ['reports/payable',company]);
+                                                              },
+                                                              child: Container(
+                                                                height: 80,
+                                                                width: 200,
+                                                                decoration: BoxDecoration(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(
+                                                                                12)),
+                                                                child: Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          8.0),
+                                                                  child: Column(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceEvenly,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Row(
+                                                                        children: [
+                                                                          Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.only(right: 4.0),
+                                                                            child: Container(
+                                                                                height: 15,
+                                                                                width: 15,
+                                                                                decoration: BoxDecoration(color: Colors.orangeAccent, borderRadius: BorderRadius.circular(50)),
+                                                                                child: Padding(
+                                                                                  padding: const EdgeInsets.all(2.0),
+                                                                                  child: Image.asset(
+                                                                                    'assets/images/payableLogo.png',
+                                                                                    color: Colors.white,
+                                                                                  ),
+                                                                                )),
+                                                                          ),
+                                                                          Text(
+                                                                              'Payable'),
+                                                                          Icon(
+                                                                            Icons
+                                                                                .info,
+                                                                            size:
+                                                                                15,
+                                                                            color:
+                                                                                Colors.grey,
+                                                                          )
+                                                                        ],
+                                                                      ),
+                                                                      Text(
+                                                                        dashboardCardsData.ret!.data!.payable!.length !=
+                                                                                0
+                                                                            ?
+                                                                            // "${dashboardCardsData.ret!.data!.payable![0].balance}"
+                                                                            '${oCcy.format(double.parse(dashboardCardsData.ret!.data!.payable![0].balance.toString()).abs())}'
+                                                                            : "",
+                                                                        style: GoogleFonts.poppins(
+                                                                            fontWeight:
+                                                                                FontWeight.bold),
+                                                                      )
+                                                                    ],
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),
@@ -768,67 +784,72 @@ class _HomePage2State extends State<HomePage2> {
                                                             padding:
                                                                 const EdgeInsets
                                                                     .all(8.0),
-                                                            child: Container(
-                                                              height: 80,
-                                                              width: 200,
-                                                              decoration: BoxDecoration(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12)),
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .all(
-                                                                        8.0),
-                                                                child: Column(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceEvenly,
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Row(
-                                                                      children: [
-                                                                        Padding(
-                                                                          padding:
-                                                                              const EdgeInsets.only(right: 4.0),
-                                                                          child: Container(
-                                                                              height: 15,
-                                                                              width: 15,
-                                                                              decoration: BoxDecoration(color: Colors.tealAccent, borderRadius: BorderRadius.circular(50)),
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsets.all(2.0),
-                                                                                child: Image.asset('assets/images/liquidityLogo.png', color: Colors.white),
-                                                                              )),
-                                                                        ),
-                                                                        Text(
-                                                                            'Liquidity'),
-                                                                        Icon(
-                                                                          Icons
-                                                                              .info,
-                                                                          size:
-                                                                              15,
-                                                                          color:
-                                                                              Colors.grey,
-                                                                        )
-                                                                      ],
-                                                                    ),
-                                                                    Text(
-                                                                      dashboardCardsData.ret!.data!.liquidity!.length !=
-                                                                              0
-                                                                          ?
-                                                                          // "${dashboardCardsData.ret!.data!.liquidity![0].balance}"
-                                                                          '${oCcy.format(double.parse(dashboardCardsData.ret!.data!.liquidity![0].balance.toString()).abs())}'
-                                                                          : "",
-                                                                      style: GoogleFonts.poppins(
-                                                                          fontWeight:
-                                                                              FontWeight.bold),
-                                                                    )
-                                                                  ],
+                                                            child: GestureDetector(
+                                                              onTap: (){
+                                                                Get.to(()=> DetailsPage(), arguments: ['reports/liquidity',company]);
+                                                              },
+                                                              child: Container(
+                                                                height: 80,
+                                                                width: 200,
+                                                                decoration: BoxDecoration(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(
+                                                                                12)),
+                                                                child: Padding(
+                                                                  padding:
+                                                                      const EdgeInsets
+                                                                              .all(
+                                                                          8.0),
+                                                                  child: Column(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .spaceEvenly,
+                                                                    crossAxisAlignment:
+                                                                        CrossAxisAlignment
+                                                                            .start,
+                                                                    children: [
+                                                                      Row(
+                                                                        children: [
+                                                                          Padding(
+                                                                            padding:
+                                                                                const EdgeInsets.only(right: 4.0),
+                                                                            child: Container(
+                                                                                height: 15,
+                                                                                width: 15,
+                                                                                decoration: BoxDecoration(color: Colors.tealAccent, borderRadius: BorderRadius.circular(50)),
+                                                                                child: Padding(
+                                                                                  padding: const EdgeInsets.all(2.0),
+                                                                                  child: Image.asset('assets/images/liquidityLogo.png', color: Colors.white),
+                                                                                )),
+                                                                          ),
+                                                                          Text(
+                                                                              'Liquidity'),
+                                                                          Icon(
+                                                                            Icons
+                                                                                .info,
+                                                                            size:
+                                                                                15,
+                                                                            color:
+                                                                                Colors.grey,
+                                                                          )
+                                                                        ],
+                                                                      ),
+                                                                      Text(
+                                                                        dashboardCardsData.ret!.data!.liquidity!.length !=
+                                                                                0
+                                                                            ?
+                                                                            // "${dashboardCardsData.ret!.data!.liquidity![0].balance}"
+                                                                            '${oCcy.format(double.parse(dashboardCardsData.ret!.data!.liquidity![0].balance.toString()).abs())}'
+                                                                            : "",
+                                                                        style: GoogleFonts.poppins(
+                                                                            fontWeight:
+                                                                                FontWeight.bold),
+                                                                      )
+                                                                    ],
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),
@@ -2245,8 +2266,12 @@ class _HomePage2State extends State<HomePage2> {
                                                       GestureDetector(
                                                         onTap: () async {
                                                           _submitForm();
+                                                          setState(() {
+                                                            print("hbff");
+                                                            setIt();
+                                                          });
                                                           Get.back();
-                                                          setState(() {});
+
                                                         },
                                                         child: Container(
                                                           height: 30,

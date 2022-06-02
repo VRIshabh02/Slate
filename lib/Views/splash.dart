@@ -85,18 +85,18 @@ class _SplashScreenState extends State<SplashScreen> {
     await Future.delayed(Duration(milliseconds: 5000));
 
 
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // String? userData = prefs.getString('userData');
-    // if (userData != null) {
-    //   userDataGlobal = json.decode(userData);
-    //   print("Yeh raha token ${userDataGlobal['ret']['data']['token']}");
-    //   Get.off( HomePage2(), arguments: [i]);
-    // }
-    // else{
-    //   Get.offAll(LoginScreen());
-    // }
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? userData = prefs.getString('userData');
+    if (userData != null) {
+      userDataGlobal = json.decode(userData);
+      // print("Yeh raha token ${userDataGlobal['ret']['data']['token']}");
+      Get.off( HomePage2(), arguments: [i]);
+    }
+    else{
+      Get.offAll(LoginScreen());
+    }
 
-    Get.offAll(HomePage3(), arguments: [0]);
+    // Get.offAll(LoginScreen(), arguments: [0]);
 
 
   }

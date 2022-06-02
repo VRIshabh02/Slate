@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:untitled_slate/Controllers/dateControllerTab1.dart';
 import 'package:untitled_slate/Controllers/globalVariables.dart';
 import 'package:untitled_slate/Models/InvoiceListModel.dart';
 import 'package:untitled_slate/Views/home.dart';
@@ -43,6 +44,7 @@ class _HomePage3State extends State<HomePage3> {
     symbol: '₹',
   );
   static DateTimeRange? myDateRange;
+  DateControllerTab1 timeRangeController = Get.put(DateControllerTab1());
   static late String DateRange1;
   static List<dynamic> splitted = [];
   static void _submitForm() {
@@ -62,11 +64,10 @@ class _HomePage3State extends State<HomePage3> {
 
   setIt(){
     _widgetOptions = [tab1(), tab2(), tab3(), tab4()];
-
   }
 
   Widget tab1() {
-    return StatefulBuilder(builder: (context, setState12) {
+    return GetX<DateControllerTab1>( builder: (controller) {
       return Stack(children: [
         FutureBuilder(
             future: organizationListApi(),
@@ -512,12 +513,20 @@ class _HomePage3State extends State<HomePage3> {
                                                 future: dashboardCardsApi(
                                                     companyIdData.ret!.data![0]
                                                         .companyId,
-                                                    splitted.length == 0
+                                                    // splitted.length == 0
+                                                    //     ? '2021-05-01'
+                                                    //     : splitted[0],
+                                                    // splitted.length == 0
+                                                    //     ? '2021-10-30'
+                                                    //     : splitted[3])
+
+                                                    controller.timeRange.value.toString().split(' ').length == 0
                                                         ? '2021-05-01'
-                                                        : splitted[0],
-                                                    splitted.length == 0
+                                                        : controller.timeRange.value.toString().split(' ')[0],
+                                                    controller.timeRange.value.toString().split(' ').length == 0
                                                         ? '2021-10-30'
-                                                        : splitted[3]),
+                                                        : controller.timeRange.value.toString().split(' ')[3])
+                                                ,
                                                 builder: (context, snapshot) {
                                                   // print(
                                                   //     "yaha dekho ${splitted}");
@@ -1734,6 +1743,8 @@ class _HomePage3State extends State<HomePage3> {
     );
   }
 
+
+
   static onSearchTextChanged(Function setWidgetState) async {
     _filteredList.clear();
     if (searchController.text.isEmpty) {
@@ -1747,8 +1758,7 @@ class _HomePage3State extends State<HomePage3> {
         _filteredList.add(userDetail);
     });
     searching = _filteredList.length < _list.length ? true : false;
-    // print(searching);
-    // print(" Length Length cjbdcvbjbv c           ${_filteredList.length}");
+
     setWidgetState(() {});
   }
 
@@ -1939,6 +1949,7 @@ class _HomePage3State extends State<HomePage3> {
                       //     ConnectionState.done) {
                       DateFormatModel dateFormatData =
                       snapshot.data as DateFormatModel;
+
                       return Scaffold(
                         appBar: _selectedIndex == 0
                             ?
@@ -2236,18 +2247,23 @@ class _HomePage3State extends State<HomePage3> {
                                                                 DateRange1
                                                                     .split(
                                                                     ' ');
-                                                            // print(
-                                                            //     '${splitted}');
-                                                            // print(
-                                                            //     '${splitted[0]} to ${splitted[3]}');
-                                                          });
+                                                            print(
+                                                                '${splitted}');
+                                                            print(
+                                                                '${splitted[0]} to ${splitted[3]}');
+                                                          }
+                                                          );
+                                                          // timeRangeController.changeTimeRange(value);
+
                                                         }),
                                                   ),
                                                   GestureDetector(
                                                     onTap: () async {
                                                       _submitForm();
+                                                      print('Hfcdn');
+                                                      setState(() {
+                                                      });
                                                       Get.back();
-                                                      setState(() {});
                                                     },
                                                     child: Container(
                                                       height: 30,
@@ -2326,6 +2342,7 @@ class _HomePage3State extends State<HomePage3> {
                                 borderRadius: BorderRadius.only(
                                     bottomRight: Radius.circular(20),
                                     bottomLeft: Radius.circular(20)))),
+
                         drawer: SafeArea(
                           child: Drawer(
                             child: Column(

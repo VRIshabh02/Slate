@@ -509,7 +509,6 @@ Future<LoginModel> loginFunc(String email, String pass) async {
       return LoginModel();
     } else {
       sharedPref(data);
-      userDataGlobal = jsonDecode(response.body.toString());
       // print("Global $userDataGlobal");
       // print('${userDataGlobal['ret']['data']['token']}');
       return LoginModel.fromJson(data);
@@ -524,6 +523,7 @@ Future sharedPref(dynamic data) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   prefs.setString('userData', jsonEncode(data));
   String? userData = prefs.getString('userData');
+  userDataGlobal = json.decode(userData!);
 
   // print('Vrishabh ${userData}');
 }
