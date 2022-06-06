@@ -47,9 +47,9 @@ class Ret {
 class DataInvoiceList {
   DataInvoiceList({
     required this.id,
-    this.invNumber,
-    required this.ccyFormat,
-    required this.invDueDate,
+    required this.invNumber,
+    this.ccyFormat,
+    this.invDueDate,
     required this.invDate,
     required this.taxFilling,
     required this.tax,
@@ -65,11 +65,11 @@ class DataInvoiceList {
     this.additionalDetails,
     required this.fileAttchmnt,
   });
-  late final int id;
+  late final int? id;
   late final String? invNumber;
-  late final String ccyFormat;
-  late final String invDueDate;
-  late final String invDate;
+  late final String? ccyFormat;
+  late final String? invDueDate;
+  late final String? invDate;
   late final String taxFilling;
   late final String tax;
   late final String status;
@@ -82,13 +82,13 @@ class DataInvoiceList {
   late final String createdOn;
   late final String updatedOn;
   late final String? additionalDetails;
-  late final List<dynamic> fileAttchmnt;
+  late final List<FileAttchmnt>? fileAttchmnt;
 
   DataInvoiceList.fromJson(Map<String, dynamic> json){
     id = json['id'];
     invNumber = json['inv_number'];
-    ccyFormat = json['ccy_format'];
-    invDueDate = json['inv_due_date'];
+    ccyFormat = null;
+    invDueDate = null;
     invDate = json['inv_date'];
     taxFilling = json['taxFilling'];
     tax = json['tax'];
@@ -102,7 +102,7 @@ class DataInvoiceList {
     createdOn = json['created_on'];
     updatedOn = json['updated_on'];
     additionalDetails = null;
-    fileAttchmnt = List.castFrom<dynamic, dynamic>(json['fileAttchmnt']);
+    fileAttchmnt = List.from(json['fileAttchmnt']).map((e)=>FileAttchmnt.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -124,7 +124,28 @@ class DataInvoiceList {
     _data['created_on'] = createdOn;
     _data['updated_on'] = updatedOn;
     _data['additional_details'] = additionalDetails;
-    _data['fileAttchmnt'] = fileAttchmnt;
+    _data['fileAttchmnt'] = fileAttchmnt?.map((e)=>e.toJson()).toList();
+    return _data;
+  }
+}
+
+class FileAttchmnt {
+  FileAttchmnt({
+    required this.fileName,
+    required this.filePath,
+  });
+  late final String fileName;
+  late final String filePath;
+
+  FileAttchmnt.fromJson(Map<String, dynamic> json){
+    fileName = json['fileName'];
+    filePath = json['filePath'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['fileName'] = fileName;
+    _data['filePath'] = filePath;
     return _data;
   }
 }

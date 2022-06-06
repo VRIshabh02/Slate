@@ -8,7 +8,9 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled_slate/Controllers/globalVariables.dart';
 import 'package:untitled_slate/Models/InvoiceListModel.dart';
+import 'package:untitled_slate/Views/createCustomer.dart';
 import 'package:untitled_slate/Views/detailsPage.dart';
+import 'package:untitled_slate/Views/documentManagement.dart';
 import 'package:untitled_slate/Views/home.dart';
 import 'package:untitled_slate/Views/selectCompany.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -90,412 +92,6 @@ class _HomePage2State extends State<HomePage2> {
                                 DateFormatModel dateFormatData =
                                     snapshot.data as DateFormatModel;
                                 return Scaffold(
-                                  // appBar: AppBar(
-                                  //     title: Column(
-                                  //       crossAxisAlignment:
-                                  //       CrossAxisAlignment.start,
-                                  //       children: [
-                                  //         GestureDetector(
-                                  //           onTap: () {
-                                  //             Get.dialog(Container(
-                                  //                 width: MediaQuery.of(context)
-                                  //                     .size
-                                  //                     .width *
-                                  //                     4 /
-                                  //                     5,
-                                  //                 child: Column(
-                                  //                   children: [
-                                  //                     Material(
-                                  //                       child: Container(
-                                  //                         height: 40,
-                                  //                         width: MediaQuery.of(
-                                  //                             context)
-                                  //                             .size
-                                  //                             .width *
-                                  //                             4 /
-                                  //                             5,
-                                  //                         color: Colors.teal,
-                                  //                         child: Padding(
-                                  //                           padding:
-                                  //                           const EdgeInsets
-                                  //                               .all(8.0),
-                                  //                           child: Text(
-                                  //                             'Select Company',
-                                  //                             style: GoogleFonts.poppins(
-                                  //                                 fontSize: 13,
-                                  //                                 color: Colors
-                                  //                                     .white,
-                                  //                                 fontWeight:
-                                  //                                 FontWeight
-                                  //                                     .w400),
-                                  //                           ),
-                                  //                         ),
-                                  //                       ),
-                                  //                     ),
-                                  //                     Material(
-                                  //                       child: Container(
-                                  //                         width: MediaQuery.of(
-                                  //                             context)
-                                  //                             .size
-                                  //                             .width *
-                                  //                             4 /
-                                  //                             5,
-                                  //                         height: MediaQuery.of(
-                                  //                             context)
-                                  //                             .size
-                                  //                             .height *
-                                  //                             4 /
-                                  //                             5,
-                                  //                         color: Colors.white,
-                                  //                         child: FutureBuilder(
-                                  //                             future:
-                                  //                             organizationListApi(),
-                                  //                             builder: (context,
-                                  //                                 snapshot) {
-                                  //                               if (snapshot
-                                  //                                   .connectionState ==
-                                  //                                   ConnectionState
-                                  //                                       .done) {
-                                  //                                 OrganizationsListByUserId
-                                  //                                 organizationsData =
-                                  //                                 snapshot.data
-                                  //                                 as OrganizationsListByUserId;
-                                  //                                 return SingleChildScrollView(
-                                  //                                   child:
-                                  //                                   Column(
-                                  //                                     children: [
-                                  //                                       SizedBox(
-                                  //                                         height:
-                                  //                                         10,
-                                  //                                       ),
-                                  //                                       for (int i =
-                                  //                                       0;
-                                  //                                       i < organizationsData.ret.data.length;
-                                  //                                       i++)
-                                  //                                         Container(
-                                  //                                           child:
-                                  //                                           Column(
-                                  //                                             mainAxisAlignment: MainAxisAlignment.start,
-                                  //                                             crossAxisAlignment: CrossAxisAlignment.start,
-                                  //                                             children: [
-                                  //                                               SizedBox(
-                                  //                                                 height: 0,
-                                  //                                               ),
-                                  //                                               GestureDetector(
-                                  //                                                 onTap: () {
-                                  //                                                   // setState(() {
-                                  //                                                   //   clicked = !clicked;
-                                  //                                                   // });
-                                  //                                                   // Get.off(()=> HomePage2(), arguments: [i]);
-                                  //                                                   // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomePage2()));
-                                  //                                                   // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
-                                  //                                                   //     HomePage2()), (Route<dynamic> route) => false);
-                                  //                                                   setState12(() {
-                                  //                                                     company = i;
-                                  //                                                   });
-                                  //                                                   Get.back();
-                                  //                                                 },
-                                  //                                                 child: Container(
-                                  //                                                   child: Row(
-                                  //                                                     mainAxisAlignment: MainAxisAlignment.start,
-                                  //                                                     children: [
-                                  //                                                       Padding(
-                                  //                                                         padding: const EdgeInsets.all(8.0),
-                                  //                                                         child: Container(
-                                  //                                                           height: 25,
-                                  //                                                           width: 25,
-                                  //                                                           decoration: BoxDecoration(color: clicked1 == true ? Colors.teal : Colors.white, border: Border.all(color: Colors.teal), borderRadius: BorderRadius.circular(50)),
-                                  //                                                           child: Icon(
-                                  //                                                             Icons.done,
-                                  //                                                             color: Colors.white,
-                                  //                                                           ),
-                                  //                                                         ),
-                                  //                                                       ),
-                                  //                                                       Padding(
-                                  //                                                         padding: const EdgeInsets.all(8.0),
-                                  //                                                         child: Column(
-                                  //                                                           crossAxisAlignment: CrossAxisAlignment.start,
-                                  //                                                           children: [
-                                  //                                                             Text(
-                                  //                                                               '${organizationsData.ret.data[i].orgName}',
-                                  //                                                               style: GoogleFonts.poppins(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
-                                  //                                                             ),
-                                  //                                                             Row(
-                                  //                                                               children: [
-                                  //                                                                 Text(
-                                  //                                                                   'primary contact: ',
-                                  //                                                                   style: GoogleFonts.poppins(fontSize: 10, color: Colors.black, fontWeight: FontWeight.w600),
-                                  //                                                                 ),
-                                  //                                                                 SizedBox(
-                                  //                                                                   width: 5,
-                                  //                                                                 ),
-                                  //                                                                 Text(
-                                  //                                                                   '${organizationsData.ret.data[i].primaryContact}',
-                                  //                                                                   style: GoogleFonts.poppins(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
-                                  //                                                                 ),
-                                  //                                                               ],
-                                  //                                                             )
-                                  //                                                           ],
-                                  //                                                         ),
-                                  //                                                       ),
-                                  //                                                     ],
-                                  //                                                   ),
-                                  //                                                 ),
-                                  //                                               ),
-                                  //                                               SizedBox(
-                                  //                                                 height: 20,
-                                  //                                               ),
-                                  //                                             ],
-                                  //                                           ),
-                                  //                                         ),
-                                  //                                     ],
-                                  //                                   ),
-                                  //                                 );
-                                  //                               }
-                                  //                               return const Center(
-                                  //                                   child:
-                                  //                                   CircularProgressIndicator(
-                                  //                                     color: Colors
-                                  //                                         .white,
-                                  //                                     // ));
-                                  //                                   ));
-                                  //                             }),
-                                  //                       ),
-                                  //                     )
-                                  //                   ],
-                                  //                 )));
-                                  //           },
-                                  //           child: Row(
-                                  //             // mainAxisAlignment: MainAxisAlignment.start,
-                                  //             children: [
-                                  //               Expanded(
-                                  //                 child: Text(
-                                  //                   '${organizationsData.ret.data[company].orgName}',
-                                  //                   style: GoogleFonts.roboto(
-                                  //                       fontSize: 16,
-                                  //                       fontWeight:
-                                  //                       FontWeight.bold),
-                                  //                   overflow:
-                                  //                   TextOverflow.ellipsis,
-                                  //                   maxLines: 2,
-                                  //                 ),
-                                  //               ),
-                                  //               Icon(
-                                  //                 Icons.arrow_drop_down,
-                                  //                 color: Colors.white,
-                                  //                 size: 30,
-                                  //               ),
-                                  //             ],
-                                  //           ),
-                                  //         ),
-                                  //         Row(
-                                  //           children: [
-                                  //             Text(
-                                  //               'Refreshed on ',
-                                  //               style: GoogleFonts.poppins(
-                                  //                   fontSize: 13,
-                                  //                   color: Colors.grey,
-                                  //                   fontWeight:
-                                  //                   FontWeight.w400),
-                                  //             ),
-                                  //             Container(
-                                  //               width: 100,
-                                  //               child: Text(
-                                  //                 '${organizationsData.ret.data[company].updatedOn}',
-                                  //                 overflow:
-                                  //                 TextOverflow.ellipsis,
-                                  //                 style: GoogleFonts.poppins(
-                                  //                     fontSize: 13,
-                                  //                     color: Colors.white,
-                                  //                     fontWeight:
-                                  //                     FontWeight.w600),
-                                  //               ),
-                                  //             ),
-                                  //           ],
-                                  //         ),
-                                  //       ],
-                                  //     ),
-                                  //     actions: [
-                                  //       Padding(
-                                  //           padding: const EdgeInsets.all(12.0),
-                                  //           child: GestureDetector(
-                                  //             onTap: () {
-                                  //               Get.dialog(
-                                  //                 Material(
-                                  //                   child: Form(
-                                  //                     key: myFormKey,
-                                  //                     child: Center(
-                                  //                       child: Column(
-                                  //                         children: [
-                                  //                           SafeArea(
-                                  //                             child:
-                                  //                             DateRangeField(
-                                  //                                 enabled:
-                                  //                                 true,
-                                  //                                 firstDate: DateTime(
-                                  //                                     int.parse((dateFormatData.ret!.data![0].dYear! - 1)
-                                  //                                         .toString()),
-                                  //                                     int.parse((dateFormatData.ret!.data![0].dMonth! + 1)
-                                  //                                         .toString())),
-                                  //                                 lastDate: DateTime(
-                                  //                                     int.parse(dateFormatData.ret!.data![0].dYear
-                                  //                                         .toString()),
-                                  //                                     int.parse(dateFormatData.ret!.data![0].dMonth
-                                  //                                         .toString())),
-                                  //                                 initialValue: DateTimeRange(
-                                  //                                     start: DateTime(
-                                  //                                         int.parse((dateFormatData.ret!.data![0].dYear! - 1).toString()),
-                                  //                                         int.parse((dateFormatData.ret!.data![0].dMonth! + 1).toString())),
-                                  //                                     end: DateTime(int.parse((dateFormatData.ret!.data![0].dYear! - 1).toString()), int.parse((dateFormatData.ret!.data![0].dMonth! + 1).toString())).add(Duration(days: 5))),
-                                  //                                 decoration: InputDecoration(
-                                  //                                   labelText:
-                                  //                                   'Date Range',
-                                  //                                   prefixIcon:
-                                  //                                   Icon(Icons.date_range),
-                                  //                                   hintText:
-                                  //                                   'Please select a start and end date',
-                                  //                                   border:
-                                  //                                   OutlineInputBorder(),
-                                  //                                 ),
-                                  //                                 validator: (value) {
-                                  //                                   if (value!
-                                  //                                       .start
-                                  //                                       .isBefore(DateTime.now())) {
-                                  //                                     return 'Please enter a later start date';
-                                  //                                   }
-                                  //                                   return null;
-                                  //                                 },
-                                  //                                 onSaved: (value) {
-                                  //                                   setState12(
-                                  //                                           () {
-                                  //                                         myDateRange =
-                                  //                                         value!;
-                                  //                                         DateRange1 =
-                                  //                                             myDateRange.toString();
-                                  //                                         splitted =
-                                  //                                             DateRange1.split(' ');
-                                  //                                         // print(
-                                  //                                         //     '${splitted}');
-                                  //                                         // print(
-                                  //                                         //     '${splitted[0]} to ${splitted[3]}');
-                                  //                                       });
-                                  //                                 }),
-                                  //                           ),
-                                  //                           GestureDetector(
-                                  //                             onTap: () async {
-                                  //                               _submitForm();
-                                  //                               Get.back();
-                                  //                               setState12(
-                                  //                                       () {});
-                                  //                             },
-                                  //                             child: Container(
-                                  //                               height: 30,
-                                  //                               width: 200,
-                                  //                               decoration: BoxDecoration(
-                                  //                                   color: Colors
-                                  //                                       .deepPurple,
-                                  //                                   borderRadius:
-                                  //                                   BorderRadius.circular(
-                                  //                                       12)),
-                                  //                               child: Center(
-                                  //                                   child: Text(
-                                  //                                     "Done",
-                                  //                                     style: GoogleFonts.roboto(
-                                  //                                         fontSize:
-                                  //                                         20,
-                                  //                                         color: Colors
-                                  //                                             .white),
-                                  //                                   )),
-                                  //                             ),
-                                  //                           )
-                                  //                         ],
-                                  //                       ),
-                                  //                     ),
-                                  //                   ),
-                                  //                 ),
-                                  //               );
-                                  //             },
-                                  //             child: Container(
-                                  //                 decoration: BoxDecoration(
-                                  //                     borderRadius:
-                                  //                     BorderRadius.circular(
-                                  //                         60),
-                                  //                     color: Colors.white),
-                                  //                 child: Padding(
-                                  //                   padding:
-                                  //                   const EdgeInsets.all(
-                                  //                       8.0),
-                                  //                   child: Icon(
-                                  //                     Icons
-                                  //                         .calendar_today_outlined,
-                                  //                     color: Colors.black,
-                                  //                     size: 20,
-                                  //                   ),
-                                  //                 )),
-                                  //           )),
-                                  //     ],
-                                  //     toolbarHeight: 60,
-                                  //     backgroundColor: Color(0xFF272D4D),
-                                  //     shape: RoundedRectangleBorder(
-                                  //         borderRadius: BorderRadius.only(
-                                  //             bottomRight: Radius.circular(20),
-                                  //             bottomLeft:
-                                  //             Radius.circular(20)))),
-                                  // drawer: SafeArea(
-                                  //   child: Drawer(
-                                  //     child: Column(
-                                  //       children: [
-                                  //         Text("Hello"),
-                                  //         TextButton(
-                                  //             onPressed: () =>
-                                  //                 showDialog<String>(
-                                  //                   context: context,
-                                  //                   builder: (BuildContext
-                                  //                   context) =>
-                                  //                       AlertDialog(
-                                  //                         title: Text('Alert'),
-                                  //                         content: Text(
-                                  //                             "Are you sure you want to sign out?"),
-                                  //                         actions: [
-                                  //                           TextButton(
-                                  //                             onPressed: () {
-                                  //                               Get.back();
-                                  //                             },
-                                  //                             child: Text("No"),
-                                  //                           ),
-                                  //                           TextButton(
-                                  //                               onPressed:
-                                  //                                   () async {
-                                  //                                 SharedPreferences
-                                  //                                 prefs =
-                                  //                                 await SharedPreferences
-                                  //                                     .getInstance();
-                                  //                                 prefs.remove(
-                                  //                                     'userData');
-                                  //                                 Get.offAll(
-                                  //                                     LoginScreen());
-                                  //                               },
-                                  //                               child: Text(
-                                  //                                 "Yes",
-                                  //                                 style: TextStyle(
-                                  //                                     color: Colors
-                                  //                                         .deepPurple),
-                                  //                               ))
-                                  //                         ],
-                                  //                         actionsAlignment:
-                                  //                         MainAxisAlignment
-                                  //                             .spaceBetween,
-                                  //                       ),
-                                  //                 ),
-                                  //             child: Text('Sign Out',
-                                  //                 style: GoogleFonts.poppins(
-                                  //                   color: Colors.black,
-                                  //                   fontSize: 15,
-                                  //                 ))),
-                                  //       ],
-                                  //     ),
-                                  //   ),
-                                  // ),
                                   backgroundColor: Color(0xE1EAEAEA),
                                   body: Center(
                                     child: SingleChildScrollView(
@@ -981,65 +577,70 @@ class _HomePage2State extends State<HomePage2> {
                                               Padding(
                                                 padding:
                                                     const EdgeInsets.all(8.0),
-                                                child: Container(
-                                                  height: 80,
-                                                  width: 200,
-                                                  decoration: BoxDecoration(
-                                                      color: Color(0xFFBCC2E5),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12)),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(12.0),
-                                                          child: Container(
-                                                              decoration: BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              50),
-                                                                  color: Color(
-                                                                      0xFF292D50)),
-                                                              child: Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                              .all(
-                                                                          4.0),
-                                                                  child: Image
-                                                                      .asset(
-                                                                    'assets/images/customerLogo.png',
-                                                                    height: 35,
-                                                                    color: Colors
-                                                                        .white,
-                                                                  ))),
-                                                        ),
-                                                        Text(
-                                                          'Create\n Customer',
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: GoogleFonts
-                                                              .poppins(
-                                                                  fontSize: 15,
-                                                                  color: Color(
-                                                                      0xff272d4d),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                        )
-                                                      ],
+                                                child: GestureDetector(
+                                                  onTap: (){
+                                                    Get.to(()=> CreateCustomer());
+                                                  },
+                                                  child: Container(
+                                                    height: 80,
+                                                    width: 200,
+                                                    decoration: BoxDecoration(
+                                                        color: Color(0xFFBCC2E5),
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                12)),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceEvenly,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(12.0),
+                                                            child: Container(
+                                                                decoration: BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(
+                                                                                50),
+                                                                    color: Color(
+                                                                        0xFF292D50)),
+                                                                child: Padding(
+                                                                    padding:
+                                                                        const EdgeInsets
+                                                                                .all(
+                                                                            4.0),
+                                                                    child: Image
+                                                                        .asset(
+                                                                      'assets/images/customerLogo.png',
+                                                                      height: 35,
+                                                                      color: Colors
+                                                                          .white,
+                                                                    ))),
+                                                          ),
+                                                          Text(
+                                                            'Create\n Customer',
+                                                            textAlign:
+                                                                TextAlign.center,
+                                                            style: GoogleFonts
+                                                                .poppins(
+                                                                    fontSize: 15,
+                                                                    color: Color(
+                                                                        0xff272d4d),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -1047,65 +648,70 @@ class _HomePage2State extends State<HomePage2> {
                                               Padding(
                                                 padding:
                                                     const EdgeInsets.all(8.0),
-                                                child: Container(
-                                                  height: 80,
-                                                  width: 200,
-                                                  decoration: BoxDecoration(
-                                                      color: Color(0xFFBCC2E5),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12)),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(12.0),
-                                                          child: Container(
-                                                              decoration: BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              50),
-                                                                  color: Color(
-                                                                      0xFF292D50)),
-                                                              child: Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                              .all(
-                                                                          8.0),
-                                                                  child: Image
-                                                                      .asset(
-                                                                    'assets/images/managementLogo.png',
-                                                                    height: 25,
-                                                                    color: Colors
-                                                                        .white,
-                                                                  ))),
-                                                        ),
-                                                        Text(
-                                                          'Document\n Management',
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: GoogleFonts
-                                                              .poppins(
-                                                                  fontSize: 15,
-                                                                  color: Color(
-                                                                      0xff272d4d),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                        )
-                                                      ],
+                                                child: GestureDetector(
+                                                  onTap: (){
+                                                    Get.to(()=> DocumentManagement());
+                                                  },
+                                                  child: Container(
+                                                    height: 80,
+                                                    width: 200,
+                                                    decoration: BoxDecoration(
+                                                        color: Color(0xFFBCC2E5),
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                12)),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceEvenly,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(12.0),
+                                                            child: Container(
+                                                                decoration: BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(
+                                                                                50),
+                                                                    color: Color(
+                                                                        0xFF292D50)),
+                                                                child: Padding(
+                                                                    padding:
+                                                                        const EdgeInsets
+                                                                                .all(
+                                                                            8.0),
+                                                                    child: Image
+                                                                        .asset(
+                                                                      'assets/images/managementLogo.png',
+                                                                      height: 25,
+                                                                      color: Colors
+                                                                          .white,
+                                                                    ))),
+                                                          ),
+                                                          Text(
+                                                            'Document\n Management',
+                                                            textAlign:
+                                                                TextAlign.center,
+                                                            style: GoogleFonts
+                                                                .poppins(
+                                                                    fontSize: 15,
+                                                                    color: Color(
+                                                                        0xff272d4d),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -1113,65 +719,73 @@ class _HomePage2State extends State<HomePage2> {
                                               Padding(
                                                 padding:
                                                     const EdgeInsets.all(8.0),
-                                                child: Container(
-                                                  height: 80,
-                                                  width: 200,
-                                                  decoration: BoxDecoration(
-                                                      color: Color(0xFFBCC2E5),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12)),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceEvenly,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(12.0),
-                                                          child: Container(
-                                                              decoration: BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              50),
-                                                                  color: Color(
-                                                                      0xFF292D50)),
-                                                              child: Padding(
-                                                                  padding:
-                                                                      const EdgeInsets
-                                                                              .all(
-                                                                          4.0),
-                                                                  child: Image
-                                                                      .asset(
-                                                                    'assets/images/inventoryLogo.png',
-                                                                    height: 35,
-                                                                    color: Colors
-                                                                        .white,
-                                                                  ))),
-                                                        ),
-                                                        Text(
-                                                          'View\n Inventory',
-                                                          textAlign:
-                                                              TextAlign.center,
-                                                          style: GoogleFonts
-                                                              .poppins(
-                                                                  fontSize: 15,
-                                                                  color: Color(
-                                                                      0xff272d4d),
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                        )
-                                                      ],
+                                                child: GestureDetector(
+                                                  onTap: (){
+                                                    Get.to(()=> DetailsPage(), arguments: [
+                                                      'reports/inventory',
+                                                      company
+                                                    ]);
+                                                  },
+                                                  child: Container(
+                                                    height: 80,
+                                                    width: 200,
+                                                    decoration: BoxDecoration(
+                                                        color: Color(0xFFBCC2E5),
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                12)),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceEvenly,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(12.0),
+                                                            child: Container(
+                                                                decoration: BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(
+                                                                                50),
+                                                                    color: Color(
+                                                                        0xFF292D50)),
+                                                                child: Padding(
+                                                                    padding:
+                                                                        const EdgeInsets
+                                                                                .all(
+                                                                            4.0),
+                                                                    child: Image
+                                                                        .asset(
+                                                                      'assets/images/inventoryLogo.png',
+                                                                      height: 35,
+                                                                      color: Colors
+                                                                          .white,
+                                                                    ))),
+                                                          ),
+                                                          Text(
+                                                            'View\n Inventory',
+                                                            textAlign:
+                                                                TextAlign.center,
+                                                            style: GoogleFonts
+                                                                .poppins(
+                                                                    fontSize: 15,
+                                                                    color: Color(
+                                                                        0xff272d4d),
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -1205,9 +819,9 @@ class _HomePage2State extends State<HomePage2> {
                                                                       BorderRadius
                                                                           .circular(
                                                                               50)),
-                                                              child: Padding(
+                                                              child: const Padding(
                                                                 padding:
-                                                                    const EdgeInsets
+                                                                    EdgeInsets
                                                                             .all(
                                                                         4.0),
                                                                 child: Icon(
@@ -1216,7 +830,8 @@ class _HomePage2State extends State<HomePage2> {
                                                                   color: Colors
                                                                       .white,
                                                                 ),
-                                                              )),
+                                                              )
+                                                          ),
                                                         ),
                                                         Padding(
                                                           padding:
@@ -1238,9 +853,9 @@ class _HomePage2State extends State<HomePage2> {
                                                         )
                                                       ],
                                                     ),
-                                                    Padding(
+                                                    const Padding(
                                                       padding:
-                                                          const EdgeInsets.only(
+                                                          EdgeInsets.only(
                                                               left: 20.0),
                                                       child: Divider(
                                                         thickness: 1,
@@ -1261,9 +876,9 @@ class _HomePage2State extends State<HomePage2> {
                                                                       BorderRadius
                                                                           .circular(
                                                                               50)),
-                                                              child: Padding(
+                                                              child: const Padding(
                                                                 padding:
-                                                                    const EdgeInsets
+                                                                    EdgeInsets
                                                                             .all(
                                                                         4.0),
                                                                 child: Icon(
@@ -1294,9 +909,9 @@ class _HomePage2State extends State<HomePage2> {
                                                         )
                                                       ],
                                                     ),
-                                                    Padding(
+                                                    const Padding(
                                                       padding:
-                                                          const EdgeInsets.only(
+                                                          EdgeInsets.only(
                                                               left: 20.0),
                                                       child: Divider(
                                                         thickness: 1,
@@ -1317,9 +932,9 @@ class _HomePage2State extends State<HomePage2> {
                                                                       BorderRadius
                                                                           .circular(
                                                                               50)),
-                                                              child: Padding(
+                                                              child: const Padding(
                                                                 padding:
-                                                                    const EdgeInsets
+                                                                    EdgeInsets
                                                                             .all(
                                                                         4.0),
                                                                 child: Icon(
@@ -1350,9 +965,9 @@ class _HomePage2State extends State<HomePage2> {
                                                         )
                                                       ],
                                                     ),
-                                                    Padding(
+                                                    const Padding(
                                                       padding:
-                                                          const EdgeInsets.only(
+                                                          EdgeInsets.only(
                                                               left: 20.0),
                                                       child: Divider(
                                                         thickness: 1,
@@ -1373,9 +988,9 @@ class _HomePage2State extends State<HomePage2> {
                                                                       BorderRadius
                                                                           .circular(
                                                                               50)),
-                                                              child: Padding(
+                                                              child: const Padding(
                                                                 padding:
-                                                                    const EdgeInsets
+                                                                    EdgeInsets
                                                                             .all(
                                                                         4.0),
                                                                 child: Icon(
@@ -1611,136 +1226,187 @@ class _HomePage2State extends State<HomePage2> {
 //       ),
       backgroundColor: Color(0xE1FFFFFF),
       body: FutureBuilder(
-          future: getInvoiceList(),
+          future: organizationListApi(),
           builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              InvoiceListModel invoiceListData =
-                  snapshot.data as InvoiceListModel;
-              _list = invoiceListData.ret.data;
-              return SingleChildScrollView(
-                child: StatefulBuilder(builder: (context, setWidgetState) {
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            top: 8, left: 10.0, bottom: 0, right: 10),
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 12.0, bottom: 12),
-                              child: Container(
-                                alignment: Alignment.center,
-                                height: 40,
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 0,
-                                ),
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(50),
-                                    border: Border.all(
-                                        width: 2, color: Colors.grey)),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Icon(Icons.search),
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          2.7 /
-                                          5,
-                                      child: TextField(
-// initialValue: "${widget.email}",
-                                          readOnly: false,
-                                          controller: searchController,
-                                          cursorColor: Colors.black,
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                          ),
-                                          decoration: InputDecoration.collapsed(
-                                            hintStyle: TextStyle(
-                                              color: Colors.black,
+            if (snapshot.connectionState ==
+                ConnectionState.done) {
+              OrganizationsListByUserId
+              organizationsData = snapshot.data
+              as OrganizationsListByUserId;
+              return FutureBuilder(
+                  future: getInvoiceList(organizationsData.ret.data[company].orgId),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      InvoiceListModel invoiceListData =
+                      snapshot.data as InvoiceListModel;
+                      _list = invoiceListData.ret.data;
+                      return SingleChildScrollView(
+                        child: StatefulBuilder(
+                            builder: (context, setWidgetState) {
+                              return Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 8,
+                                        left: 10.0,
+                                        bottom: 0,
+                                        right: 10),
+                                    child: Row(
+                                      children: [
+                                        Padding(
+                                          padding:
+                                          const EdgeInsets.only(
+                                              top: 12.0, bottom: 12),
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            height: 40,
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 10,
+                                              vertical: 0,
                                             ),
-                                            hintText: 'Search',
-                                          ),
-                                          onChanged: (text) {
-                                            _filteredList.clear();
-                                            if (text.isEmpty) {
-                                              setWidgetState(() {});
-                                              return;
-                                            }
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius
+                                                    .circular(50),
+                                                border: Border.all(
+                                                    width: 2,
+                                                    color: Colors.grey)),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Icon(Icons.search),
+                                                Container(
+                                                  width: MediaQuery
+                                                      .of(context)
+                                                      .size
+                                                      .width *
+                                                      2.7 /
+                                                      5,
+                                                  child: TextField(
+// initialValue: "${widget.email}",
+                                                      readOnly: false,
+                                                      controller: searchController,
+                                                      cursorColor: Colors.black,
+                                                      style: TextStyle(
+                                                        color: Colors.black,
+                                                      ),
+                                                      decoration: InputDecoration
+                                                          .collapsed(
+                                                        hintStyle: TextStyle(
+                                                          color: Colors.black,
+                                                        ),
+                                                        hintText: 'Search',
+                                                      ),
+                                                      onChanged: (text) {
+                                                        _filteredList.clear();
+                                                        if (text.isEmpty) {
+                                                          setWidgetState(() {});
+                                                          return;
+                                                        }
 
-                                            _list.forEach((userDetail) {
-                                              if ((userDetail.invNumber ?? "")
-                                                      .contains(searchController
-                                                          .text) ||
-                                                  userDetail.customerName
-                                                      .contains(searchController
-                                                          .text)) {
-                                                _filteredList.add(userDetail);
-                                              }
-                                            });
-                                            searching = _filteredList.length <
-                                                    _list.length
-                                                ? true
-                                                : false;
+                                                        _list.forEach((
+                                                            userDetail) {
+                                                          if ((userDetail
+                                                              .invNumber ?? "")
+                                                              .contains(
+                                                              searchController
+                                                                  .text) ||
+                                                              userDetail
+                                                                  .customerName
+                                                                  .contains(
+                                                                  searchController
+                                                                      .text)) {
+                                                            _filteredList.add(
+                                                                userDetail);
+                                                          }
+                                                        });
+                                                        searching =
+                                                        _filteredList.length <
+                                                            _list.length
+                                                            ? true
+                                                            : false;
 // print(searching);
 // print(" Length Length cjbdcvbjbv c           ${_filteredList.length}");
-                                            setWidgetState(() {});
-                                          }
+                                                        setWidgetState(() {});
+                                                      }
 
 // onSearchTextChanged(setWidgetState),
 
+                                                  ),
+                                                ),
+                                                Align(
+                                                  alignment: Alignment
+                                                      .centerRight,
+                                                  child: IconButton(
+                                                    icon: Icon(Icons.cancel),
+                                                    onPressed: () {
+                                                      setWidgetState(() {
+                                                        searching = false;
+                                                      });
+                                                      searchController.clear();
+                                                      onSearchTextChanged(
+                                                          setWidgetState);
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 8.0),
+                                          child: Container(
+                                              child: Image.asset(
+                                                'assets/images/searchFilter.png',
+                                                height: 25,
+                                              )),
+                                        )
+                                      ],
                                     ),
-                                    Align(
-                                      alignment: Alignment.centerRight,
-                                      child: IconButton(
-                                        icon: Icon(Icons.cancel),
-                                        onPressed: () {
-                                          setWidgetState(() {
-                                            searching = false;
-                                          });
-                                          searchController.clear();
-                                          onSearchTextChanged(setWidgetState);
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                        child: GridView.count(
+                                          childAspectRatio: 7 / 3,
+                                          mainAxisSpacing: 10,
+                                          shrinkWrap: true,
+                                          physics: NeverScrollableScrollPhysics(),
+                                          crossAxisCount: 1,
+                                          children: listChildren(
+                                              searching == true
+                                                  ? _filteredList
+                                                  : _list),
+                                        )),
+                                  )
+                                ],
+                              );
+                            }),
+                      );
+                    }
+                    return Material(
+                      child: Center(
+                        child: Container(
+                          height: 100,
+                          width: 100,
+                          child: Center(
+                            child: Column(
+                              children: const [
+                                Center(
+                                    child: CircularProgressIndicator(
+                                      color: Colors.black,
+                                    )),
+                                Text("Please wait!")
+                              ],
                             ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Container(
-                                  child: Image.asset(
-                                'assets/images/searchFilter.png',
-                                height: 25,
-                              )),
-                            )
-                          ],
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                            child: GridView.count(
-                          childAspectRatio: 7 / 3,
-                          mainAxisSpacing: 10,
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          crossAxisCount: 1,
-                          children: listChildren(
-                              searching == true ? _filteredList : _list),
-                        )),
-                      )
-                    ],
-                  );
-                }),
-              );
-            }
-            return Material(
+                    );
+                  });
+            } return Material(
               child: Center(
                 child: Container(
                   height: 100,
@@ -1750,8 +1416,8 @@ class _HomePage2State extends State<HomePage2> {
                       children: const [
                         Center(
                             child: CircularProgressIndicator(
-                          color: Colors.black,
-                        )),
+                              color: Colors.black,
+                            )),
                         Text("Please wait!")
                       ],
                     ),
@@ -1759,7 +1425,8 @@ class _HomePage2State extends State<HomePage2> {
                 ),
               ),
             );
-          }),
+        }
+      ),
     );
   }
 
@@ -1790,7 +1457,7 @@ class _HomePage2State extends State<HomePage2> {
   static List<Widget> listChildren(List<DataInvoiceList> list) {
     final children = <Widget>[];
     for (int i = 0; i < list.length; i++) {
-      String date1 = list[i].invDate;
+      String date1 =  list[i].invDate ?? "";
       String status1 = list[i].status;
       children.add(Container(
         decoration: BoxDecoration(
@@ -1890,14 +1557,23 @@ class _HomePage2State extends State<HomePage2> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                          date1.length > 2 ?
                         Text(
-                          '${date1.substring(2)}',
+                          date1.substring(2),
                           textAlign: TextAlign.start,
                           style: GoogleFonts.poppins(
                               fontSize: 13,
                               color: Colors.black,
                               fontWeight: FontWeight.w500),
-                        ),
+                        ) :
+                          Text(
+                            date1,
+                            textAlign: TextAlign.start,
+                            style: GoogleFonts.poppins(
+                                fontSize: 13,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500),
+                          ),
                         Text(
                           'Date',
                           textAlign: TextAlign.start,
@@ -2382,54 +2058,294 @@ class _HomePage2State extends State<HomePage2> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Container(
-                                              child: Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 15.0),
-                                                    child: CircleAvatar(
-                                                      child: ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(50),
-                                                          child: Image.asset(
-                                                              'assets/images/customerLogo.png')),
-                                                      radius: 25,
-                                                    ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            8.0),
+                                            GestureDetector(
+                                              onTap: (){
+                                                Get.dialog(Container(
+                                                    width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                        4 /
+                                                        5,
                                                     child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
                                                       children: [
-                                                        Row(children: [
+                                                        Material(
+                                                          child: Container(
+                                                            height: 40,
+                                                            width:
+                                                            MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                                4 /
+                                                                5,
+                                                            color: Colors.teal,
+                                                            child: Padding(
+                                                              padding:
+                                                              const EdgeInsets.all(
+                                                                  8.0),
+                                                              child: Text(
+                                                                'Select Company',
+                                                                style:
+                                                                GoogleFonts.poppins(
+                                                                    fontSize: 13,
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontWeight:
+                                                                    FontWeight
+                                                                        .w400),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Material(
+                                                          child: Container(
+                                                            width:
+                                                            MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                                4 /
+                                                                5,
+                                                            height:
+                                                            MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                                4 /
+                                                                5,
+                                                            color: Colors.white,
+                                                            child: FutureBuilder(
+                                                                future:
+                                                                organizationListApi(),
+                                                                builder: (context,
+                                                                    snapshot) {
+                                                                  if (snapshot
+                                                                      .connectionState ==
+                                                                      ConnectionState
+                                                                          .done) {
+                                                                    OrganizationsListByUserId
+                                                                    organizationsData =
+                                                                    snapshot.data
+                                                                    as OrganizationsListByUserId;
+                                                                    return SingleChildScrollView(
+                                                                      child: Column(
+                                                                        children: [
+                                                                          SizedBox(
+                                                                            height: 10,
+                                                                          ),
+                                                                          for (int i =
+                                                                          0;
+                                                                          i <
+                                                                              organizationsData
+                                                                                  .ret
+                                                                                  .data
+                                                                                  .length;
+                                                                          i++)
+                                                                            Container(
+                                                                              child:
+                                                                              Column(
+                                                                                mainAxisAlignment:
+                                                                                MainAxisAlignment.start,
+                                                                                crossAxisAlignment:
+                                                                                CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  SizedBox(
+                                                                                    height:
+                                                                                    0,
+                                                                                  ),
+                                                                                  GestureDetector(
+                                                                                    onTap:
+                                                                                        () {
+                                                                                      // setState(() {
+                                                                                      //   clicked = !clicked;
+                                                                                      // });
+                                                                                      // Get.off(()=> HomePage2(), arguments: [i]);
+                                                                                      // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomePage2()));
+                                                                                      // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                                                                                      //     HomePage2()), (Route<dynamic> route) => false);
+                                                                                      setState(() {
+                                                                                        company = i;
+                                                                                        setIt();
+                                                                                      });
+                                                                                      Get.back();
+                                                                                    },
+                                                                                    child:
+                                                                                    Container(
+                                                                                      child: Row(
+                                                                                        mainAxisAlignment: MainAxisAlignment.start,
+                                                                                        children: [
+                                                                                          Padding(
+                                                                                            padding: const EdgeInsets.all(8.0),
+                                                                                            child: Container(
+                                                                                              height: 25,
+                                                                                              width: 25,
+                                                                                              decoration: BoxDecoration(
+                                                                                                  color:
+                                                                                                  clicked1 == true ? Colors.teal : Colors.white,
+                                                                                                  border: Border.all(
+                                                                                                      color: Colors.teal
+                                                                                                  ),
+                                                                                                  borderRadius: BorderRadius.circular(50)),
+                                                                                              child: Icon(
+                                                                                                Icons.done,
+                                                                                                color: Colors.white,
+                                                                                              ),
+                                                                                            ),
+                                                                                          ),
+                                                                                          Padding(
+                                                                                            padding: const EdgeInsets.all(8.0),
+                                                                                            child: Column(
+                                                                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                              children: [
+                                                                                                Text(
+                                                                                                  '${organizationsData.ret.data[i].orgName}',
+                                                                                                  style: GoogleFonts.poppins(
+                                                                                                      fontSize: 15,
+                                                                                                      color: Colors.black,
+                                                                                                      fontWeight: FontWeight.bold
+                                                                                                  ),
+                                                                                                ),
+                                                                                                Row(
+                                                                                                  children: [
+                                                                                                    Text(
+                                                                                                      'primary contact: ',
+                                                                                                      style: GoogleFonts.poppins(fontSize: 10,
+                                                                                                          color: Colors.black,
+                                                                                                          fontWeight: FontWeight.w600
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                    SizedBox(
+                                                                                                      width: 5,
+                                                                                                    ),
+                                                                                                    Text(
+                                                                                                      '${organizationsData.ret.data[i].primaryContact}',
+                                                                                                      style: GoogleFonts.poppins(
+                                                                                                          fontSize: 15,
+                                                                                                          color: Colors.black,
+                                                                                                          fontWeight: FontWeight.bold
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                  ],
+                                                                                                )
+                                                                                              ],
+                                                                                            ),
+                                                                                          ),
+                                                                                        ],
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                  SizedBox(
+                                                                                    height:
+                                                                                    20,
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                        ],
+                                                                      ),
+                                                                    );
+                                                                  }
+                                                                  return const Center(
+                                                                      child:
+                                                                      CircularProgressIndicator(
+                                                                        color: Colors.white,
+                                                                        // ));
+                                                                      ));
+                                                                }),
+                                                          ),
+                                                        )
+                                                      ],
+                                                    )));
+                                              },
+                                              child: Container(
+                                                child: Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 15.0),
+                                                      child: CircleAvatar(
+                                                        child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(50),
+                                                            child: Image.asset(
+                                                                'assets/images/customerLogo.png')),
+                                                        radius: 25,
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              8.0),
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(children: [
+                                                            Container(
+                                                              width: 150,
+                                                              child: Text(
+                                                                organizationsData.ret.data[company].orgName,
+                                                                style: GoogleFonts.poppins(
+                                                                    fontSize: 16,
+                                                                    color: Colors
+                                                                        .black,
+                                                                    decoration:
+                                                                        TextDecoration
+                                                                            .none,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold),
+                                                                overflow: TextOverflow.ellipsis,
+                                                              ),
+                                                            ),
+                                                            Icon(Icons
+                                                                .arrow_drop_down),
+                                                          ]),
+                                                          Row(children: [
+                                                            Text(
+                                                              'Refreshed on: ',
+                                                              style: GoogleFonts.poppins(
+                                                                  fontSize: 12,
+                                                                  color: Colors
+                                                                      .black45,
+                                                                  decoration:
+                                                                      TextDecoration
+                                                                          .none,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500),
+                                                            ),
+                                                            Text(
+                                                              organizationsData.ret.data[company].updatedOn.split(' ')[0],
+                                                              style: GoogleFonts.poppins(
+                                                                  fontSize: 14,
+                                                                  color: Colors
+                                                                      .black,
+                                                                  decoration:
+                                                                      TextDecoration
+                                                                          .none,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500),
+                                                            ),
+                                                          ]),
                                                           Text(
-                                                            organizationsData.ret.data[company].orgName,
+                                                            '${userDataGlobal['ret']['data']['name']}',
                                                             style: GoogleFonts.poppins(
-                                                                fontSize: 18,
-                                                                color: Colors
-                                                                    .black,
+                                                                fontSize: 14,
+                                                                color:
+                                                                    Colors.black,
                                                                 decoration:
                                                                     TextDecoration
                                                                         .none,
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .bold),
+                                                                        .w500),
                                                           ),
-                                                          Icon(Icons
-                                                              .arrow_drop_down),
-                                                        ]),
-                                                        Row(children: [
                                                           Text(
-                                                            'Refreshed on: ',
+                                                            '${userDataGlobal['ret']['data']['last_role_name']}',
                                                             style: GoogleFonts.poppins(
                                                                 fontSize: 12,
                                                                 color: Colors
@@ -2441,50 +2357,11 @@ class _HomePage2State extends State<HomePage2> {
                                                                     FontWeight
                                                                         .w500),
                                                           ),
-                                                          Text(
-                                                            organizationsData.ret.data[company].updatedOn.split(' ')[0],
-                                                            style: GoogleFonts.poppins(
-                                                                fontSize: 14,
-                                                                color: Colors
-                                                                    .black,
-                                                                decoration:
-                                                                    TextDecoration
-                                                                        .none,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500),
-                                                          ),
-                                                        ]),
-                                                        Text(
-                                                          '${userDataGlobal['ret']['data']['name']}',
-                                                          style: GoogleFonts.poppins(
-                                                              fontSize: 14,
-                                                              color:
-                                                                  Colors.black,
-                                                              decoration:
-                                                                  TextDecoration
-                                                                      .none,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
-                                                        ),
-                                                        Text(
-                                                          '${userDataGlobal['ret']['data']['last_role_name']}',
-                                                          style: GoogleFonts.poppins(
-                                                              fontSize: 12,
-                                                              color: Colors
-                                                                  .black45,
-                                                              decoration:
-                                                                  TextDecoration
-                                                                      .none,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  )
-                                                ],
+                                                        ],
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                             SizedBox(
@@ -2522,74 +2399,305 @@ class _HomePage2State extends State<HomePage2> {
                                             SizedBox(
                                               width: 10,
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 10.0, bottom: 10),
-                                              child: GestureDetector(
-                                                onTap: (){
-                                                  setState(() {
-                                                    showReports = !showReports;
-                                                  });
-                                                },
-                                                child: Row(children: [
-                                                  Icon(
-                                                    Icons.description_outlined,
-                                                    color: Colors.black45,
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Text(
-                                                    'REPORTS',
-                                                    style: GoogleFonts.poppins(
-                                                        fontSize: 15,
-                                                        color: Colors.black,
-                                                        decoration:
-                                                            TextDecoration.none,
-                                                        fontWeight:
-                                                            FontWeight.w500),
-                                                  ),
-                                                  SizedBox(
-                                                    width: 10,
-                                                  ),
-                                                  Icon(Icons.arrow_drop_down)
-                                                ]),
-                                              ),
+                                            StatefulBuilder(
+                                              builder: (context, setStateReport) {
+                                                return Column(
+                                                  children: [
+                                                    Padding(
+                                                      padding: const EdgeInsets.only(
+                                                          top: 10.0, bottom: 10),
+                                                      child: GestureDetector(
+                                                        onTap: (){
+                                                          setStateReport(() {
+                                                            showReports = !showReports;
+                                                          });
+                                                        },
+                                                        child: Row(children: [
+                                                          Icon(
+                                                            Icons.description_outlined,
+                                                            color: Colors.black45,
+                                                          ),
+                                                          SizedBox(
+                                                            width: 10,
+                                                          ),
+                                                          Text(
+                                                            'REPORTS',
+                                                            style: GoogleFonts.poppins(
+                                                                fontSize: 15,
+                                                                color: Colors.black,
+                                                                decoration:
+                                                                    TextDecoration.none,
+                                                                fontWeight:
+                                                                    FontWeight.w500),
+                                                          ),
+                                                          SizedBox(
+                                                            width: 10,
+                                                          ),
+                                                          Icon(Icons.arrow_drop_down)
+                                                        ]),
+                                                      ),
+                                                    ),
+                                                    showReports == true ?
+                                                    Align(
+                                                      alignment: Alignment.topLeft,
+                                                      child: Container(
+                                                        child: Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(
+                                                                  top: 5.0, bottom: 10, left: 50),
+                                                              child: GestureDetector(
+                                                                onTap: (){
+                                                                  Get.to(()=> DetailsPage(), arguments: [
+                                                                    'reports/liquidity',
+                                                                    company
+                                                                  ]);
+                                                                },
+                                                                child: Text(
+                                                                  'Liquidity',
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize: 15,
+                                                                      color: Colors.black,
+                                                                      decoration:
+                                                                      TextDecoration.none,
+                                                                      fontWeight:
+                                                                      FontWeight.w500),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(
+                                                                  top: 5.0, bottom: 10, left: 50),
+                                                              child: GestureDetector(
+                                                                onTap: (){
+                                                                  Get.to(()=> DetailsPage(), arguments: [
+                                                                    'reports/receivable',
+                                                                    company
+                                                                  ]);
+                                                                },
+                                                                child: Text(
+                                                                  'Receivable',
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize: 15,
+                                                                      color: Colors.black,
+                                                                      decoration:
+                                                                      TextDecoration.none,
+                                                                      fontWeight:
+                                                                      FontWeight.w500),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(
+                                                                  top: 5.0, bottom: 10, left: 50),
+                                                              child: GestureDetector(
+                                                                onTap: (){
+                                                                  Get.to(()=> DetailsPage(), arguments: [
+                                                                    'reports/payable',
+                                                                    company
+                                                                  ]);
+                                                                },
+                                                                child: Text(
+                                                                  'Payable',
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize: 15,
+                                                                      color: Colors.black,
+                                                                      decoration:
+                                                                      TextDecoration.none,
+                                                                      fontWeight:
+                                                                      FontWeight.w500),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(
+                                                                  top: 5.0, bottom: 10, left: 50),
+                                                              child: GestureDetector(
+                                                                onTap: (){
+                                                                  Get.to(()=> DetailsPage(), arguments: [
+                                                                    'reports/sales',
+                                                                    company
+                                                                  ]);
+                                                                },
+                                                                child: Text(
+                                                                  'Sales Performance',
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize: 15,
+                                                                      color: Colors.black,
+                                                                      decoration:
+                                                                      TextDecoration.none,
+                                                                      fontWeight:
+                                                                      FontWeight.w500),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(
+                                                                  top: 5.0, bottom: 10, left: 50),
+                                                              child: GestureDetector(
+                                                                onTap: (){
+                                                                  Get.to(()=> DetailsPage(), arguments: [
+                                                                    'reports/purchase',
+                                                                    company
+                                                                  ]);
+                                                                },
+                                                                child: Text(
+                                                                  'Purchase Performance',
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize: 15,
+                                                                      color: Colors.black,
+                                                                      decoration:
+                                                                      TextDecoration.none,
+                                                                      fontWeight:
+                                                                      FontWeight.w500),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(
+                                                                  top: 5.0, bottom: 10, left: 50),
+                                                              child: GestureDetector(
+                                                                onTap: (){
+                                                                  Get.to(()=> DetailsPage(), arguments: [
+                                                                    'reports/expense',
+                                                                    company
+                                                                  ]);
+                                                                },
+                                                                child: Text(
+                                                                  'Expense',
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize: 15,
+                                                                      color: Colors.black,
+                                                                      decoration:
+                                                                      TextDecoration.none,
+                                                                      fontWeight:
+                                                                      FontWeight.w500),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(
+                                                                  top: 5.0, bottom: 10, left: 50),
+                                                              child: GestureDetector(
+                                                                onTap: (){
+                                                                  Get.to(()=> DetailsPage(), arguments: [
+                                                                    'reports/inventory',
+                                                                    company
+                                                                  ]);
+                                                                },
+                                                                child: Text(
+                                                                  'Inventory',
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize: 15,
+                                                                      color: Colors.black,
+                                                                      decoration:
+                                                                      TextDecoration.none,
+                                                                      fontWeight:
+                                                                      FontWeight.w500),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(
+                                                                  top: 5.0, bottom: 10, left: 50),
+                                                              child: GestureDetector(
+                                                                onTap: (){
+                                                                  Get.to(()=> DetailsPage(), arguments: [
+                                                                    'reports/gst-tds',
+                                                                    company
+                                                                  ]);
+                                                                },
+                                                                child: Text(
+                                                                  'GST & TDS Liabilities',
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize: 15,
+                                                                      color: Colors.black,
+                                                                      decoration:
+                                                                      TextDecoration.none,
+                                                                      fontWeight:
+                                                                      FontWeight.w500),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(
+                                                                  top: 5.0, bottom: 10, left: 50),
+                                                              child: GestureDetector(
+                                                                onTap: (){
+                                                                  Get.to(()=> DetailsPage(), arguments: [
+                                                                    'reports/profit-loss',
+                                                                    company
+                                                                  ]);
+                                                                },
+                                                                child: Text(
+                                                                  'Profit & Loss',
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize: 15,
+                                                                      color: Colors.black,
+                                                                      decoration:
+                                                                      TextDecoration.none,
+                                                                      fontWeight:
+                                                                      FontWeight.w500),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(
+                                                                  top: 5.0, bottom: 10, left: 50),
+                                                              child: GestureDetector(
+                                                                onTap: (){
+                                                                  Get.to(()=> DetailsPage(), arguments: [
+                                                                    'reports/cash-flow',
+                                                                    company
+                                                                  ]);
+                                                                },
+                                                                child: Text(
+                                                                  'Cash Flow',
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize: 15,
+                                                                      color: Colors.black,
+                                                                      decoration:
+                                                                      TextDecoration.none,
+                                                                      fontWeight:
+                                                                      FontWeight.w500),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(
+                                                                  top: 5.0, bottom: 10, left: 50),
+                                                              child: GestureDetector(
+                                                                onTap: (){
+                                                                  Get.to(()=> DetailsPage(), arguments: [
+                                                                    'reports/balance-sheet',
+                                                                    company
+                                                                  ]);
+                                                                },
+                                                                child: Text(
+                                                                  'Balance Sheet',
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize: 15,
+                                                                      color: Colors.black,
+                                                                      decoration:
+                                                                      TextDecoration.none,
+                                                                      fontWeight:
+                                                                      FontWeight.w500),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ) :
+                                                    Container(),
+                                                  ],
+                                                );
+                                              }
                                             ),
                                             SizedBox(
                                               width: 10,
                                             ),
-                                            showReports == true ?
-                                            Container(
-                                              child: Column(
-                                                children: [
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        top: 10.0, bottom: 10, left: 20),
-                                                    child: Row(children: [
-                                                      Icon(
-                                                        Icons.description_outlined,
-                                                        color: Colors.black45,
-                                                      ),
-                                                      SizedBox(
-                                                        width: 10,
-                                                      ),
-                                                      Text(
-                                                        'Liquidity',
-                                                        style: GoogleFonts.poppins(
-                                                            fontSize: 15,
-                                                            color: Colors.black,
-                                                            decoration:
-                                                            TextDecoration.none,
-                                                            fontWeight:
-                                                            FontWeight.w500),
-                                                      ),
-                                                    ]),
-                                                  ),
-                                                ],
-                                              ),
-                                            ) :
-                                                Container(),
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   top: 10.0, bottom: 10),
@@ -2978,7 +3086,7 @@ class _HomePage2State extends State<HomePage2> {
   }
 }
 
-Future<InvoiceListModel> getInvoiceList() async {
+Future<InvoiceListModel> getInvoiceList(int orgId) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   String? data1 = prefs.getString('userData');
   final userData = json.decode(data1!);
@@ -2988,9 +3096,9 @@ Future<InvoiceListModel> getInvoiceList() async {
 
   final uri = Uri.parse('$requestURL').replace(queryParameters: {
     'action': 'getInvoice',
-    'arg': '81',
+    'arg': '$orgId',
   });
-  // print('final url is: $uri');
+  // print('final url is: $orgId');
   // var map = Map<String, dynamic>();
   // map['company_id'] = '$comId';
   // map['from_date'] = '2021-05-01';

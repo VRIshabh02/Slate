@@ -14,19 +14,26 @@ import '../Views/selectCompany.dart';
 var userDataGlobal;
 
 
-class MyScaffold extends StatelessWidget {
+class MyScaffold extends StatefulWidget {
 
   final Widget body;
   final Widget tittle;
   var company;
+  var comapny1;
+  Function setStateDrawer;
 
-  MyScaffold({required this.body, required this.tittle, required this.company});
+  MyScaffold({required this.body, required this.tittle, required this.company, required this.setStateDrawer, required this.comapny1});
 
+  @override
+  State<MyScaffold> createState() => _MyScaffoldState();
+}
+
+class _MyScaffoldState extends State<MyScaffold> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title:  tittle,
+          title:  widget.tittle,
           toolbarHeight: 60,
           backgroundColor: Color(0xFF272D4D),
           shape: RoundedRectangleBorder(
@@ -53,54 +60,298 @@ class MyScaffold extends StatelessWidget {
                         crossAxisAlignment:
                         CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            child: Row(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding:
-                                  const EdgeInsets.only(
-                                      top: 15.0),
-                                  child: CircleAvatar(
-                                    child: ClipRRect(
-                                        borderRadius:
-                                        BorderRadius
-                                            .circular(50),
-                                        child: Image.asset(
-                                            'assets/images/customerLogo.png')),
-                                    radius: 25,
+                          GestureDetector(
+                            onTap: (){
+                              // Get.dialog(Container(
+                              //     width: MediaQuery.of(context)
+                              //         .size
+                              //         .width *
+                              //         4 /
+                              //         5,
+                              //     child: Column(
+                              //       children: [
+                              //         Material(
+                              //           child: Container(
+                              //             height: 40,
+                              //             width:
+                              //             MediaQuery.of(context)
+                              //                 .size
+                              //                 .width *
+                              //                 4 /
+                              //                 5,
+                              //             color: Colors.teal,
+                              //             child: Padding(
+                              //               padding:
+                              //               const EdgeInsets.all(
+                              //                   8.0),
+                              //               child: Text(
+                              //                 'Select Company',
+                              //                 style:
+                              //                 GoogleFonts.poppins(
+                              //                     fontSize: 13,
+                              //                     color: Colors
+                              //                         .white,
+                              //                     fontWeight:
+                              //                     FontWeight
+                              //                         .w400),
+                              //               ),
+                              //             ),
+                              //           ),
+                              //         ),
+                              //         Material(
+                              //           child: Container(
+                              //             width:
+                              //             MediaQuery.of(context)
+                              //                 .size
+                              //                 .width *
+                              //                 4 /
+                              //                 5,
+                              //             height:
+                              //             MediaQuery.of(context)
+                              //                 .size
+                              //                 .height *
+                              //                 4 /
+                              //                 5,
+                              //             color: Colors.white,
+                              //             child: FutureBuilder(
+                              //                 future:
+                              //                 organizationListApi(),
+                              //                 builder: (context,
+                              //                     snapshot) {
+                              //                   if (snapshot
+                              //                       .connectionState ==
+                              //                       ConnectionState
+                              //                           .done) {
+                              //                     OrganizationsListByUserId
+                              //                     organizationsData =
+                              //                     snapshot.data
+                              //                     as OrganizationsListByUserId;
+                              //                     return SingleChildScrollView(
+                              //                       child: Column(
+                              //                         children: [
+                              //                           SizedBox(
+                              //                             height: 10,
+                              //                           ),
+                              //                           for (int i =
+                              //                           0;
+                              //                           i <
+                              //                               organizationsData
+                              //                                   .ret
+                              //                                   .data
+                              //                                   .length;
+                              //                           i++)
+                              //                             Container(
+                              //                               child:
+                              //                               Column(
+                              //                                 mainAxisAlignment:
+                              //                                 MainAxisAlignment.start,
+                              //                                 crossAxisAlignment:
+                              //                                 CrossAxisAlignment.start,
+                              //                                 children: [
+                              //                                   SizedBox(
+                              //                                     height:
+                              //                                     0,
+                              //                                   ),
+                              //                                   GestureDetector(
+                              //                                     onTap:
+                              //                                         () {
+                              //                                       // setState(() {
+                              //                                       //   clicked = !clicked;
+                              //                                       // });
+                              //                                       // Get.off(()=> HomePage2(), arguments: [i]);
+                              //                                       // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomePage2()));
+                              //                                       // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
+                              //                                       //     HomePage2()), (Route<dynamic> route) => false);
+                              //                                           widget.setStateDrawer(() {
+                              //                                         // widget.company = i;
+                              //                                             widget.comapny1 = i;
+                              //                                         print(widget.company);
+                              //                                         // setIt();
+                              //                                       });
+                              //                                           setState(() {
+                              //                                             // widget.company = i;
+                              //                                             widget.comapny1 = i;
+                              //                                             print(widget.company);
+                              //                                           });
+                              //                                       Get.back();
+                              //                                     },
+                              //                                     child:
+                              //                                     Container(
+                              //                                       child: Row(
+                              //                                         mainAxisAlignment: MainAxisAlignment.start,
+                              //                                         children: [
+                              //                                           Padding(
+                              //                                             padding: const EdgeInsets.all(8.0),
+                              //                                             child: Container(
+                              //                                               height: 25,
+                              //                                               width: 25,
+                              //                                               decoration: BoxDecoration(
+                              //                                                   color:
+                              //                                                   // clicked1 == true ? Colors.teal :
+                              //                                                   Colors.white,
+                              //                                                   border: Border.all(
+                              //                                                       color: Colors.teal
+                              //                                                   ),
+                              //                                                   borderRadius: BorderRadius.circular(50)),
+                              //                                               child: Icon(
+                              //                                                 Icons.done,
+                              //                                                 color: Colors.white,
+                              //                                               ),
+                              //                                             ),
+                              //                                           ),
+                              //                                           Padding(
+                              //                                             padding: const EdgeInsets.all(8.0),
+                              //                                             child: Column(
+                              //                                               crossAxisAlignment: CrossAxisAlignment.start,
+                              //                                               children: [
+                              //                                                 Text(
+                              //                                                   '${organizationsData.ret.data[i].orgName}',
+                              //                                                   style: GoogleFonts.poppins(
+                              //                                                       fontSize: 15,
+                              //                                                       color: Colors.black,
+                              //                                                       fontWeight: FontWeight.bold
+                              //                                                   ),
+                              //                                                 ),
+                              //                                                 Row(
+                              //                                                   children: [
+                              //                                                     Text(
+                              //                                                       'primary contact: ',
+                              //                                                       style: GoogleFonts.poppins(fontSize: 10,
+                              //                                                           color: Colors.black,
+                              //                                                           fontWeight: FontWeight.w600
+                              //                                                       ),
+                              //                                                     ),
+                              //                                                     SizedBox(
+                              //                                                       width: 5,
+                              //                                                     ),
+                              //                                                     Text(
+                              //                                                       '${organizationsData.ret.data[i].primaryContact}',
+                              //                                                       style: GoogleFonts.poppins(
+                              //                                                           fontSize: 15,
+                              //                                                           color: Colors.black,
+                              //                                                           fontWeight: FontWeight.bold
+                              //                                                       ),
+                              //                                                     ),
+                              //                                                   ],
+                              //                                                 )
+                              //                                               ],
+                              //                                             ),
+                              //                                           ),
+                              //                                         ],
+                              //                                       ),
+                              //                                     ),
+                              //                                   ),
+                              //                                   SizedBox(
+                              //                                     height:
+                              //                                     20,
+                              //                                   ),
+                              //                                 ],
+                              //                               ),
+                              //                             ),
+                              //                         ],
+                              //                       ),
+                              //                     );
+                              //                   }
+                              //                   return const Center(
+                              //                       child:
+                              //                       CircularProgressIndicator(
+                              //                         color: Colors.white,
+                              //                         // ));
+                              //                       ));
+                              //                 }),
+                              //           ),
+                              //         )
+                              //       ],
+                              //     )));
+                            },
+                            child: Container(
+                              child: Row(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding:
+                                    const EdgeInsets.only(
+                                        top: 15.0),
+                                    child: CircleAvatar(
+                                      child: ClipRRect(
+                                          borderRadius:
+                                          BorderRadius
+                                              .circular(50),
+                                          child: Image.asset(
+                                              'assets/images/customerLogo.png')),
+                                      radius: 25,
+                                    ),
                                   ),
-                                ),
-                                Padding(
-                                  padding:
-                                  const EdgeInsets.all(
-                                      8.0),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment
-                                        .start,
-                                    children: [
-                                      Row(children: [
+                                  Padding(
+                                    padding:
+                                    const EdgeInsets.all(
+                                        8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment
+                                          .start,
+                                      children: [
+                                        Row(children: [
+                                          Text(
+                                            organizationsData.ret.data[widget.company].orgName,
+                                            style: GoogleFonts.poppins(
+                                                fontSize: 18,
+                                                color: Colors
+                                                    .black,
+                                                decoration:
+                                                TextDecoration
+                                                    .none,
+                                                fontWeight:
+                                                FontWeight
+                                                    .bold),
+                                          ),
+                                          // Icon(Icons
+                                          //     .arrow_drop_down),
+                                        ]),
+                                        Row(children: [
+                                          Text(
+                                            'Refreshed on: ',
+                                            style: GoogleFonts.poppins(
+                                                fontSize: 12,
+                                                color: Colors
+                                                    .black45,
+                                                decoration:
+                                                TextDecoration
+                                                    .none,
+                                                fontWeight:
+                                                FontWeight
+                                                    .w500),
+                                          ),
+                                          Text(
+                                            organizationsData.ret.data[widget.company].updatedOn.split(' ')[0],
+                                            style: GoogleFonts.poppins(
+                                                fontSize: 14,
+                                                color: Colors
+                                                    .black,
+                                                decoration:
+                                                TextDecoration
+                                                    .none,
+                                                fontWeight:
+                                                FontWeight
+                                                    .w500),
+                                          ),
+                                        ]),
                                         Text(
-                                          organizationsData.ret.data[company].orgName,
+                                          '${userDataGlobal['ret']['data']['name']}',
                                           style: GoogleFonts.poppins(
-                                              fontSize: 18,
-                                              color: Colors
-                                                  .black,
+                                              fontSize: 14,
+                                              color:
+                                              Colors.black,
                                               decoration:
                                               TextDecoration
                                                   .none,
                                               fontWeight:
                                               FontWeight
-                                                  .bold),
+                                                  .w500),
                                         ),
-                                        Icon(Icons
-                                            .arrow_drop_down),
-                                      ]),
-                                      Row(children: [
                                         Text(
-                                          'Refreshed on: ',
+                                          '${userDataGlobal['ret']['data']['last_role_name']}',
                                           style: GoogleFonts.poppins(
                                               fontSize: 12,
                                               color: Colors
@@ -112,50 +363,11 @@ class MyScaffold extends StatelessWidget {
                                               FontWeight
                                                   .w500),
                                         ),
-                                        Text(
-                                          organizationsData.ret.data[company].updatedOn.split(' ')[0],
-                                          style: GoogleFonts.poppins(
-                                              fontSize: 14,
-                                              color: Colors
-                                                  .black,
-                                              decoration:
-                                              TextDecoration
-                                                  .none,
-                                              fontWeight:
-                                              FontWeight
-                                                  .w500),
-                                        ),
-                                      ]),
-                                      Text(
-                                        '${userDataGlobal['ret']['data']['name']}',
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 14,
-                                            color:
-                                            Colors.black,
-                                            decoration:
-                                            TextDecoration
-                                                .none,
-                                            fontWeight:
-                                            FontWeight
-                                                .w500),
-                                      ),
-                                      Text(
-                                        '${userDataGlobal['ret']['data']['last_role_name']}',
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 12,
-                                            color: Colors
-                                                .black45,
-                                            decoration:
-                                            TextDecoration
-                                                .none,
-                                            fontWeight:
-                                            FontWeight
-                                                .w500),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                              ],
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
                           SizedBox(
@@ -166,7 +378,7 @@ class MyScaffold extends StatelessWidget {
                                 top: 10.0, bottom: 10),
                             child: GestureDetector(
                               onTap: (){
-                                  Get.offAll(()=> HomePage2(), arguments: [company, 1]);
+                                  Get.offAll(()=> HomePage2(), arguments: [widget.company, 1]);
                               },
                               child: Row(children: [
                                 Icon(
@@ -223,7 +435,7 @@ class MyScaffold extends StatelessWidget {
                                 top: 10.0, bottom: 10),
                             child: GestureDetector(
                               onTap: (){
-                                Get.offAll(()=> HomePage2(), arguments: [company, 2]);
+                                Get.offAll(()=> HomePage2(), arguments: [widget.company, 2]);
                               },
                               child: Row(children: [
                                 Icon(
@@ -507,7 +719,7 @@ class MyScaffold extends StatelessWidget {
           ),
         ),
       ),
-      body: body,
+      body: widget.body,
 
     );
   }
