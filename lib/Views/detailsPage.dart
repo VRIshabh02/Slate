@@ -19,6 +19,7 @@ class DetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     title = "${titleLink.split('/')[1][0].toUpperCase()}${titleLink.split('/')[1].substring(1).toLowerCase()}";
     return MyScaffold(
+      company: company,
         tittle: Text("$title"),
         body: FutureBuilder(
             future: organizationListApi(),
@@ -28,7 +29,7 @@ class DetailsPage extends StatelessWidget {
                     snapshot.data as OrganizationsListByUserId;
                 finalURL =
                 "https://${reqUrl}${titleLink}/${organizationsData.ret.data[company].orgId}/${userDataGlobal['ret']['data']['token']}";
-
+                  print("$finalURL");
                 return WebView(
                   initialUrl: Uri.encodeFull(finalURL),
                   javascriptMode: JavascriptMode.unrestricted,

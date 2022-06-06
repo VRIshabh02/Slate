@@ -28,7 +28,7 @@ class HomePage2 extends StatefulWidget {
 }
 
 class _HomePage2State extends State<HomePage2> {
-  int _selectedIndex = 0;
+  int _selectedIndex = Get.arguments[1];
   int company = Get.arguments[0];
   static bool clicked1 = false;
   static bool searching = false;
@@ -60,9 +60,8 @@ class _HomePage2State extends State<HomePage2> {
     setIt();
   }
 
-  setIt(){
+  setIt() {
     _widgetOptions = [tab1(), tab2(), tab3(), tab4()];
-
   }
 
   Widget tab1() {
@@ -549,9 +548,16 @@ class _HomePage2State extends State<HomePage2> {
                                                             padding:
                                                                 const EdgeInsets
                                                                     .all(8.0),
-                                                            child: GestureDetector(
-                                                              onTap: (){
-                                                                Get.to(()=> DetailsPage(), arguments: ['reports/sales', company]);
+                                                            child:
+                                                                GestureDetector(
+                                                              onTap: () {
+                                                                Get.to(
+                                                                    () =>
+                                                                        DetailsPage(),
+                                                                    arguments: [
+                                                                      'reports/sales',
+                                                                      company
+                                                                    ]);
                                                               },
                                                               child: Container(
                                                                 height: 80,
@@ -560,9 +566,8 @@ class _HomePage2State extends State<HomePage2> {
                                                                     color: Colors
                                                                         .white,
                                                                     borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(
-                                                                                12)),
+                                                                        BorderRadius.circular(
+                                                                            12)),
                                                                 child: Padding(
                                                                   padding:
                                                                       const EdgeInsets
@@ -583,14 +588,10 @@ class _HomePage2State extends State<HomePage2> {
                                                                                 const EdgeInsets.only(right: 4.0),
                                                                             child:
                                                                                 Container(
-                                                                              height:
-                                                                                  15,
-                                                                              width:
-                                                                                  15,
-                                                                              decoration:
-                                                                                  BoxDecoration(color: Colors.orangeAccent, borderRadius: BorderRadius.circular(50)),
-                                                                              child:
-                                                                                  Icon(
+                                                                              height: 15,
+                                                                              width: 15,
+                                                                              decoration: BoxDecoration(color: Colors.orangeAccent, borderRadius: BorderRadius.circular(50)),
+                                                                              child: Icon(
                                                                                 Icons.shopping_bag_outlined,
                                                                                 size: 10,
                                                                                 color: Colors.white,
@@ -600,8 +601,7 @@ class _HomePage2State extends State<HomePage2> {
                                                                           Text(
                                                                               'Sales'),
                                                                           Icon(
-                                                                            Icons
-                                                                                .info,
+                                                                            Icons.info,
                                                                             size:
                                                                                 15,
                                                                             color:
@@ -630,9 +630,16 @@ class _HomePage2State extends State<HomePage2> {
                                                             padding:
                                                                 const EdgeInsets
                                                                     .all(8.0),
-                                                            child: GestureDetector(
-                                                              onTap: (){
-                                                                Get.to(()=> DetailsPage(), arguments: ['reports/receivable', company]);
+                                                            child:
+                                                                GestureDetector(
+                                                              onTap: () {
+                                                                Get.to(
+                                                                    () =>
+                                                                        DetailsPage(),
+                                                                    arguments: [
+                                                                      'reports/receivable',
+                                                                      company
+                                                                    ]);
                                                               },
                                                               child: Container(
                                                                 height: 80,
@@ -641,9 +648,8 @@ class _HomePage2State extends State<HomePage2> {
                                                                     color: Colors
                                                                         .white,
                                                                     borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(
-                                                                                12)),
+                                                                        BorderRadius.circular(
+                                                                            12)),
                                                                 child: Padding(
                                                                   padding:
                                                                       const EdgeInsets
@@ -677,8 +683,7 @@ class _HomePage2State extends State<HomePage2> {
                                                                           Text(
                                                                               'Receivables'),
                                                                           Icon(
-                                                                            Icons
-                                                                                .info,
+                                                                            Icons.info,
                                                                             size:
                                                                                 15,
                                                                             color:
@@ -707,9 +712,16 @@ class _HomePage2State extends State<HomePage2> {
                                                             padding:
                                                                 const EdgeInsets
                                                                     .all(8.0),
-                                                            child: GestureDetector(
-                                                              onTap: (){
-                                                                Get.to(()=> DetailsPage(), arguments: ['reports/payable',company]);
+                                                            child:
+                                                                GestureDetector(
+                                                              onTap: () {
+                                                                Get.to(
+                                                                    () =>
+                                                                        DetailsPage(),
+                                                                    arguments: [
+                                                                      'reports/payable',
+                                                                      company
+                                                                    ]);
                                                               },
                                                               child: Container(
                                                                 height: 80,
@@ -718,9 +730,8 @@ class _HomePage2State extends State<HomePage2> {
                                                                     color: Colors
                                                                         .white,
                                                                     borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(
-                                                                                12)),
+                                                                        BorderRadius.circular(
+                                                                            12)),
                                                                 child: Padding(
                                                                   padding:
                                                                       const EdgeInsets
@@ -754,8 +765,7 @@ class _HomePage2State extends State<HomePage2> {
                                                                           Text(
                                                                               'Payable'),
                                                                           Icon(
-                                                                            Icons
-                                                                                .info,
+                                                                            Icons.info,
                                                                             size:
                                                                                 15,
                                                                             color:
@@ -784,9 +794,16 @@ class _HomePage2State extends State<HomePage2> {
                                                             padding:
                                                                 const EdgeInsets
                                                                     .all(8.0),
-                                                            child: GestureDetector(
-                                                              onTap: (){
-                                                                Get.to(()=> DetailsPage(), arguments: ['reports/liquidity',company]);
+                                                            child:
+                                                                GestureDetector(
+                                                              onTap: () {
+                                                                Get.to(
+                                                                    () =>
+                                                                        DetailsPage(),
+                                                                    arguments: [
+                                                                      'reports/liquidity',
+                                                                      company
+                                                                    ]);
                                                               },
                                                               child: Container(
                                                                 height: 80,
@@ -795,9 +812,8 @@ class _HomePage2State extends State<HomePage2> {
                                                                     color: Colors
                                                                         .white,
                                                                     borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(
-                                                                                12)),
+                                                                        BorderRadius.circular(
+                                                                            12)),
                                                                 child: Padding(
                                                                   padding:
                                                                       const EdgeInsets
@@ -828,8 +844,7 @@ class _HomePage2State extends State<HomePage2> {
                                                                           Text(
                                                                               'Liquidity'),
                                                                           Icon(
-                                                                            Icons
-                                                                                .info,
+                                                                            Icons.info,
                                                                             size:
                                                                                 15,
                                                                             color:
@@ -1936,7 +1951,7 @@ class _HomePage2State extends State<HomePage2> {
       _selectedIndex = index;
     });
   }
-
+  bool showReports = false;
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -1961,8 +1976,7 @@ class _HomePage2State extends State<HomePage2> {
                           snapshot.data as DateFormatModel;
                       return Scaffold(
                         appBar: _selectedIndex == 0
-                            ?
-                        AppBar(
+                            ? AppBar(
                                 title: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -2068,7 +2082,7 @@ class _HomePage2State extends State<HomePage2> {
                                                                               // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => HomePage2()));
                                                                               // Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(builder: (context) =>
                                                                               //     HomePage2()), (Route<dynamic> route) => false);
-                                                                                  setState(() {
+                                                                              setState(() {
                                                                                 company = i;
                                                                                 setIt();
                                                                               });
@@ -2178,7 +2192,7 @@ class _HomePage2State extends State<HomePage2> {
                                         Container(
                                           width: 100,
                                           child: Text(
-                                            '${organizationsData.ret.data[company].updatedOn}',
+                                            '${organizationsData.ret.data[company].updatedOn.split(" ")[0]}',
                                             overflow: TextOverflow.ellipsis,
                                             style: GoogleFonts.poppins(
                                                 fontSize: 13,
@@ -2267,11 +2281,9 @@ class _HomePage2State extends State<HomePage2> {
                                                         onTap: () async {
                                                           _submitForm();
                                                           setState(() {
-                                                            print("hbff");
                                                             setIt();
                                                           });
                                                           Get.back();
-
                                                         },
                                                         child: Container(
                                                           height: 30,
@@ -2331,13 +2343,13 @@ class _HomePage2State extends State<HomePage2> {
                                     Container(
                                       width: 220,
                                       child: Text(
-                                        _selectedIndex == 1 ?
-                                            'Dashboard' :
-                                         _selectedIndex == 2 ?
-                                        'Invoices'  :
-                                         _selectedIndex == 3 ?
-                                         'Notifications':
-                                        '',
+                                        _selectedIndex == 1
+                                            ? 'Dashboard'
+                                            : _selectedIndex == 2
+                                                ? 'Invoices'
+                                                : _selectedIndex == 3
+                                                    ? 'Notifications'
+                                                    : '',
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
                                       ),
@@ -2352,49 +2364,519 @@ class _HomePage2State extends State<HomePage2> {
                                         bottomLeft: Radius.circular(20)))),
                         drawer: SafeArea(
                           child: Drawer(
-                            child: Column(
-                              children: [
-                                Text("Hello"),
-                                TextButton(
-                                    onPressed: () => showDialog<String>(
-                                          context: context,
-                                          builder: (BuildContext context) =>
-                                              AlertDialog(
-                                            title: Text('Alert'),
-                                            content: Text(
-                                                "Are you sure you want to sign out?"),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () {
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 20.0, left: 20),
+                              child: SingleChildScrollView(
+                                child: FutureBuilder(
+                                    future: organizationListApi(),
+                                    builder: (context, snapshot) {
+                                      if (snapshot.connectionState ==
+                                          ConnectionState.done) {
+                                        OrganizationsListByUserId
+                                            organizationsData = snapshot.data
+                                                as OrganizationsListByUserId;
+                                        return Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 15.0),
+                                                    child: CircleAvatar(
+                                                      child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(50),
+                                                          child: Image.asset(
+                                                              'assets/images/customerLogo.png')),
+                                                      radius: 25,
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            8.0),
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Row(children: [
+                                                          Text(
+                                                            organizationsData.ret.data[company].orgName,
+                                                            style: GoogleFonts.poppins(
+                                                                fontSize: 18,
+                                                                color: Colors
+                                                                    .black,
+                                                                decoration:
+                                                                    TextDecoration
+                                                                        .none,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                          Icon(Icons
+                                                              .arrow_drop_down),
+                                                        ]),
+                                                        Row(children: [
+                                                          Text(
+                                                            'Refreshed on: ',
+                                                            style: GoogleFonts.poppins(
+                                                                fontSize: 12,
+                                                                color: Colors
+                                                                    .black45,
+                                                                decoration:
+                                                                    TextDecoration
+                                                                        .none,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500),
+                                                          ),
+                                                          Text(
+                                                            organizationsData.ret.data[company].updatedOn.split(' ')[0],
+                                                            style: GoogleFonts.poppins(
+                                                                fontSize: 14,
+                                                                color: Colors
+                                                                    .black,
+                                                                decoration:
+                                                                    TextDecoration
+                                                                        .none,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500),
+                                                          ),
+                                                        ]),
+                                                        Text(
+                                                          '${userDataGlobal['ret']['data']['name']}',
+                                                          style: GoogleFonts.poppins(
+                                                              fontSize: 14,
+                                                              color:
+                                                                  Colors.black,
+                                                              decoration:
+                                                                  TextDecoration
+                                                                      .none,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
+                                                        ),
+                                                        Text(
+                                                          '${userDataGlobal['ret']['data']['last_role_name']}',
+                                                          style: GoogleFonts.poppins(
+                                                              fontSize: 12,
+                                                              color: Colors
+                                                                  .black45,
+                                                              decoration:
+                                                                  TextDecoration
+                                                                      .none,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10.0, bottom: 10),
+                                              child: GestureDetector(
+                                                onTap: (){
+                                                  _onItemTapped(1);
                                                   Get.back();
                                                 },
-                                                child: Text("No"),
+                                                child: Row(children: [
+                                                  Icon(
+                                                    Icons.dashboard_outlined,
+                                                    color: Colors.black45,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Text(
+                                                    'DASHBOARD',
+                                                    style: GoogleFonts.poppins(
+                                                        fontSize: 15,
+                                                        color: Colors.black,
+                                                        decoration:
+                                                            TextDecoration.none,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                ]),
                                               ),
-                                              TextButton(
-                                                  onPressed: () async {
-                                                    SharedPreferences prefs =
-                                                        await SharedPreferences
-                                                            .getInstance();
-                                                    prefs.remove('userData');
-                                                    Get.offAll(LoginScreen());
-                                                  },
-                                                  child: Text(
-                                                    "Yes",
-                                                    style: TextStyle(
-                                                        color:
-                                                            Colors.deepPurple),
-                                                  ))
-                                            ],
-                                            actionsAlignment:
-                                                MainAxisAlignment.spaceBetween,
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10.0, bottom: 10),
+                                              child: GestureDetector(
+                                                onTap: (){
+                                                  setState(() {
+                                                    showReports = !showReports;
+                                                  });
+                                                },
+                                                child: Row(children: [
+                                                  Icon(
+                                                    Icons.description_outlined,
+                                                    color: Colors.black45,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Text(
+                                                    'REPORTS',
+                                                    style: GoogleFonts.poppins(
+                                                        fontSize: 15,
+                                                        color: Colors.black,
+                                                        decoration:
+                                                            TextDecoration.none,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Icon(Icons.arrow_drop_down)
+                                                ]),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            showReports == true ?
+                                            Container(
+                                              child: Column(
+                                                children: [
+                                                  Padding(
+                                                    padding: const EdgeInsets.only(
+                                                        top: 10.0, bottom: 10, left: 20),
+                                                    child: Row(children: [
+                                                      Icon(
+                                                        Icons.description_outlined,
+                                                        color: Colors.black45,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Text(
+                                                        'Liquidity',
+                                                        style: GoogleFonts.poppins(
+                                                            fontSize: 15,
+                                                            color: Colors.black,
+                                                            decoration:
+                                                            TextDecoration.none,
+                                                            fontWeight:
+                                                            FontWeight.w500),
+                                                      ),
+                                                    ]),
+                                                  ),
+                                                ],
+                                              ),
+                                            ) :
+                                                Container(),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10.0, bottom: 10),
+                                              child: GestureDetector(
+                                                onTap: (){
+                                                  _onItemTapped(2);
+                                                  Get.back();
+                                                },
+                                                child: Row(children: [
+                                                  Icon(
+                                                    Icons.description_outlined,
+                                                    color: Colors.black45,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Text(
+                                                    'INVOICES',
+                                                    style: GoogleFonts.poppins(
+                                                        fontSize: 15,
+                                                        color: Colors.black,
+                                                        decoration:
+                                                            TextDecoration.none,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                ]),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10.0, bottom: 10),
+                                              child: Row(children: [
+                                                Icon(
+                                                  Icons.sync,
+                                                  color: Colors.black45,
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text(
+                                                  'TALLY SYNC',
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 15,
+                                                      color: Colors.black,
+                                                      decoration:
+                                                          TextDecoration.none,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ]),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10.0, bottom: 10),
+                                              child: Row(children: [
+                                                Icon(
+                                                  Icons.dashboard_outlined,
+                                                  color: Colors.black45,
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text(
+                                                  'COMPANY PROFILE',
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 15,
+                                                      color: Colors.black,
+                                                      decoration:
+                                                          TextDecoration.none,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ]),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10.0, bottom: 10),
+                                              child: Row(children: [
+                                                Icon(
+                                                  Icons.person_outlined,
+                                                  color: Colors.black45,
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text(
+                                                  'CUSTOMERS',
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 15,
+                                                      color: Colors.black,
+                                                      decoration:
+                                                          TextDecoration.none,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ]),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10.0, bottom: 10),
+                                              child: Row(children: [
+                                                Icon(
+                                                  Icons.shopping_bag_outlined,
+                                                  color: Colors.black45,
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text(
+                                                  'MARKETPLACE',
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 15,
+                                                      color: Colors.black,
+                                                      decoration:
+                                                          TextDecoration.none,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ]),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10.0, bottom: 10),
+                                              child: Row(children: [
+                                                Icon(
+                                                  Icons.dashboard_outlined,
+                                                  color: Colors.black45,
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text(
+                                                  'DOCUMENT MANAGEMENT',
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 15,
+                                                      color: Colors.black,
+                                                      decoration:
+                                                          TextDecoration.none,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ]),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 10.0, bottom: 10),
+                                              child: Row(children: [
+                                                Icon(
+                                                  Icons.lock_outline,
+                                                  color: Colors.black45,
+                                                ),
+                                                SizedBox(
+                                                  width: 10,
+                                                ),
+                                                Text(
+                                                  'RESET PASSWORD',
+                                                  style: GoogleFonts.poppins(
+                                                      fontSize: 15,
+                                                      color: Colors.black,
+                                                      decoration:
+                                                          TextDecoration.none,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ]),
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Container(
+                                              width: 150,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  color: Colors.teal),
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 2.0, right: 2),
+                                                child: TextButton(
+                                                    onPressed: () =>
+                                                        showDialog<String>(
+                                                          context: context,
+                                                          builder: (BuildContext
+                                                                  context) =>
+                                                              AlertDialog(
+                                                            title:
+                                                                Text('Alert'),
+                                                            content: Text(
+                                                                "Are you sure you want to sign out?"),
+                                                            actions: [
+                                                              TextButton(
+                                                                onPressed: () {
+                                                                  Get.back();
+                                                                },
+                                                                child:
+                                                                    Text("No"),
+                                                              ),
+                                                              TextButton(
+                                                                  onPressed:
+                                                                      () async {
+                                                                    SharedPreferences
+                                                                        prefs =
+                                                                        await SharedPreferences
+                                                                            .getInstance();
+                                                                    prefs.remove(
+                                                                        'userData');
+                                                                    Get.offAll(
+                                                                        LoginScreen());
+                                                                  },
+                                                                  child: Text(
+                                                                    "Yes",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .deepPurple),
+                                                                  ))
+                                                            ],
+                                                            actionsAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceBetween,
+                                                          ),
+                                                        ),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      children: [
+                                                        Icon(
+                                                          Icons
+                                                              .power_settings_new,
+                                                          color: Colors.white,
+                                                        ),
+                                                        Text('Logout',
+                                                            style: GoogleFonts.poppins(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 20,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold)),
+                                                      ],
+                                                    )),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }
+                                      return Material(
+                                        child: Center(
+                                          child: Container(
+                                            height: 100,
+                                            width: 100,
+                                            child: Center(
+                                              child: Column(
+                                                children: const [
+                                                  Center(
+                                                      child:
+                                                          CircularProgressIndicator(
+                                                    color: Colors.black,
+                                                  )),
+                                                  Text("Please wait!")
+                                                ],
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                    child: Text('Sign Out',
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.black,
-                                          fontSize: 15,
-                                        ))),
-                              ],
+                                      );
+                                    }),
+                              ),
                             ),
                           ),
                         ),
@@ -2501,8 +2983,8 @@ Future<InvoiceListModel> getInvoiceList() async {
   String? data1 = prefs.getString('userData');
   final userData = json.decode(data1!);
 
-  var requestURL = Uri.parse(
-      'https://uat.finance.slate.ac/slate-api/routes.php?');
+  var requestURL =
+      Uri.parse('https://uat.finance.slate.ac/slate-api/routes.php?');
 
   final uri = Uri.parse('$requestURL').replace(queryParameters: {
     'action': 'getInvoice',
@@ -2513,8 +2995,11 @@ Future<InvoiceListModel> getInvoiceList() async {
   // map['company_id'] = '$comId';
   // map['from_date'] = '2021-05-01';
   // map['to_date'] = '2021-10-30';
-  final response = await http.get(uri,
-    headers: {"Authorization": "Bearer${userDataGlobal['ret']['data']['token']}"},
+  final response = await http.get(
+    uri,
+    headers: {
+      "Authorization": "Bearer${userDataGlobal['ret']['data']['token']}"
+    },
     // body: json.encode(map)
   );
   var data = jsonDecode(response.body.toString());
@@ -2526,5 +3011,3 @@ Future<InvoiceListModel> getInvoiceList() async {
     return InvoiceListModel.fromJson(data);
   }
 }
-
-

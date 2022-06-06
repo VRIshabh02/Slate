@@ -59,7 +59,7 @@ class _SelectCompanyState extends State<SelectCompany> {
                       // setState(() {
                       //   clicked = !clicked;
                       // });
-                      Get.off(()=> HomePage2(), arguments: [i]);
+                      Get.off(()=> HomePage2(), arguments: [i,0]);
                     },
                     child: Container(
                       child: Row(

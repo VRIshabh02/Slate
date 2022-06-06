@@ -61,7 +61,7 @@ class SignUpComplete extends StatelessWidget {
               padding: const EdgeInsets.only(top: 40.0),
               child: GestureDetector(
                 onTap: (){
-                  Get.offAll(()=> HomePage2(), arguments: [0]);
+                  Get.offAll(()=> HomePage2(), arguments: [0,0]);
                 },
                 child: Container(
                   height: 50,

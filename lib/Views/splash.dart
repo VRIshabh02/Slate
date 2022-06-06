@@ -89,8 +89,7 @@ class _SplashScreenState extends State<SplashScreen> {
     String? userData = prefs.getString('userData');
     if (userData != null) {
       userDataGlobal = json.decode(userData);
-      // print("Yeh raha token ${userDataGlobal['ret']['data']['token']}");
-      Get.off( HomePage2(), arguments: [i]);
+      Get.off( HomePage2(), arguments: [i,0]);
     }
     else{
       Get.offAll(LoginScreen());

@@ -197,7 +197,7 @@ Future verifyOTPFunc(String otp, String number) async {
       Get.snackbar('Error', '${data['err']['data']}');
     }else{
       Get.snackbar('OTP Verified','');
-      Get.offAll(()=> HomePage2(), arguments: [0]);
+      Get.offAll(()=> HomePage2(), arguments: [0,0]);
     }
   } else {
     Get.snackbar('Error', '${data['err']['data']}');
