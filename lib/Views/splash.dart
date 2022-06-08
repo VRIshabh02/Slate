@@ -89,7 +89,7 @@ class _SplashScreenState extends State<SplashScreen> {
     String? userData = prefs.getString('userData');
     if (userData != null) {
       userDataGlobal = json.decode(userData);
-      Get.off( HomePage2(), arguments: [i,0]);
+      Get.off(HomePage2(), arguments: [i,0]);
     }
     else{
       Get.offAll(LoginScreen());
