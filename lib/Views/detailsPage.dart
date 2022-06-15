@@ -30,10 +30,10 @@ class _DetailsPageState extends State<DetailsPage> {
   Widget build(BuildContext context) {
     title = "${titleLink.split('/')[1][0].toUpperCase()}${titleLink.split('/')[1].substring(1).toLowerCase()}";
     return MyScaffold(
-      comapny1: company1,
+      company1: company1,
       setStateDrawer:setState,
       company: company,
-        tittle: Text("$title"),
+        title: Text("$title"),
         body: FutureBuilder(
             future: organizationListApi(),
             builder: (context, snapshot) {

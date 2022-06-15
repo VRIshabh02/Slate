@@ -8,6 +8,8 @@ import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled_slate/Controllers/globalVariables.dart';
 import 'package:untitled_slate/Models/InvoiceListModel.dart';
+import 'package:untitled_slate/Views/addBankAccPage.dart';
+import 'package:untitled_slate/Views/addUserPage.dart';
 import 'package:untitled_slate/Views/createCustomer.dart';
 import 'package:untitled_slate/Views/detailsPage.dart';
 import 'package:untitled_slate/Views/documentManagement.dart';
@@ -651,7 +653,9 @@ class _HomePage2State extends State<HomePage2> {
                                                     const EdgeInsets.all(8.0),
                                                 child: GestureDetector(
                                                   onTap: (){
-                                                    Get.to(()=> DocumentManagement());
+                                                    Get.to(()=> DocumentManagement(), arguments: [
+                                                      company
+                                                    ]);
                                                   },
                                                   child: Container(
                                                     height: 80,
@@ -806,53 +810,61 @@ class _HomePage2State extends State<HomePage2> {
                                                     left: 8.0),
                                                 child: Column(
                                                   children: [
-                                                    Row(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Container(
-                                                              decoration: BoxDecoration(
-                                                                  color: Colors
-                                                                      .blue,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              50)),
-                                                              child: const Padding(
-                                                                padding:
-                                                                    EdgeInsets
-                                                                            .all(
-                                                                        4.0),
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .supervisor_account_rounded,
-                                                                  color: Colors
-                                                                      .white,
-                                                                ),
-                                                              )
+                                                    GestureDetector(
+                                                      onTap: (){
+                                                        Get.to(()=> AddUserPage(), arguments: [
+                                                          company,
+                                                          int.parse(organizationsData.ret.data[company].orgId.toString())
+                                                        ]);
+                                                      },
+                                                      child: Row(
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(8.0),
+                                                            child: Container(
+                                                                decoration: BoxDecoration(
+                                                                    color: Colors
+                                                                        .blue,
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(
+                                                                                50)),
+                                                                child: const Padding(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                              .all(
+                                                                          4.0),
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .supervisor_account_rounded,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                )
+                                                            ),
                                                           ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(4.0),
-                                                          child: Text(
-                                                            'Add User',
-                                                            style: GoogleFonts.poppins(
-                                                                fontSize: 15,
-                                                                color:
-                                                                    Colors.blue,
-                                                                decoration:
-                                                                    TextDecoration
-                                                                        .none,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500),
-                                                          ),
-                                                        )
-                                                      ],
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(4.0),
+                                                            child: Text(
+                                                              'Add User',
+                                                              style: GoogleFonts.poppins(
+                                                                  fontSize: 15,
+                                                                  color:
+                                                                      Colors.blue,
+                                                                  decoration:
+                                                                      TextDecoration
+                                                                          .none,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
                                                     const Padding(
                                                       padding:
@@ -863,52 +875,60 @@ class _HomePage2State extends State<HomePage2> {
                                                         endIndent: 50,
                                                       ),
                                                     ),
-                                                    Row(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Container(
-                                                              decoration: BoxDecoration(
-                                                                  color: Colors
-                                                                      .blue,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              50)),
-                                                              child: const Padding(
-                                                                padding:
-                                                                    EdgeInsets
-                                                                            .all(
-                                                                        4.0),
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .account_balance,
-                                                                  color: Colors
-                                                                      .white,
-                                                                ),
-                                                              )),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(8.0),
-                                                          child: Text(
-                                                            'Add Bank Account',
-                                                            style: GoogleFonts.poppins(
-                                                                fontSize: 15,
-                                                                color:
-                                                                    Colors.blue,
-                                                                decoration:
-                                                                    TextDecoration
-                                                                        .none,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500),
+                                                    GestureDetector(
+                                                      onTap: (){
+                                                        Get.to(()=> AddBankAccount(), arguments: [
+                                                          company,
+                                                          organizationsData.ret.data[company].orgId
+                                                        ]);
+                                                      },
+                                                      child: Row(
+                                                        children: [
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(8.0),
+                                                            child: Container(
+                                                                decoration: BoxDecoration(
+                                                                    color: Colors
+                                                                        .blue,
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(
+                                                                                50)),
+                                                                child: const Padding(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                              .all(
+                                                                          4.0),
+                                                                  child: Icon(
+                                                                    Icons
+                                                                        .account_balance,
+                                                                    color: Colors
+                                                                        .white,
+                                                                  ),
+                                                                )),
                                                           ),
-                                                        )
-                                                      ],
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(8.0),
+                                                            child: Text(
+                                                              'Add Bank Account',
+                                                              style: GoogleFonts.poppins(
+                                                                  fontSize: 15,
+                                                                  color:
+                                                                      Colors.blue,
+                                                                  decoration:
+                                                                      TextDecoration
+                                                                          .none,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
                                                     const Padding(
                                                       padding:
@@ -1241,10 +1261,12 @@ class _HomePage2State extends State<HomePage2> {
                       InvoiceListModel invoiceListData =
                       snapshot.data as InvoiceListModel;
                       _list = invoiceListData.ret.data;
-                      return SingleChildScrollView(
-                        child: StatefulBuilder(
-                            builder: (context, setWidgetState) {
-                              return Column(
+                      return Stack(
+                        children:[
+                          SingleChildScrollView(
+                          child: StatefulBuilder(
+                              builder: (context, setWidgetState) {
+                                return Column(
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
@@ -1370,21 +1392,44 @@ class _HomePage2State extends State<HomePage2> {
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Container(
-                                        child: GridView.count(
-                                          childAspectRatio: 7 / 3,
-                                          mainAxisSpacing: 10,
-                                          shrinkWrap: true,
-                                          physics: NeverScrollableScrollPhysics(),
-                                          crossAxisCount: 1,
-                                          children: listChildren(
-                                              searching == true
-                                                  ? _filteredList
-                                                  : _list),
-                                        )),
+                                      child: GridView.count(
+                                        childAspectRatio: 7 / 3,
+                                        mainAxisSpacing: 10,
+                                        shrinkWrap: true,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        crossAxisCount: 1,
+                                        children: listChildren(
+                                            searching == true
+                                                ? _filteredList
+                                                : _list),
+                                      )),
                                   )
                                 ],
-                              );
-                            }),
+                                  );
+                              }),
+                        ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 50,
+                                width: 200,
+                                decoration: BoxDecoration(
+                                  color: Colors.teal,
+                                  borderRadius: BorderRadius.circular(50)
+                                ),
+                                child: Center(
+                                  child: Text("+ Create Invoice",
+                                          style: GoogleFonts.roboto(color: Colors.white,
+                                          fontSize: 20, fontWeight: FontWeight.bold
+                                          ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                    ]
                       );
                     }
                     return Material(
@@ -2709,11 +2754,11 @@ class _HomePage2State extends State<HomePage2> {
                                                   Get.back();
                                                 },
                                                 child: Row(children: [
-                                                  Icon(
+                                                  const Icon(
                                                     Icons.description_outlined,
                                                     color: Colors.black45,
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     width: 10,
                                                   ),
                                                   Text(
@@ -2839,25 +2884,33 @@ class _HomePage2State extends State<HomePage2> {
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   top: 10.0, bottom: 10),
-                                              child: Row(children: [
-                                                Icon(
-                                                  Icons.dashboard_outlined,
-                                                  color: Colors.black45,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Text(
-                                                  'DOCUMENT MANAGEMENT',
-                                                  style: GoogleFonts.poppins(
-                                                      fontSize: 15,
-                                                      color: Colors.black,
-                                                      decoration:
-                                                          TextDecoration.none,
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                              ]),
+                                              child: GestureDetector(
+                                                onTap: (){
+                                                  Get.to(()=> DocumentManagement(), arguments: [
+                                                    company
+                                                  ]);
+                                                },
+                                                child: Row(
+                                                    children: [
+                                                  Icon(
+                                                    Icons.dashboard_outlined,
+                                                    color: Colors.black45,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                  Text(
+                                                    'DOCUMENT MANAGEMENT',
+                                                    style: GoogleFonts.poppins(
+                                                        fontSize: 15,
+                                                        color: Colors.black,
+                                                        decoration:
+                                                            TextDecoration.none,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
+                                                ]),
+                                              ),
                                             ),
                                             SizedBox(
                                               width: 10,
@@ -3100,11 +3153,6 @@ Future<InvoiceListModel> getInvoiceList(int orgId) async {
     'action': 'getInvoice',
     'arg': '$orgId',
   });
-  // print('final url is: $orgId');
-  // var map = Map<String, dynamic>();
-  // map['company_id'] = '$comId';
-  // map['from_date'] = '2021-05-01';
-  // map['to_date'] = '2021-10-30';
   final response = await http.get(
     uri,
     headers: {

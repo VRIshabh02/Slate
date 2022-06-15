@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.teal,
       ),
       // home:  SplashScreen(),
         home: SplashScreen(),

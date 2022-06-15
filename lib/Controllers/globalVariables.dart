@@ -17,12 +17,12 @@ var userDataGlobal;
 class MyScaffold extends StatefulWidget {
 
   final Widget body;
-  final Widget tittle;
+  final Widget title;
   var company;
-  var comapny1;
+  var company1;
   Function setStateDrawer;
 
-  MyScaffold({required this.body, required this.tittle, required this.company, required this.setStateDrawer, required this.comapny1});
+  MyScaffold({required this.body, required this.title, required this.company, required this.setStateDrawer, required this.company1});
 
   @override
   State<MyScaffold> createState() => _MyScaffoldState();
@@ -33,7 +33,7 @@ class _MyScaffoldState extends State<MyScaffold> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title:  widget.tittle,
+          title:  widget.title,
           toolbarHeight: 60,
           backgroundColor: Color(0xFF272D4D),
           shape: RoundedRectangleBorder(
