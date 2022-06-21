@@ -25,8 +25,8 @@ class _DocumentManagementState extends State<DocumentManagement> {
   var company = Get.arguments[0];
   TextEditingController searchController = TextEditingController();
   bool searching = false;
-  List<DataDocumentModel> _list = [];
-  List<DataDocumentModel> _filteredList = [];
+  List<DataDocument> _list = [];
+  List<DataDocument> _filteredList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class _DocumentManagementState extends State<DocumentManagement> {
                     if (snapshot.connectionState == ConnectionState.done) {
                       DocumentManagementModel documentListData =
                       snapshot.data as DocumentManagementModel;
-                      _list = documentListData.ret.data;
+                      _list = documentListData.ret!.data!;
                       return SingleChildScrollView(
                         child: StatefulBuilder(
                             builder: (context, setWidgetState) {
@@ -127,12 +127,12 @@ class _DocumentManagementState extends State<DocumentManagement> {
                                                         }
 
                                                         _list.forEach((userDetail) {
-                                                          if ((userDetail.name ?? "")
+                                                          if ((userDetail.id.toString() ?? "")
                                                               .contains(
                                                               searchController
                                                                   .text) ||
                                                               userDetail
-                                                                  .folderPath
+                                                                  .folderPath!
                                                                   .contains(
                                                                   searchController
                                                                       .text)) {
@@ -247,8 +247,8 @@ class _DocumentManagementState extends State<DocumentManagement> {
     }
 
     _list.forEach((userDetail) {
-      if ((userDetail.name ?? "").contains(searchController.text) ||
-          userDetail.folderPath.contains(searchController.text))
+      if ((userDetail.id.toString() ?? "").contains(searchController.text) ||
+          userDetail.folderPath!.contains(searchController.text))
         _filteredList.add(userDetail);
     });
     searching = _filteredList.length < _list.length ? true : false;
@@ -257,10 +257,10 @@ class _DocumentManagementState extends State<DocumentManagement> {
     setWidgetState(() {});
   }
 
-  List<Widget> listChildren(List<DataDocumentModel> list) {
+  List<Widget> listChildren(List<DataDocument> list) {
     final children = <Widget>[];
     for (int i = 0; i < list.length; i++) {
-      String date1 =  list[i].name ?? "";
+      // String date1 =  list[i].id.toString() ?? "";
       children.add(Container(
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(12)),
@@ -278,7 +278,8 @@ class _DocumentManagementState extends State<DocumentManagement> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${list[i].name}',
+                          // '${list[i].name ?? ""}',
+                          "",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
                               fontSize: 15,
@@ -294,7 +295,8 @@ class _DocumentManagementState extends State<DocumentManagement> {
                               fontWeight: FontWeight.w400),
                         ),
                         Text(
-                          '${list[i].id}',
+                          // '${list[i].id ?? ""}',
+                          "",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
                               fontSize: 13,
@@ -318,7 +320,8 @@ class _DocumentManagementState extends State<DocumentManagement> {
                       children: [
                         Container(
                             child: Image.asset('assets/images/dots.png',
-                                height: 20, color: Colors.grey)),
+                                height: 20, color: Colors.grey)
+                        ),
                       ],
                     ),
                   )
@@ -332,7 +335,7 @@ class _DocumentManagementState extends State<DocumentManagement> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        date1.length > 2 ?
+                        /*date1.length > 2 ?
                         Text(
                           date1.substring(2),
                           textAlign: TextAlign.start,
@@ -348,7 +351,7 @@ class _DocumentManagementState extends State<DocumentManagement> {
                               fontSize: 13,
                               color: Colors.black,
                               fontWeight: FontWeight.w500),
-                        ),
+                        ),*/
                         Text(
                           'Date',
                           textAlign: TextAlign.start,
@@ -368,8 +371,8 @@ class _DocumentManagementState extends State<DocumentManagement> {
                           //     oCcy.format(double.parse(list[i].invoiceValue.toString()).abs())
                           // :
                           // oCcy.format(int.parse(list[i].invoiceValue.toString()).abs())
-                          'INR ${list[i].crcId}',
-                              // : '',
+                          // 'INR ${list[i].crcId ?? ""}',
+                               '',
                           textAlign: TextAlign.start,
                           style: GoogleFonts.poppins(
                               fontSize: 13,
@@ -407,14 +410,15 @@ Future<DocumentManagementModel> getDocuments(int orgId) async {
       'https://dev.finance.slate.ac/slate-api/routes.php?action=getFolder');
 
   var map = Map<String, dynamic>();
-  map['company_id'] = '$orgId';
+  map['org_id'] = '81';
   // map['from_date'] = '2021-05-01';
   // map['to_date'] = '2021-10-30';
   final response = await http.post(requestURL,
       headers: {"Authorization": "Bearer${userData['ret']['data']['token']}"},
       body: json.encode(map));
+  print(response.body.toString());
   var data = jsonDecode(response.body.toString());
-  print('${data.toString()}');
+  // print('${data.toString()}');
   if (response.statusCode == 200) {
     return DocumentManagementModel.fromJson(data);
   } else {

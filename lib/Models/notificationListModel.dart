@@ -1,10 +1,10 @@
-class DocumentManagementModel {
+class NotificationListModel {
   Ret? ret;
   Err? err;
 
-  DocumentManagementModel({this.ret, this.err});
+  NotificationListModel({this.ret, this.err});
 
-  DocumentManagementModel.fromJson(Map<String, dynamic> json) {
+  NotificationListModel.fromJson(Map<String, dynamic> json) {
     ret = json['ret'] != null ? new Ret.fromJson(json['ret']) : null;
     err = json['err'] != null ? new Err.fromJson(json['err']) : null;
   }
@@ -22,7 +22,7 @@ class DocumentManagementModel {
 }
 
 class Ret {
-  List<DataDocument>? data;
+  List<Data>? data;
   int? status;
   String? msg;
 
@@ -30,9 +30,9 @@ class Ret {
 
   Ret.fromJson(Map<String, dynamic> json) {
     if (json['data'] != null) {
-      data = <DataDocument>[];
+      data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(new DataDocument.fromJson(v));
+        data!.add(new Data.fromJson(v));
       });
     }
     status = json['status'];
@@ -50,55 +50,43 @@ class Ret {
   }
 }
 
-class DataDocument {
+class Data {
   int? id;
-  String? folderPath;
-  int? salesInvCnt;
-  int? purchaseInvCnt;
-  int? banksatementCnt;
-  int? otherCnt;
-  String? updatedOn;
-  String? name;
-  Null? createdBy;
-  int? crcId;
+  String? notificationType;
+  String? orgLogo;
+  String? title;
+  String? redirectUrl;
+  int? readStatus;
+  String? createdDatetime;
 
-  DataDocument(
+  Data(
       {this.id,
-        this.folderPath,
-        this.salesInvCnt,
-        this.purchaseInvCnt,
-        this.banksatementCnt,
-        this.otherCnt,
-        this.updatedOn,
-        this.name,
-        this.createdBy,
-        this.crcId});
+        this.notificationType,
+        this.orgLogo,
+        this.title,
+        this.redirectUrl,
+        this.readStatus,
+        this.createdDatetime});
 
-  DataDocument.fromJson(Map<String, dynamic> json) {
+  Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    folderPath = json['folder_path'];
-    salesInvCnt = json['sales_inv_cnt'];
-    purchaseInvCnt = json['purchase_inv_cnt'];
-    banksatementCnt = json['banksatement_cnt'];
-    otherCnt = json['other_cnt'];
-    updatedOn = json['updated_on'];
-    name = json['name'];
-    createdBy = json['created_by'];
-    crcId = json['crc_id'];
+    notificationType = json['notification_type'];
+    orgLogo = json['org_logo'];
+    title = json['title'];
+    redirectUrl = json['redirect_url'];
+    readStatus = json['read_status'];
+    createdDatetime = json['created_datetime'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['folder_path'] = this.folderPath;
-    data['sales_inv_cnt'] = this.salesInvCnt;
-    data['purchase_inv_cnt'] = this.purchaseInvCnt;
-    data['banksatement_cnt'] = this.banksatementCnt;
-    data['other_cnt'] = this.otherCnt;
-    data['updated_on'] = this.updatedOn;
-    data['name'] = this.name;
-    data['created_by'] = this.createdBy;
-    data['crc_id'] = this.crcId;
+    data['notification_type'] = this.notificationType;
+    data['org_logo'] = this.orgLogo;
+    data['title'] = this.title;
+    data['redirect_url'] = this.redirectUrl;
+    data['read_status'] = this.readStatus;
+    data['created_datetime'] = this.createdDatetime;
     return data;
   }
 }
