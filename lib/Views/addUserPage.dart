@@ -55,161 +55,168 @@ class _AddUserPageState extends State<AddUserPage> {
                   bottomLeft: Radius.circular(20)))),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: Colors.white
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextFormField(
-                        controller: fNameController,
-                        decoration: InputDecoration(
-                          labelText: 'First Name',
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextFormField(
-                        controller: lNameController,
-                        decoration: InputDecoration(
-                          labelText: 'Last Name',
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextFormField(
-                        controller: emailController,
-                        decoration: InputDecoration(
-                          labelText: 'Email ID',
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextFormField(
-                        controller: numberController,
-                        decoration: InputDecoration(
-                          labelText: 'Mobile Number',
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: TextFormField(
-                        controller: roleController,
-                        decoration: InputDecoration(
-                          labelText: 'Select Role',
-                        ),
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                          checkColor: Colors.white,
-                          fillColor: MaterialStateProperty.resolveWith(getColor),
-                            value: inviteCheck,
-                            onChanged: (bool? value){
-                                  setState(() {
-                                    inviteCheck = !inviteCheck;
-                                  });
-                            },
-                        ),
-                        Text('Send Email invites to User')
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Checkbox(
-                          checkColor: Colors.white,
-                          fillColor: MaterialStateProperty.resolveWith(getColor),
-                          value: subWarningCheck,
-                          onChanged: (bool? value){
-                            setState(() {
-                              subWarningCheck = !subWarningCheck;
-                            });
-                          },
-                        ),
-                        Expanded(
-                          child: Text("You subscrition allows two users. You will be charged for on-boarding new user. "
-                              "Click here for details."),
-                        )
-                      ],
-                    ),
-                    SizedBox(height: 15,),
-                    Text("Note: New user will be informed that you send\n email invitaion to join accounting platform.",
-
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8.0, right: 8, bottom: 20),
-                  child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        child: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: Colors.white
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      GestureDetector(
-                        onTap: (){
-                          addUserApi(
-                              Get.arguments[1],
-                              fNameController.text,
-                              lNameController.text,
-                              emailController.text,
-                              numberController.text,
-                              roleController.text,
-                              inviteCheck,
-                              '3',
-                              subWarningCheck
-                          );
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width/3,
-                          decoration: BoxDecoration(
-                            color: Colors.teal,
-                            borderRadius: BorderRadius.circular(50)
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Center(
-                              child: Text('Save',
-                              style: GoogleFonts.roboto(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-                              ),
-                            ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: TextFormField(
+                          controller: fNameController,
+                          decoration: InputDecoration(
+                            labelText: 'First Name',
                           ),
                         ),
                       ),
-                      Container(
-                        width: MediaQuery.of(context).size.width/3,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(50),
-                          border: Border.all()
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                            child: Text('Cancel',
-                              style: GoogleFonts.roboto(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: TextFormField(
+                          controller: lNameController,
+                          decoration: InputDecoration(
+                            labelText: 'Last Name',
                           ),
                         ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: TextFormField(
+                          controller: emailController,
+                          decoration: InputDecoration(
+                            labelText: 'Email ID',
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: TextFormField(
+                          controller: numberController,
+                          decoration: InputDecoration(
+                            labelText: 'Mobile Number',
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: TextFormField(
+                          controller: roleController,
+                          decoration: InputDecoration(
+                            labelText: 'Select Role',
+                          ),
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          Checkbox(
+                            checkColor: Colors.white,
+                            fillColor: MaterialStateProperty.resolveWith(getColor),
+                              value: inviteCheck,
+                              onChanged: (bool? value){
+                                    setState(() {
+                                      inviteCheck = !inviteCheck;
+                                    });
+                              },
+                          ),
+                          Text('Send Email invites to User')
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Checkbox(
+                            checkColor: Colors.white,
+                            fillColor: MaterialStateProperty.resolveWith(getColor),
+                            value: subWarningCheck,
+                            onChanged: (bool? value){
+                              setState(() {
+                                subWarningCheck = !subWarningCheck;
+                              });
+                            },
+                          ),
+                          Expanded(
+                            child: Text("You subscrition allows two users. You will be charged for on-boarding new user. "
+                                "Click here for details."),
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 15,),
+                      Text("Note: New user will be informed that you send\n email invitaion to join accounting platform.",
+
                       )
                     ],
                   ),
                 ),
-              ),
-            ],
+                Container(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8.0, right: 8, bottom: 20),
+                    child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        GestureDetector(
+                          onTap: (){
+                            addUserApi(
+                                Get.arguments[1],
+                                fNameController.text,
+                                lNameController.text,
+                                emailController.text,
+                                numberController.text,
+                                roleController.text,
+                                inviteCheck,
+                                '3',
+                                subWarningCheck
+                            );
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width/3,
+                            decoration: BoxDecoration(
+                              color: Colors.teal,
+                              borderRadius: BorderRadius.circular(50)
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Center(
+                                child: Text('Save',
+                                style: GoogleFonts.roboto(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: (){
+                            Get.back();
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width/3,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(50),
+                              border: Border.all()
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Center(
+                                child: Text('Cancel',
+                                  style: GoogleFonts.roboto(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

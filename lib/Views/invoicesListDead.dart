@@ -12,6 +12,7 @@ import 'package:untitled_slate/Models/InvoiceListModel.dart';
 import 'package:untitled_slate/Models/notificationCountModel.dart';
 import 'package:untitled_slate/Views/addBankAccPage.dart';
 import 'package:untitled_slate/Views/addUserPage.dart';
+import 'package:untitled_slate/Views/blogWebview.dart';
 import 'package:untitled_slate/Views/createCustomer.dart';
 import 'package:untitled_slate/Views/detailsPage.dart';
 import 'package:untitled_slate/Views/documentManagement.dart';
@@ -1079,36 +1080,220 @@ class _HomePage2State extends State<HomePage2> {
                                               ),
                                             ),
                                           ),
-                                          ImageSlideshow(
+                                          Container(
+                                            height: 400,
                                             width: double.infinity,
-                                            height: MediaQuery.of(context).size.height*2/5,
-                                            initialPage: 0,
-                                            indicatorColor: Colors.white,
-                                            indicatorBackgroundColor: Color(0xFF00DFB0),
-                                            children: [
-                                              Container(
-                                                height: 100,
-                                                child: Image.asset(
-                                                  'assets/images/slateCrousel1.png',
-                                                  height: 300,
-                                                  fit: BoxFit.cover,
+                                            child: GridView.count(
+                                              childAspectRatio: 3/2,
+                                              mainAxisSpacing: 0,
+                                              crossAxisSpacing: 0,
+                                              shrinkWrap: true,
+                                              scrollDirection: Axis.horizontal,
+                                              physics:
+                                              BouncingScrollPhysics(),
+
+                                              crossAxisCount: 1,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: GestureDetector(
+                                                    onTap: (){
+                                                      Get.to(()=> BlogWebview(), arguments: [
+                                                        "what-are-the-steps-to-prepare-a-statement-of-cash-flows"
+                                                      ]);
+                                                    },
+                                                    child: Container(
+                                                      alignment: Alignment.topCenter,
+                                                      // height: 100,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius: BorderRadius.circular(20)
+                                                      ),
+
+                                                      child: ClipRRect(
+                                                        borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20)),
+                                                        child: Column(
+                                                          children: [
+                                                            Image.network(
+                                                              'https://slate.ac/wp-content/uploads/2021/07/7-steps-to-prepare-statement-of-cash-flow.png',
+                                                              height: 170,
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.all(8.0),
+                                                              child: Text(
+                                                                'What are the 7 Steps to Prepare a Statement of Cash Flows?',
+                                                                style: GoogleFonts.poppins(
+                                                                    fontSize: 12,
+                                                                    color: Colors.black,
+                                                                    fontWeight: FontWeight.bold),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.all(8.0),
+                                                              child: Align(
+                                                                alignment: Alignment.centerLeft,
+                                                                child: Text(
+                                                                  '7th March, 2021',
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize: 10,
+                                                                      color: Colors.black45,
+                                                                      fontWeight: FontWeight.w400),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.all(8.0),
+                                                              child: Text(
+                                                                'A cash flow statement is a financial statement that shows the inflow and outflow of cash within a business. It is considered one of the essential reporting documents...',
+                                                                style: GoogleFonts.poppins(
+                                                                    fontSize: 12,
+                                                                    color: Colors.black,
+                                                                    fontWeight: FontWeight.w400),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
                                                 ),
-                                              ),
-                                              Image.asset(
-                                                'assets/images/slateCrousel2.png',
-                                                fit: BoxFit.cover,
-                                              ),
-                                              Image.asset(
-                                                'assets/images/slateCrousel3.png',
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ],
-                                            onPageChanged: (value) {
-                                              // print('Page changed: $value');
-                                              // controller.jumpToPage(value);
-                                            },
-                                            autoPlayInterval: 0,
-                                            isLoop: false,
+                                                Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: GestureDetector(
+                                                    onTap: (){
+                                                      Get.to(()=> BlogWebview(), arguments: [
+                                                        "how-to-calculate-cash-flow"
+                                                      ]);
+                                                    },
+                                                    child: Container(
+                                                      alignment: Alignment.topCenter,
+                                                      // height: 100,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius: BorderRadius.circular(20)
+                                                      ),
+
+                                                      child: ClipRRect(
+                                                        borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20)),
+                                                        child: Column(
+                                                          children: [
+                                                            Image.network(
+                                                              'https://slate.ac/wp-content/uploads/2021/07/how-is-cash-flow-calculated-scaled.jpg',
+                                                              height: 170,
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.all(8.0),
+                                                              child: Text(
+                                                                'How to Calculate Cash Flow Statement?',
+                                                                style: GoogleFonts.poppins(
+                                                                    fontSize: 12,
+                                                                    color: Colors.black,
+                                                                    fontWeight: FontWeight.bold),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.all(8.0),
+                                                              child: Align(
+                                                                alignment: Alignment.centerLeft,
+                                                                child: Text(
+                                                                  '12th July, 2021',
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize: 10,
+                                                                      color: Colors.black45,
+                                                                      fontWeight: FontWeight.w400),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.all(8.0),
+                                                              child: Text(
+                                                                'Calculating the cash flow statement is a lengthy process, one which involves several variables. Along with the company’s income, you have to include the expenses, credit, payments, receipts, etc. After jotting'
+                                                                    ' them down and their corresponding figures, the accountants are supposed to find out that one figure we discussed above, closing cash balance.',
+                                                                style: GoogleFonts.poppins(
+                                                                    fontSize: 12,
+                                                                    color: Colors.black,
+                                                                    fontWeight: FontWeight.w400),
+                                                                maxLines: 6,
+                                                                overflow: TextOverflow.ellipsis,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: GestureDetector(
+                                                    onTap: (){
+                                                      Get.to(()=> BlogWebview(), arguments: [
+                                                        "what-is-discounted-cash-flow"
+                                                      ]);
+                                                    },
+                                                    child: Container(
+                                                      alignment: Alignment.topCenter,
+                                                      // height: 100,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius: BorderRadius.circular(20)
+                                                      ),
+
+                                                      child: ClipRRect(
+                                                        borderRadius: BorderRadius.only(topRight: Radius.circular(20),topLeft: Radius.circular(20)),
+                                                        child: Column(
+                                                          children: [
+                                                            Image.network(
+                                                              'https://slate.ac/wp-content/uploads/2021/11/cash-flows.png',
+                                                              height: 170,
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.all(8.0),
+                                                              child: Text(
+                                                                'What Is Discounted Cash Flow?',
+                                                                style: GoogleFonts.poppins(
+                                                                    fontSize: 12,
+                                                                    color: Colors.black,
+                                                                    fontWeight: FontWeight.bold),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.all(8.0),
+                                                              child: Align(
+                                                                alignment: Alignment.centerLeft,
+                                                                child: Text(
+                                                                  '12th February, 2022',
+                                                                  style: GoogleFonts.poppins(
+                                                                      fontSize: 10,
+                                                                      color: Colors.black45,
+                                                                      fontWeight: FontWeight.w400),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.all(8.0),
+                                                              child: Text(
+                                                                'Accountants/ business analysts use the discounted cash flow method to determine the future value of money from an investment made today. That is why it is important to know what is a discounted cash flow.',
+                                                                style: GoogleFonts.poppins(
+                                                                    fontSize: 12,
+                                                                    color: Colors.black,
+                                                                    fontWeight: FontWeight.w400),
+                                                                maxLines: 6,
+                                                                overflow: TextOverflow.ellipsis,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+
+                                            ),
                                           ),
                                           SizedBox(
                                             height: 70,
@@ -1542,7 +1727,7 @@ class _HomePage2State extends State<HomePage2> {
                           children:[
                             SingleChildScrollView(
                             child: GridView.count(
-                            childAspectRatio: 9 / 3,
+                            childAspectRatio: 8 / 3,
                             mainAxisSpacing: 0,
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
@@ -1558,47 +1743,53 @@ class _HomePage2State extends State<HomePage2> {
                                   ),
                                     child: Row(
                                       crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Image.network(notificationData.ret!.data![i].orgLogo.toString(), height: 60,),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: Container(
-                                            width: MediaQuery.of(context).size.width*2/3,
-                                            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text("${notificationData.ret!.data![i].title}"),
-                                                SizedBox(height: 10,),
-                                                Text("${notificationData.ret!.data![i].createdDatetime}",
-                                                    style: GoogleFonts.roboto(color: Colors.black45),
-                                                ),
-                                                SizedBox(height: 10,),
-                                                GestureDetector(
-                                                  onTap: (){
-                                                    notificationData.ret!.data![i].notificationType == "NEW_USER_ADDED_NOTIFICATION_FRANCHISE" ?
-                                                        Get.offAll(()=> HomePage2(), arguments: [company , 1]) :
-                                                    notificationData.ret!.data![i].notificationType == "TALLY_SYNC_NOTIFICATION" ?
-                                                      Get.offAll(()=> TallySync()) :
-
-                                                        (){};
-                                                  },
-                                                  child: Container(
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(color: Colors.teal),
-                                                      borderRadius: BorderRadius.circular(12)
-                                                    ),
-                                                    child: Padding(
-                                                      padding: const EdgeInsets.only(top: 8.0, bottom: 8, left: 20, right: 20),
-                                                      child: Text("View"),
-                                                    ),
-                                                  ),
-                                                )
-                                              ],
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Image.network(notificationData.ret!.data![i].orgLogo.toString(), height: 60,),
                                             ),
-                                          ),
+                                            Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Container(
+                                                width: MediaQuery.of(context).size.width*2/3 - 10,
+                                                child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text("${notificationData.ret!.data![i].title}"),
+                                                    SizedBox(height: 10,),
+                                                    Text("${notificationData.ret!.data![i].createdDatetime}",
+                                                      style: GoogleFonts.roboto(color: Colors.black45),
+                                                    ),
+                                                    SizedBox(height: 10,),
+                                                    GestureDetector(
+                                                      onTap: (){
+                                                        notificationData.ret!.data![i].notificationType == "NEW_USER_ADDED_NOTIFICATION_FRANCHISE" ?
+                                                        Get.offAll(()=> HomePage2(), arguments: [company , 1]) :
+                                                        notificationData.ret!.data![i].notificationType == "TALLY_SYNC_NOTIFICATION" ?
+                                                        Get.offAll(()=> TallySync()) :
+
+                                                            (){};
+                                                      },
+                                                      child: Container(
+                                                        decoration: BoxDecoration(
+                                                            border: Border.all(color: Colors.teal),
+                                                            borderRadius: BorderRadius.circular(12)
+                                                        ),
+                                                        child: Padding(
+                                                          padding: const EdgeInsets.only(top: 8.0, bottom: 8, left: 20, right: 20),
+                                                          child: Text("View"),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
+
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: GestureDetector(

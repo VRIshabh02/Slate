@@ -127,18 +127,23 @@ class AddBankAccount extends StatelessWidget {
                           ),
                         ),
                       ),
-                      Container(
-                        width: MediaQuery.of(context).size.width/3,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(50),
-                            border: Border.all()
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Center(
-                            child: Text('Cancel',
-                              style: GoogleFonts.roboto(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                      GestureDetector(
+                        onTap: (){
+                          Get.back();
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width/3,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(50),
+                              border: Border.all()
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Center(
+                              child: Text('Cancel',
+                                style: GoogleFonts.roboto(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
                         ),

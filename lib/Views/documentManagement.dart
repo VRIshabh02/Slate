@@ -127,7 +127,7 @@ class _DocumentManagementState extends State<DocumentManagement> {
                                                         }
 
                                                         _list.forEach((userDetail) {
-                                                          if ((userDetail.id.toString() ?? "")
+                                                          if ((userDetail.id.toString())
                                                               .contains(
                                                               searchController
                                                                   .text) ||
@@ -247,7 +247,7 @@ class _DocumentManagementState extends State<DocumentManagement> {
     }
 
     _list.forEach((userDetail) {
-      if ((userDetail.id.toString() ?? "").contains(searchController.text) ||
+      if ((userDetail.id.toString()).contains(searchController.text) ||
           userDetail.folderPath!.contains(searchController.text))
         _filteredList.add(userDetail);
     });
